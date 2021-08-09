@@ -9,7 +9,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
+import com.example.salesenquiry.Database.CustomerDetails;
+import com.example.salesenquiry.Database.DAO;
+import com.example.salesenquiry.Database.MyDatabase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -20,68 +25,71 @@ import com.google.firebase.auth.FirebaseUser;
 public class login extends AppCompatActivity {
     ImageView logo;
     TextInputEditText email, password;
-    View Login, fb, google;
-    TextView orline, donthave, signupac;
-    FirebaseAuth firebaseAuth;
-
+    View loginBut;
+    TextView donthave, signupac,forgot;
+CustomerDetails customerDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        Login = findViewById(R.id.login);
+        loginBut = findViewById(R.id.login);
         signupac = findViewById(R.id.signupac);
         logo=findViewById(R.id.logoIcon);
         email=findViewById(R.id.emailtxt);
         password=findViewById(R.id.passwordtxt);
-        orline=findViewById(R.id.orline);
         donthave=findViewById(R.id.donthave);
-        fb=findViewById(R.id.fb);
-        google=findViewById(R.id.signupac);
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        //if user is note null then open module activity
-        if (user != null) {
-            finish();
-            startActivity(new Intent(login.this, welcome.class));
+        forgot=findViewById(R.id.forgot);
+
+
+        //SignUpButton
+        signupbut();
+        //Enter Details In Feild
+        detailsEnter();
+        //log in Button
+        loginButton();
         }
-        signuptext();
-        loginbut();
-
+//Log in button
+    private void loginButton() {
+    loginBut.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            detailsEnter();
+        }
+    });
     }
 
-    private void loginbut() {
-        //after click on log in button verify the details and go to modules page --- log in page
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                check(email.getText().toString(),password.getText().toString());
-            }
-        });
+    //Enter Details i
+    private void detailsEnter(){
+        MyDatabase myDatabase= Room.databaseBuilder(getApplicationContext(),
+                MyDatabase.class
+                ,"DB_CUSTOMER").allowMainThreadQueries().build();
+        DAO dao=myDatabase.Dao();
+        String user_email=email.getText().toString();
+        String user_password=password.getText().toString();
+
+        customerDetails=dao.UserDetails(user_email,user_password);
+        if (customerDetails != null){
+            Intent intent=new Intent(getApplicationContext(),welcome.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"Sign In Failed",Toast.LENGTH_LONG).show();
+        }
     }
 
-    //firebase authentication is use to verify details store in firebase --- Log in page
-    public void check(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(login.this,"Log in Sucessful",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(login.this,welcome.class));
-                }
-                else {
-                    Toast.makeText(login.this,"Try again",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
-    //SignUpText
-    private void signuptext() {
+
+    //Go to Login Activity
+    private void signupbut() {
         signupac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), register.class);
+                Intent intent=new Intent(getApplicationContext(),register.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
     }
+
+
 }

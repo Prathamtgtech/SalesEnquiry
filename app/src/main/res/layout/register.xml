@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".register">
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/logoicon"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:id="@+id/logoIcon"
         />  <com.google.android.material.textfield.TextInputLayout
     android:layout_width="350dp"
@@ -88,33 +88,6 @@
         android:background="@drawable/signup"
         android:text="Log In"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_below="@id/signup"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:padding="6dp"
-        android:id="@+id/orline"
-        android:text="@string/or_line"/>
-    <View
-        android:layout_width="310dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/orline"
-        android:layout_marginTop="9dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/fb"
-        android:background="@drawable/fb"
-        />
-    <View
-        android:layout_width="310dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/fb"
-        android:layout_marginTop="9dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/google"
-        android:background="@drawable/google"
-        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -129,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log In"
-        android:textColor="@color/design_default_color_primary"
+        android:textColor="@color/red"
         android:id="@+id/loginac"
         android:layout_alignParentBottom="true"
         android:textStyle="bold"
