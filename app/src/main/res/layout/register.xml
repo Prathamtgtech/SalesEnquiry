@@ -76,7 +76,9 @@
             android:inputType="textEmailAddress"
             />
     </com.google.android.material.textfield.TextInputLayout>
-    <View
+
+   //I want here red color
+    <Button
         android:layout_width="340dp"
         android:layout_height="80dp"
         android:layout_below="@+id/passwordInput"
@@ -84,6 +86,7 @@
         android:layout_centerInParent="true"
         android:id="@+id/signup"
         android:background="@drawable/signup"
+        android:text="Log In"
         />
     <TextView
         android:layout_width="wrap_content"
