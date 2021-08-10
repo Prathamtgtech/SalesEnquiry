@@ -1,6 +1,5 @@
 package com.example.salesenquiry.Database;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -13,7 +12,7 @@ public class CustomerDetails {
     String password;
 
     //constructor
-    public CustomerDetails(String name, String email, String password) {
+    public CustomerDetails() {
         this.name = name;
         this.email = email;
         this.password = password;

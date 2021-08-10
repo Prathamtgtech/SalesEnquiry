@@ -9,7 +9,8 @@ public interface DAO {
 
     @Insert
     void SignUpDetails(CustomerDetails customerDetails);
-    @Query("select * from CustomerDetails where name=:userId and password=:UserPassword")
-    CustomerDetails UserDetails(String userId,String UserPassword);
+
+    @Query("SELECT * FROM CustomerDetails Where email=:user_email and password=:user_password")
+    CustomerDetails UserDetails(String user_email,String user_password);
 
 }

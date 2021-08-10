@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class login extends AppCompatActivity {
     ImageView logo;
+    MyDatabase myDatabase;
     TextInputEditText email, password;
     View loginBut;
     TextView donthave, signupac,forgot;
@@ -39,13 +40,11 @@ CustomerDetails customerDetails;
         password=findViewById(R.id.passwordtxt);
         donthave=findViewById(R.id.donthave);
         forgot=findViewById(R.id.forgot);
-
-
+        myDatabase=Room.databaseBuilder(getApplicationContext(),MyDatabase.class,"CustomerDetails")
+                .allowMainThreadQueries().build();
         //SignUpButton
         signupbut();
-        //Enter Details In Feild
-        detailsEnter();
-        //log in Button
+       //log in Button
         loginButton();
         }
 //Log in button
@@ -53,29 +52,24 @@ CustomerDetails customerDetails;
     loginBut.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            detailsEnter();
+            String user_email=email.getText().toString().trim();
+            String user_password=password.getText().toString().trim();
+             if (user_email.isEmpty() || user_password.isEmpty()){
+                 Toast.makeText(getApplicationContext(),"Fills All Details",Toast.LENGTH_LONG).show();
+             }
+             else {
+                 customerDetails=myDatabase.getDao().UserDetails(user_email,user_password);
+                 if (customerDetails == null){
+                     Toast.makeText(getApplicationContext(),"Invalid Credantials",Toast.LENGTH_LONG).show();
+                 }
+                 else {
+                     Toast.makeText(getApplicationContext(),"Log In Sucessful",Toast.LENGTH_LONG).show();
+                     startActivity(new Intent(getApplicationContext(),welcome.class));
+                 }
+             }
+
         }
     });
-    }
-
-    //Enter Details i
-    private void detailsEnter(){
-        MyDatabase myDatabase= Room.databaseBuilder(getApplicationContext(),
-                MyDatabase.class
-                ,"DB_CUSTOMER").allowMainThreadQueries().build();
-        DAO dao=myDatabase.Dao();
-        String user_email=email.getText().toString();
-        String user_password=password.getText().toString();
-
-        customerDetails=dao.UserDetails(user_email,user_password);
-        if (customerDetails != null){
-            Intent intent=new Intent(getApplicationContext(),welcome.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            Toast.makeText(getApplicationContext(),"Sign In Failed",Toast.LENGTH_LONG).show();
-        }
     }
 
 

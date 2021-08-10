@@ -23,7 +23,6 @@
     android:hint="Fullname"
     app:hintTextColor="@color/red"
     app:boxStrokeColor="@color/red"
-    android:textColorHint="@color/red"
     >
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
@@ -78,7 +77,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
    //I want here red color
-    <Button
+    <View
         android:layout_width="340dp"
         android:layout_height="80dp"
         android:layout_below="@+id/passwordInput"
