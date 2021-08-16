@@ -58,7 +58,7 @@
             android:textCursorDrawable="@color/red"
             />
     </com.google.android.material.textfield.TextInputLayout>
-    <View
+    <Button
         android:layout_width="340dp"
         android:layout_height="80dp"
         android:layout_below="@+id/passwordInput"
@@ -66,6 +66,8 @@
         android:layout_centerInParent="true"
         android:id="@+id/login"
         android:background="@drawable/login"
+        android:text="Log In"
+        android:paddingBottom="10dp"
         />
 
     <TextView

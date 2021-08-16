@@ -40,7 +40,7 @@ public class register extends AppCompatActivity {
         email = findViewById(R.id.emailtxt);
         password = findViewById(R.id.passwordtxt);
         haveac = findViewById(R.id.haveac);
-        myDatabase= Room.databaseBuilder(getApplicationContext(), MyDatabase.class, "DB_CUSTOMER")
+        myDatabase= Room.databaseBuilder(getApplicationContext(), MyDatabase.class, "Customer_Details")
                 .allowMainThreadQueries().build();
         login = findViewById(R.id.loginac);
         logintxt();

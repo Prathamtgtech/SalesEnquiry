@@ -9,29 +9,47 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 public class welcome extends AppCompatActivity {
-    FirebaseAuth firebaseAuth;
-Button signout;
-    @Override
+SliderView sliderView;
+int[] images={R.drawable.a,
+        R.drawable.b,
+        R.drawable.c,
+        R.drawable.d,
+        R.drawable.e};
+    Button enquiry;
+SliderAdapter sliderAdapter;
+
+@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        firebaseAuth=FirebaseAuth.getInstance();
-        signout=findViewById(R.id.signout);
-        signoutbut();
-    }
+        enquiry=findViewById(R.id.enquirybut);
+      sliderView=findViewById(R.id.image_slider);
+        sliderAdapter=new SliderAdapter(images);
+        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+        sliderView.startAutoCycle();
 
-    private void signoutbut() {
-    signout.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // logout - go to log in page (sign out your log in account) -- Module page
-            firebaseAuth.signOut();
-            Toast.makeText(getApplicationContext(),"Log Out Sucessful",Toast.LENGTH_SHORT).show();
-            finish();
-            startActivity(new Intent(getApplicationContext(),login.class));
-        }
-    });
+        //Enquiry Button
+    enquirybut();
+
     }
+//Open Sales Enquiry Form
+    private void enquirybut() {
+enquiry.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        //Open Form Activity
+        Intent intent=new Intent(getApplicationContext(),com.example.salesenquiry.EnquiryFrom.personal.class);
+        startActivity(intent);
+        finish();
+    }
+});
+}
+
 }
