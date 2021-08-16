@@ -29,7 +29,7 @@ public class need_require extends AppCompatActivity {
     RadioGroup loangroup, typegroup;
     String budgets[] = {"< 1Cr.", "1.0 - 1.25 Cr", "1.25 – 1.5 Cr", "1.5 – 2 Cr", "2 cr & above"};
     String loangroupval, typegroupval, clientbudget;
-    String Purchaseval =" ", configurationval;
+    String Purchaseval =" ", configurationval=" ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +97,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (one.isChecked()) {
-                    configurationval = "1 BHK";
+                    configurationval += "1 BHK";
                 }
             }
         });
@@ -105,7 +105,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (two.isChecked()) {
-                    configurationval = "2 BHK";
+                    configurationval += "2 BHK";
                 }
             }
         });
@@ -113,7 +113,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (three.isChecked()) {
-                configurationval = "3 BHK";
+                configurationval += "3 BHK";
                 }
             }
         });
@@ -121,7 +121,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (other.isChecked()) {
-                    configurationval = "other";
+                    configurationval += "other";
                 }
             }
         });
