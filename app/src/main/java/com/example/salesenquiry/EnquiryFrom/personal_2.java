@@ -1,5 +1,6 @@
 package com.example.salesenquiry.EnquiryFrom;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,33 +23,43 @@ import static android.content.ContentValues.TAG;
 
 public class personal_2 extends AppCompatActivity {
     Spinner occupation;
-    TextView next, previous, demo;
+    TextView next,previous;
     TextInputEditText Education, CompanyName, Designation, WorkNature, BLocation;
     String education, companyname, designation, worknature, busiloc, occupationss;
     String occupations[] = {"Salary", "Business", "Professional", "Retired", "Student"};
+    SharedPreferences sp;
     SharedPreferences.Editor ed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal2);
         occupation = findViewById(R.id.spinner);
-        next = (TextView) findViewById(R.id.next);
-        previous = (TextView) findViewById(R.id.previous);
+        next =findViewById(R.id.next);
+        previous =findViewById(R.id.previous);
         Education = findViewById(R.id.education);
         CompanyName = findViewById(R.id.CompanyName);
-        demo = findViewById(R.id.demo);
         Designation = findViewById(R.id.designation);
         WorkNature = findViewById(R.id.worknature);
         BLocation = findViewById(R.id.busiloc);
-        SharedPreferences sp= getSharedPreferences("DetailsKey",MODE_PRIVATE);
-        String time=sp.getString("Timers","");
-        demo.setText(""+ time);
-        occupationfeild();
-        buttonsclick(sp);
 
+        occupationfeild();
+        nextclick();
+        previousclick();
+    }
+//previous activity
+    private void previousclick() {
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), personal.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    private void buttonsclick(SharedPreferences sp) {
+
+//Next Activity
+    private void nextclick() {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +73,7 @@ public class personal_2 extends AppCompatActivity {
                 catch (NumberFormatException nfe){
                     nfe.printStackTrace();
                 }
+                sp= getSharedPreferences("DetailsKey",MODE_PRIVATE);
                 ed= sp.edit();
                 ed.putString("Education", education);
                 ed.putString("CompanyName", companyname);
@@ -71,16 +84,9 @@ public class personal_2 extends AppCompatActivity {
                 ed.apply();
                 Intent intent = new Intent(getApplicationContext(), need_require.class);
                 startActivity(intent);
-                finish();
             }
         });
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), personal.class));
-                finish();
-            }
-        });
+
     }
 
     private void occupationfeild() {

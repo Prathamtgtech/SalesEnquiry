@@ -141,15 +141,6 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/BusinessLayout"
-        android:layout_marginTop="10dp"
-        android:id="@+id/demo"
-        android:text="Demo text"
-        android:textSize="20dp"
-        />
     <RelativeLayout
         android:layout_width="210dp"
         android:layout_height="65dp"

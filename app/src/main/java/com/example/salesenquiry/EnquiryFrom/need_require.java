@@ -23,7 +23,7 @@ import static android.content.ContentValues.TAG;
 
 public class need_require extends AppCompatActivity {
     Spinner budget;
-    TextView next, previous, demo, Configuration, HomeLoan, Purchase, Residantial, specify;
+    TextView next, previous, Configuration, HomeLoan, Purchase, Residantial, specify;
     TextInputEditText BankName;
     CheckBox one, two, three, other, selfuse, investment, secondhome;
     RadioGroup loangroup, typegroup;
@@ -54,7 +54,6 @@ public class need_require extends AppCompatActivity {
         secondhome = findViewById(R.id.secondhome);
         loangroup = findViewById(R.id.loangroup);
         typegroup = findViewById(R.id.typegroup);
-        demo = findViewById(R.id.demo);
         buttonclick(bundle);
         budgetitem();
         loangrouptxt();
@@ -69,7 +68,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (selfuse.isChecked()) {
-                    Purchaseval +="Self-Use";
+                    Purchaseval +=" "+"Self-Use";
                 }
             }
         });
@@ -77,7 +76,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (investment.isChecked()) {
-                    Purchaseval +="Investment";
+                    Purchaseval +=" "+"Investment";
                 }
             }
         });
@@ -85,7 +84,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (secondhome.isChecked()) {
-                    Purchaseval +="Second-Home";
+                    Purchaseval +=" "+"Second-Home";
                 }
             }
         });
@@ -97,7 +96,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (one.isChecked()) {
-                    configurationval += "1 BHK";
+                    configurationval +=" "+"1 BHK";
                 }
             }
         });
@@ -105,7 +104,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (two.isChecked()) {
-                    configurationval += "2 BHK";
+                    configurationval +=" " +"2 BHK";
                 }
             }
         });
@@ -113,7 +112,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (three.isChecked()) {
-                configurationval += "3 BHK";
+                configurationval +=" "+"3 BHK";
                 }
             }
         });
