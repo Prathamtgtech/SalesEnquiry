@@ -4,87 +4,105 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:cardCornerRadius="10dp"
+        android:elevation="20dp"
+        android:id="@+id/slidercard"
+        >
+        <com.smarteist.autoimageslider.SliderView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/image_slider"
+            app:sliderAnimationDuration="500"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderIndicatorAnimationDuration="500"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="@color/white"
+            app:sliderIndicatorUnselectedColor="@color/red"
+            app:sliderScrollTimeInSec="2"
+            app:sliderStartAutoCycle="true"
+            />
+    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:id="@+id/premia_logo"
+        android:background="@drawable/premia_symbol"
+        android:layout_below="@+id/slidercard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        />
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/premia_text"
+        android:layout_below="@+id/premia_logo"
+        android:background="@drawable/premia_text"
+        android:layout_marginTop="10dp"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/agarwaltxt"
-        android:text="Agarwal Real Estate"
-        android:textSize="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/red"
+        android:text="A PROJECT BY"
+        android:textSize="30sp"
+        android:id="@+id/projectbytxt"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/button_color"
+        android:layout_below="@+id/premia_text"
+        android:layout_marginTop="50dp"
         android:textStyle="bold"
         />
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="230dp"
-    app:cardCornerRadius="10dp"
-    android:elevation="20dp"
-    android:layout_marginTop="10dp"
-    android:layout_below="@id/agarwaltxt"
-    android:id="@+id/slidercard"
-    android:layout_margin="15dp"
-    >
-<com.smarteist.autoimageslider.SliderView
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="130dp"
+        android:id="@+id/kenarc_logo"
+        android:background="@drawable/kenarc_logo"
+        android:layout_below="@+id/projectbytxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        />
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/button_color"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:cardCornerRadius="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/image_slider"
-    app:sliderAnimationDuration="500"
-    app:sliderAutoCycleDirection="back_and_forth"
-    app:sliderAutoCycleEnabled="true"
-    app:sliderIndicatorAnimationDuration="500"
-    app:sliderIndicatorGravity="center_horizontal|bottom"
-    app:sliderIndicatorMargin="15dp"
-    app:sliderIndicatorOrientation="horizontal"
-    app:sliderIndicatorPadding="3dp"
-    app:sliderIndicatorRadius="2dp"
-    app:sliderIndicatorSelectedColor="@color/white"
-    app:sliderIndicatorUnselectedColor="@color/red"
-    app:sliderScrollTimeInSec="2"
-    app:sliderStartAutoCycle="true"
-    />
-</androidx.cardview.widget.CardView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/overview"
-        android:text="* OVERVIEW *"
-        android:layout_centerInParent="true"
-        android:textSize="30dp"
-        android:layout_below="@id/slidercard"
-        android:layout_marginTop="15dp"
-        android:textStyle="bold"
-        />
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/overview"
-        android:layout_marginTop="10dp"
-        >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/description"
-        android:text="Designed to match your discerning taste and impeccable style, Agarwal Paramount pampers you for choice. Refined sophistication is available through massive 13 wings, each 14 storeys high, with spaciously planned luxury apartments that come in the ideal size and budget to fit your needs. Choose from super luxurious 1BHK, 2 BHK and 3 BHK apartments. Your unparralleled lifestyle now includes a world of amenities and convenience stores in a legendary natural setting, surrounded by wondrous tranquility and spectacular vistas - to live the full life and embrace every moment because your every need is satisfied.
-Designed to match your discerning taste and impeccable style, Agarwal Paramount pampers you for choice. Refined sophistication is available through massive 13 wings, each 14 storeys high, with spaciously planned luxury apartments that come in the ideal size and budget to fit your needs. Choose from super luxurious 1BHK, 2 BHK and 3 BHK apartments. Your unparralleled lifestyle now includes a world of amenities and convenience stores in a legendary natural setting, surrounded by wondrous tranquility and spectacular vistas - to live the full life and embrace every moment because your every need is satisfied."
-        android:layout_centerInParent="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:textSize="15dp"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        />
-    </ScrollView>
-    <Button
-        android:layout_width="350dp"
-        android:layout_height="135dp"
-        android:background="@drawable/salesenquiry"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/enquirybut"
-        android:text="Sales Enquiry"
-        android:paddingTop="54dp"
-        />
-
+    >
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Next"
+      android:id="@+id/nextTxt"
+      android:textSize="25sp"
+      android:textStyle="bold"
+      android:layout_marginStart="25sp"
+      android:layout_marginTop="10dp"
+      android:textColor="@color/button_text"
+      />
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="20dp"
+        android:id="@+id/arrowImg"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/right_arrow"/>
+</LinearLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

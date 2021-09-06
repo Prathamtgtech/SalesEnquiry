@@ -50,4 +50,24 @@ public class LoginDB extends SQLiteOpenHelper {
         if (cursor.getCount()>0)return true;
         else  return false;
         }
+
+        public boolean changepassword(String Username,String Password){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("Password",Password);
+        long result=db.update("users",values,"Username=?",new String[]{Username});
+        if (result==-1){
+            return false;
+        }
+        else {
+            return true;
+        }
+        }
+
+    public Cursor FetchLoginData(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String Query="Select * from users";
+        Cursor cursor=db.rawQuery(Query,null);
+        return cursor;
+    }
     }

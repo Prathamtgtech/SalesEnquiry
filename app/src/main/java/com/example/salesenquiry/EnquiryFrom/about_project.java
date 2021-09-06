@@ -1,158 +1,276 @@
 package com.example.salesenquiry.EnquiryFrom;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.nfc.Tag;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.salesenquiry.Database.FormDatabase;
+import com.example.salesenquiry.Database.FormDB;
 import com.example.salesenquiry.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.jar.Attributes;
 
 public class about_project extends AppCompatActivity {
-    TextView pleasure, aboutproject, printadv;
-    CheckBox news1, news2, news3, news4;
-    TextInputEditText newspaper, hording, digital, telecalling, source, refer, partner;
-    String Advertise = "", insertpaper, hordindloc, digitals, sources, refers, partners;
-    FormDatabase formDatabase;
+    Spinner newsadv, newsinsert;
+    TextView pleasure, aboutproject, newsadvtxt, newsinserttxt;
+    TextInputEditText hording, digital, telecalling, source, broker, reference;
+    String hordindloc, digitals, sources, refernces, brokers, telecallings;
+    FormDB formDB;
     SharedPreferences sp;
-Button submit;
+    Button submit, submitbut;
+    Dialog submit_dialog;
+    DataModel dataModel;
+    DatabaseReference dbreference;
+    Cursor cursor;
+    String FName, LName, Locality, City, Timetocall, Phone, Altphone, Email,
+            Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
+            Configuration, Specify, Budget, Purchase, Loan, Bankname, Residantal,
+            Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference;
+    int Pincode;
+    String newsAdvOpt[] = {"Times Of India", "Mumbai Mirror,Mid-Day", "Navbhart Times", "Maharashtra Times", "Mumbai Samachar", "Gujrat Samachar", "Any Others"};
+    String newsInsertOpt[] = {"Times Of India", "Mumbai Mirror,Mid-Day", "Navbhart Times", "Maharashtra Times", "Mumbai Samachar", "Gujrat Samachar", "Any Others"};
+    ArrayList<DataModel> dataView = new ArrayList<DataModel>();
+    FirebaseDatabase db;
+    String newsadvval, newsinsertval;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_project);
         pleasure = findViewById(R.id.pleasuretxt);
         aboutproject = findViewById(R.id.aboutproject);
-        printadv = findViewById(R.id.printadv);
-        news1 = findViewById(R.id.news1);
-        news2 = findViewById(R.id.news2);
-        news3 = findViewById(R.id.news3);
-        news4 = findViewById(R.id.news4);
-        newspaper = findViewById(R.id.newsinsert);
+        newsadvtxt = findViewById(R.id.newsadvtxt);
+        newsinserttxt = findViewById(R.id.newsinserttxt);
+        newsadv = findViewById(R.id.newsadv);
+        newsinsert = findViewById(R.id.newsinsert);
         hording = findViewById(R.id.hording);
         digital = findViewById(R.id.digital);
         telecalling = findViewById(R.id.telecalling);
         source = findViewById(R.id.source);
-        refer = findViewById(R.id.refer);
-        partner = findViewById(R.id.partner);
-        submit=findViewById(R.id.submit);
-        formDatabase = new FormDatabase(this);
-        printadvertisment();
+        broker = findViewById(R.id.broker);
+        reference = findViewById(R.id.refrence);
+        submit = findViewById(R.id.submit);
+        submit_dialog = new Dialog(this);
+
+        //insert data in sqlite
+        formDB = new FormDB(this);
+        //firebase data get
+        cursor=new FormDB(this).FetchCustData();
+        db = FirebaseDatabase.getInstance();
+        dbreference = db.getReference("Sales Enquiry").child("Customer Data").child("Id");
+        //Newspaper Advertisment Spineer
+        NewspaperAdv();
+        //Newspaper Insert Spinner
+        NewsaperInsert();
         submitbut();
+//        //Update Form
+//        UpdateFormData();
     }
 
-
-
-    //Print Advertisment
-    private void printadvertisment() {
-
-        news1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    //Newspaper Advertisment
+    private void NewspaperAdv() {
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.newspaper_advertise, newsAdvOpt);
+        arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        newsadv.setAdapter(arrayAdapter);
+        newsadv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (news1.isChecked()) {
-                    Advertise += "Times Of India";
-                }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                newsadvval = (newsAdvOpt[position].toString());
             }
-        });
-        news2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (news2.isChecked()) {
-                    Advertise += "Hindusatan Times";
-                }
-            }
-        });
-        news3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (news3.isChecked()) {
-                    Advertise += "Mid-Day";
-                }
-            }
-        });
-        news4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (news4.isChecked()) {
-                    Advertise = "Mumbai Mirror";
-                }
+            public void onNothingSelected(AdapterView<?> parent) {
+                newsadvval = "Null";
             }
         });
     }
+
+    //Insert Newspaper
+    private void NewsaperInsert() {
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.newspaper_insert, newsInsertOpt);
+        arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        newsinsert.setAdapter(arrayAdapter);
+        newsinsert.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                newsinsertval = (newsInsertOpt[position].toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                newsinsertval = "Null";
+            }
+        });
+    }
+////Form Update Data
+    private void UpdateFormData() {
+//    newspaper.setText(getIntent().getStringExtra("ENTER_NEWSPAPER"));
+    hording.setText(getIntent().getStringExtra("HORDING"));
+    digital.setText(getIntent().getStringExtra("ADVERTISMENT"));
+    telecalling.setText(getIntent().getStringExtra("SOURCE"));
+    source.setText(getIntent().getStringExtra("TELECALLING"));
+    broker.setText(getIntent().getStringExtra("BROKER"));
+    reference.setText(getIntent().getStringExtra("REFER"));
+    }
+
+    //Submit Details Dialog Box
+    private void SubmitDialog() {
+        submit_dialog.setContentView(R.layout.details_submit);
+        submit_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        submitbut = submit_dialog.findViewById(R.id.detailsubmit);
+        submitbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), view_form_data.class);
+                startActivity(intent);
+            }
+        });
+        submit_dialog.show();
+    }
+
 
     //Submit Button
     private void submitbut() {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertpaper = newspaper.getText().toString();
+
                 hordindloc = hording.getText().toString();
                 digitals = digital.getText().toString();
                 sources = source.getText().toString();
-                refers = refer.getText().toString();
-                partners = partner.getText().toString();
+                brokers = broker.getText().toString();
+                refernces = reference.getText().toString();
+                telecallings = telecalling.getText().toString();
                 sp = getSharedPreferences("DetailsKey", MODE_PRIVATE);
                 SharedPreferences.Editor ed = sp.edit();
-                ed.putString("NEWSPAPER", Advertise);
-                ed.putString("PAPERNAME", insertpaper);
-                ed.putString("HORDING", hordindloc);
-                ed.putString("ADVERTISMENT", digitals);
+                ed.putString("NEWSPAPER_ADV", newsadvval);
+                ed.putString("NEWSPAPER_INSERT", newsinsertval);
+                ed.putString("HORDINGS", hordindloc);
+                ed.putString("DIGITAL_ADV", digitals);
                 ed.putString("SOURCE", sources);
-                ed.putString("REFER", refers);
-                ed.putString("PARTNER", partners);
-                ed.putString("TELE", telecalling.getText().toString());
+                ed.putString("BROKER", brokers);
+                ed.putString("REFERENCE", refernces);
+                ed.putString("TELECALLING", telecallings);
                 ed.apply();
-                String Name =sp.getString("Name","");
-                String Locality =sp.getString("Locality","");
-                String City =sp.getString("City","");
-                int Pincode =sp.getInt("Pincodes",0);
-                String Timetocall=sp.getString("Timers","");
-                String Phone=sp.getString("Phones","");
-                String Altphone=sp.getString("AltPhones","");
-                String Email=sp.getString("Emails","");
-                String Education=sp.getString("Education","");
-                String Occupation=sp.getString("Occupation","");
-                String Company_name=sp.getString("CompanyName","");
-                String Designation=sp.getString("Designation","");
-                String Work_natures=sp.getString("WorkNature","");
-                String Business_location=sp.getString("BusinessLocation","");
-                String Configuration=sp.getString("Configurtaion","");
-                String Specify=sp.getString("SPECIFY","");
-                String Budget=sp.getString("BUDGET","");
-                String Loan=sp.getString("Loan","");
-                String Bankname=sp.getString("BankName","");
-                String Purchase=sp.getString("Purchase","");
-                String Residantal=sp.getString("Residantal","");
-                String Newspaper=sp.getString("NEWSPAPER","");
-                String Insert_newspaper=sp.getString("INSERT","");
-                String Hording=sp.getString("HORDING","");
-                String Advertisement=sp.getString("ADVERTISMENT","");
-                String Telecalling=sp.getString("TELE","");
-                String Source=sp.getString("SOURCE","");
-                String Refer=sp.getString("REFER","");
-                String Partner=sp.getString("PARTNER","");
+                FName = sp.getString("FNAME", "");
+                LName = sp.getString("LNAME", "");
+                Locality = sp.getString("LOCALITY", "");
+                City = sp.getString("CITY", "");
+                Pincode = sp.getInt("PINCODE", 0);
+                Timetocall = sp.getString("TIMER", "");
+                Phone = sp.getString("PHONE", "");
+                Altphone = sp.getString("ALTPHONE", "");
+                Email = sp.getString("EMAIL", "");
+                Gender = sp.getString("GENDER", "");
+                Status = sp.getString("STATUS", "");
+                Occupation = sp.getString("OCCUPATION", "");
+                Company_name = sp.getString("COMPANY_NAME", "");
+                Designation = sp.getString("DESIGNATION", "");
+                Work_nature = sp.getString("WORKNATURE", "");
+                Business_location = sp.getString("BUSINESS_LOC", "");
+                Configuration = sp.getString("CONFIGURATION", "");
+                Specify = sp.getString("SPECIFY", "");
+                Budget = sp.getString("BUDGETS", "");
+                Purchase = sp.getString("PURCHASE", "");
+                Loan = sp.getString("LOAN", "");
+                Bankname = sp.getString("BANKNAME", "");
+                Residantal = sp.getString("RESIDENTAL", "");
+                Newspaper_Adv = sp.getString("NEWSPAPER_ADV", "");
+                Newspaper_Insert = sp.getString("NEWSPAPER_INSERT", "");
+                Hording = sp.getString("HORDINGS", "");
+                Advertisement = sp.getString("DIGITAL_ADV", "");
+                Telecalling = sp.getString("TELECALLING", "");
+                Source = sp.getString("SOURCE", "");
+                Broker = sp.getString("BROKER", "");
+                Reference = sp.getString("REFERENCE", "");
+//Insert Value in Database
+                firestoredata();
+                //Update Data
+//                Boolean updateFormData = formDB.UpdateFormData(FName,LName,Locality,City,Pincode,Timetocall,Phone,Altphone,Email,
+//                        Gender,Status,Occupation,Company_name,Designation,Work_nature,Business_location,
+//                        Configuration,Specify,Budget,Loan,Bankname,Purchase,Residantal,
+//                        Newspaper_Adv,Newspaper_Insert,Hording,Advertisement,Telecalling,Source,Broker,Reference);
+//                if (updateFormData == true) {
+//                    SubmitDialog();
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
+//                }
 
-                Boolean insertData=formDatabase.InsertValues(Name,Locality,City,Pincode,Timetocall,Phone,Altphone,Email,Education,Occupation,Company_name,Designation,Work_natures,Business_location,Configuration,Specify,Budget,Loan,Bankname,Purchase,Residantal,Newspaper,Insert_newspaper,Hording,Advertisement,Telecalling,Source,Refer,Partner);
-                if (insertData==true){
-                    startActivity(new Intent(getApplicationContext(),com.example.salesenquiry.welcome.class));
-                    Toast.makeText(getApplicationContext(),"Details Are Submitted",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"Details Are Not Submitted",Toast.LENGTH_LONG).show();
+                //insert data
+                Boolean insertFormData = formDB.InsertFormData(FName,LName,Locality,City,Pincode,Timetocall,Phone,Altphone,Email,
+                        Gender,Status,Occupation,Company_name,Designation,Work_nature,Business_location,
+                        Configuration,Specify,Budget,Loan,Bankname,Purchase,Residantal,
+                        Newspaper_Adv,Newspaper_Insert,Hording,Advertisement,Telecalling,Source,Broker,Reference);
+                if (insertFormData == true) {
+                    SubmitDialog();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
 
-
+    //Firebase Value Store
+    private void firestoredata() {
+        while (cursor.moveToNext()) {
+            dataModel = new DataModel();
+            dataModel.setId(cursor.getInt(0));
+            dataModel.setFNAME(cursor.getString(1));
+            dataModel.setLNAME(cursor.getString(2));
+            dataModel.setLOCALITY(cursor.getString(3));
+            dataModel.setCITY(cursor.getString(4));
+            dataModel.setPINCODE(cursor.getInt(5));
+            dataModel.setTIME_TO_CALL(cursor.getString(6));
+            dataModel.setPHONE(cursor.getString(7));
+            dataModel.setALTPHONE(cursor.getString(8));
+            dataModel.setEMAIL(cursor.getString(9));
+            //Personal Details
+            dataModel.setGENDER(cursor.getString(10));
+            dataModel.setSTATUS(cursor.getString(11));
+            dataModel.setOCCUPATION(cursor.getString(12));
+            dataModel.setCOMPANY_NAME(cursor.getString(13));
+            dataModel.setDESIGNATION(cursor.getString(14));
+            dataModel.setWORK_NATURE(cursor.getString(15));
+            dataModel.setBUSINESS_LOCATION(cursor.getString(16));
+            //Need And Requirment
+            dataModel.setCONFIGURATION(cursor.getString(17));
+            dataModel.setSPECIFY(cursor.getString(18));
+            dataModel.setBUDGET(cursor.getString(19));
+            dataModel.setLOAN(cursor.getString(20));
+            dataModel.setBANKNAME(cursor.getString(21));
+            dataModel.setPURCHASE(cursor.getString(22));
+            dataModel.setRESIDENTAL(cursor.getString(23));
+            //About Project
+            dataModel.setNEWSPAPER_ADV(cursor.getString(24));
+            dataModel.setNEWSPAPER_INSERT(cursor.getString(25));
+            dataModel.setHORDING(cursor.getString(26));
+            dataModel.setADVERTISEMENT(cursor.getString(27));
+            dataModel.setTELECALLING(cursor.getString(28));
+            dataModel.setSOURCE(cursor.getString(29));
+            dataModel.setBROKER(cursor.getString(30));
+            dataModel.setREFER(cursor.getString(31));
+            dataView.add(dataModel);
+        }
+        dbreference.setValue(dataView);
     }
 }

@@ -10,9 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="IT’S A PLEASURE TO HAVE YOU HERE,"
-        android:textColor="@color/red"
+        android:textColor="@color/button_color"
         android:textStyle="bold"
-        android:textSize="17dp"
+        android:textSize="15sp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
@@ -22,9 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HOW DID YOU COME TO KNOW ABOUT OUR PROJECT?  "
-        android:textColor="@color/red"
+        android:textColor="@color/button_color"
         android:textStyle="bold"
-        android:textSize="13dp"
+        android:textSize="15sp"
         android:layout_below="@+id/pleasuretxt"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
@@ -33,80 +33,39 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Print Advertisement"
-        android:textSize="16dp"
+        android:text="Newspaper Advertisement"
+        android:textSize="15sp"
         android:layout_below="@+id/aboutproject"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:id="@+id/printadv"
-        android:textColor="@color/grey"
+        android:id="@+id/newsadvtxt"
+        android:textColor="@color/button_color"
         />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_toRightOf="@+id/printadv"
-        android:layout_marginTop="17dp"
-        android:layout_marginLeft="10dp"
-        android:text="Times of India"
-        android:layout_below="@id/aboutproject"
-        app:useMaterialThemeColors="true"
-        android:id="@+id/news1"
-        android:textColor="@color/grey"
-        android:textStyle="bold"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="175dp"
-        android:text="Hindustan Times"
-        android:layout_below="@id/news1"
-        android:id="@+id/news2"
-        android:textStyle="bold"
-        android:textColor="@color/grey"
-        />
-
-    <CheckBox
-        android:id="@+id/news3"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@id/news2"
-        android:layout_marginLeft="175dp"
-        android:layout_marginTop="5dp"
-        android:text="Mid-Day"
-        android:textColor="@color/grey"
-        android:textStyle="bold" />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@+id/news3"
-        android:layout_marginLeft="175dp"
-        android:layout_marginTop="5dp"
-        android:text="Mumbai Mirror"
-        android:id="@+id/news4"
-        android:textStyle="bold"
-        android:textColor="@color/grey"
-        />
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <Spinner
+        android:id="@+id/newsadv"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/newsadvtxt"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/newsinserttxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newsadv"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/newspaperLayout"
-        android:layout_below="@+id/news4"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/red"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/newsinsert"
-            android:hint="Newspaper Insert"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:text="Newspaper Insert"
+        android:textColor="@color/button_color"
+        android:textSize="15sp" />
+    <Spinner
+        android:id="@+id/newsinsert"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/newsinserttxt"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp" />
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -114,10 +73,14 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:id="@+id/hordingLayout"
-        android:layout_below="@+id/newspaperLayout"
+        android:layout_below="@+id/newsinsert"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/red"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -136,13 +99,17 @@
         android:layout_below="@+id/hordingLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/red"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/digital"
-            android:hint="Where You Can See Advertisement"
+            android:hint="Where You Can See Digital Advertisement"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -156,6 +123,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/ic_baseline_phone_24"
         app:endIconMode="clear_text"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -176,7 +148,11 @@
         android:layout_below="@+id/teleLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/red"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -191,17 +167,21 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/referLayout"
+        android:id="@+id/brokerLayout"
         android:layout_below="@+id/sourceLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/red"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/refer"
-            android:hint="Refrral"
+            android:id="@+id/broker"
+            android:hint="Broker Name"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -210,17 +190,21 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/partnerLayout"
-        android:layout_below="@+id/referLayout"
+        android:id="@+id/refrenceLayout"
+        android:layout_below="@+id/brokerLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/red"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/partner"
-            android:hint="Channel Partner/Company Name"
+            android:id="@+id/refrence"
+            android:hint="Direct Refrences"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <Button
@@ -232,5 +216,5 @@
         android:text="Submit"
         android:drawableTint="@color/white"
         android:textSize="18dp"
-        android:backgroundTint="@color/red" />
+        android:backgroundTint="@color/button_color"/>
 </RelativeLayout>

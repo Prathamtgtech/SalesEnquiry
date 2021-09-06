@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.SalesEnquiry" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#EC5F5F</item>
-        <item name="colorPrimaryVariant">@color/red</item>
+        <item name="colorPrimary">#66004D</item>
+        <item name="colorPrimaryVariant">#66004D</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/red</item>
-        <item name="colorSecondaryVariant">@color/red</item>
+        <item name="colorSecondary">@color/button_color</item>
+        <item name="colorSecondaryVariant">@color/button_color</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>

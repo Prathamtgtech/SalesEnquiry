@@ -4,287 +4,299 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".EnquiryFrom.need_require">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/need_requirement"
-        android:textSize="25dp"
-        android:textColor="@color/red"
-        android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:id="@+id/needtxt"
-        android:layout_marginTop="40dp"
-        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Configuration"
-        android:textSize="16dp"
-        android:layout_below="@+id/needtxt"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:id="@+id/configration"
-        android:textColor="@color/grey"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/needtxt"
-        android:layout_toRightOf="@+id/configration"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:text="1 BHK"
-        android:id="@+id/one"
-        android:textColor="@color/grey"
-        android:textStyle="bold"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/needtxt"
-        android:layout_toRightOf="@+id/one"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:text="2 BHK"
-        android:id="@+id/two"
-        android:textColor="@color/grey"
-        android:textStyle="bold"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/needtxt"
-        android:layout_toRightOf="@+id/two"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:text="3 BHK"
-        android:id="@+id/three"
-        android:textColor="@color/grey"
-        android:textStyle="bold"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/one"
-        android:layout_marginLeft="130dp"
-        android:text="Other"
-        android:id="@+id/other"
-        android:textColor="@color/grey"
-        android:textStyle="bold"
-        />
-    <EditText
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:hint="Specify"
-        android:paddingLeft="20dp"
-        android:textColorHint="@color/grey"
-        android:id="@+id/specify"
-        android:layout_below="@id/one"
-        android:layout_toRightOf="@id/other"
-        android:layout_marginLeft="10dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/budget"
-        android:text="Budeget"
-        android:textSize="15dp"
-        android:textColor="@color/grey"
-        android:layout_below="@+id/other"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        />
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="370dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/budget"
-        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home Loan :"
-        android:textSize="16dp"
-        android:layout_below="@+id/spinner"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:id="@+id/loan"
-        android:textColor="@color/grey"
-        />
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/loangroup"
-        android:layout_below="@id/spinner"
-        android:layout_toRightOf="@id/loan"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        >
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:id="@+id/approve"
-            android:text="Approved"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
-            />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:id="@+id/noapprove"
-            android:text="No Approved"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
-            />
-    </RadioGroup>
+            <CheckBox
+                android:id="@+id/one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/configrationtxt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="1 BHK"
+                android:textColor="@color/grey"
+                android:buttonTint="@color/button_color"
+                android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/bankLayout"
-        android:layout_below="@+id/loangroup"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconDrawable="@drawable/ic_baseline_person_24"
-        app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/red"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bankname"
-            android:hint="Name Of Bank"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nature Of Purchase :"
-        android:textSize="16dp"
-        android:layout_below="@+id/bankLayout"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:id="@+id/purchase"
-        android:textColor="@color/grey"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bankLayout"
-        android:layout_toRightOf="@+id/purchase"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:text="Self-Use"
-        android:id="@+id/selfuse"
-        android:textColor="@color/grey"
-        android:textStyle="bold"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bankLayout"
-        android:layout_toRightOf="@+id/selfuse"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:text="Investment"
-        android:id="@+id/investment"
-        android:textColor="@color/grey"
-        android:textStyle="bold"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/purchase"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="175dp"
-        android:text="Second Home"
-        android:id="@+id/secondhome"
-        android:textColor="@color/grey"
-        android:textStyle="bold"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Current Residental Type :"
-        android:textSize="16dp"
-        android:layout_below="@+id/secondhome"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:id="@+id/residental"
-        android:textColor="@color/grey"
-        />
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/typegroup"
-        android:layout_below="@id/secondhome"
-        android:layout_toRightOf="@id/residental"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        >
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:id="@+id/owned"
-            android:text="Owned"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
-            />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:id="@+id/rent"
-            android:text="Rented"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
-            />
-    </RadioGroup>
+            <CheckBox
+                android:id="@+id/two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/configrationtxt"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/one"
+                android:text="2 BHK"
+                android:buttonTint="@color/button_color"
+                android:textColor="@color/grey"
+                android:textStyle="bold" />
 
-    <RelativeLayout
-        android:layout_width="210dp"
-        android:layout_height="65dp"
-        android:background="@color/red"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/preLay"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/previous"
-            android:text="Previous"
-            android:textStyle="bold"
-            android:layout_marginLeft="65dp"
-            android:textColor="@color/white"
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="210dp"
-        android:layout_height="65dp"
-        android:background="@color/red"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/preLay"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/next"
-            android:text="Next"
-            android:textStyle="bold"
-            android:layout_marginLeft="65dp"
-            android:textColor="@color/white"
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"/>
-    </RelativeLayout>
-</RelativeLayout>
+            <CheckBox
+                android:id="@+id/three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/configrationtxt"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/two"
+                android:text="3 BHK"
+                android:buttonTint="@color/button_color"
+                android:textColor="@color/grey"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/configrationtxt"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/three"
+                android:text="Other"
+                android:buttonTint="@color/button_color"
+                android:textColor="@color/grey"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/specify"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/configrationtxt"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/other"
+                android:hint="Specify"
+                android:paddingLeft="5dp"
+                android:textColorHint="@color/button_color" />
+
+            <RadioGroup
+                android:id="@+id/purchaseval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/purchasetxt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/self_fund"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:text="Self Funding"
+                    android:buttonTint="@color/button_color"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/housing_loan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:text="Housing Loan"
+                    android:textColor="@color/grey"
+                    android:buttonTint="@color/button_color"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+            <RelativeLayout
+                android:id="@+id/preLay"
+                android:layout_width="210dp"
+                android:layout_height="65dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/button_color">
+
+                <TextView
+                    android:id="@+id/previous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginTop="20dp"
+                    android:text="PREVIOUS"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="210dp"
+                android:layout_height="65dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/preLay"
+                android:background="@color/button_color">
+
+                <TextView
+                    android:id="@+id/next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginTop="20dp"
+                    android:text="NEXT"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="370dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/budgettxt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/needtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:text="NEED AND REQUIREMENT"
+                android:textColor="@color/button_color"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/configrationtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/needtxt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Configuration"
+                android:textColor="@color/button_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home Loan :"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/purchaseval"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:id="@+id/loan"
+                    android:textColor="@color/button_color"
+                    />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/loangroup"
+                    android:layout_below="@id/loan"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/approve"
+                        android:text="Approved"
+                        android:textStyle="bold"
+                        android:textColor="@color/grey"
+                        android:buttonTint="@color/button_color"
+                        />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/noapprove"
+                        android:text="No Approved"
+                        android:textStyle="bold"
+                        android:textColor="@color/grey"
+                        android:buttonTint="@color/button_color"
+                        />
+
+                </RadioGroup>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/bankLayout"
+                    android:layout_below="@+id/loangroup"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24"
+                    app:endIconMode="clear_text"
+                    app:boxStrokeColor="@color/button_color"
+                    android:textColorHint="@color/black"
+                    app:helperTextTextColor="@color/button_color"
+                    app:boxStrokeErrorColor="@color/error_color"
+                    app:errorTextColor="@color/error_color"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bankname"
+                        android:hint="Name Of Bank"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Residental Type :"
+                    android:textSize="16dp"
+                    android:layout_below="@+id/bankLayout"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:id="@+id/residental"
+                    android:textColor="@color/button_color"
+                    />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/typegroup"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/residental"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/owned"
+                        android:text="Owned"
+                        android:textStyle="bold"
+                        android:buttonTint="@color/button_color"
+                        android:textColor="@color/grey"
+                        />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:id="@+id/rent"
+                        android:text="Rented"
+                        android:textStyle="bold"
+                        android:buttonTint="@color/button_color"
+                        android:textColor="@color/grey"
+                        />
+                </RadioGroup>
+            <TextView
+                android:id="@+id/budgettxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/other"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Budget :"
+                android:textColor="@color/button_color"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/purchasetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="22dp"
+                android:text="Nature Of Purchase :"
+                android:textColor="@color/button_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </RelativeLayout>

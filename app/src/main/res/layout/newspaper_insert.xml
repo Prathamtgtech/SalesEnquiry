@@ -7,8 +7,7 @@
     android:padding="16dp"
     android:maxLines="1"
     android:textSize="13dp"
-    android:textColorHint="@color/button_color"
-    android:textColorHighlight="@color/button_color"
+    android:textAppearance="?attr/textAppearanceSubtitle1"
     android:background="@drawable/border"
     >
 

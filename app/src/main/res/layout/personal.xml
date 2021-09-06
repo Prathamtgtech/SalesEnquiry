@@ -10,30 +10,68 @@
         android:layout_height="wrap_content"
         android:text="PERSONAL DETAILS"
         android:textSize="25dp"
-        android:textColor="@color/red"
+        android:textColor="@color/button_color"
         android:layout_marginLeft="20dp"
         android:textStyle="bold"
         android:id="@+id/entertxt"
         android:layout_marginTop="40dp"
         />
+
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
-        android:id="@+id/nameLayout"
+        android:id="@+id/FirstNameLayout"
         android:layout_below="@+id/entertxt"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/ic_baseline_person_24"
         app:endIconMode="clear_text"
-        app:boxStrokeColor="@color/red"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
+        app:errorEnabled="true"
+        app:helperTextEnabled="true"
+        app:helperText="Required"
         >
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Name"
-            android:hint="Name"
+            android:id="@+id/FirstName"
+            android:hint="First Name"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:id="@+id/LastnameLayout"
+        android:layout_below="@+id/entertxt"
+        android:layout_toRightOf="@id/FirstNameLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:helperTextEnabled="true"
+        app:helperText="Required"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/LastName"
+            android:hint="Last Name"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -42,11 +80,16 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/nameLayout"
+        android:layout_below="@+id/FirstNameLayout"
         android:id="@+id/LocalityLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/ic_baseline_location_on_24"
         app:endIconMode="clear_text"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -61,12 +104,17 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/nameLayout"
+        android:layout_below="@+id/LastnameLayout"
         android:id="@+id/CityLayout"
         android:layout_toRightOf="@+id/LocalityLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/ic_baseline_location_city_24"
         app:endIconMode="clear_text"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -85,6 +133,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/ic_baseline_pin_drop_24"
         app:endIconMode="clear_text"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -107,6 +160,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconDrawable="@drawable/ic_baseline_access_time_24"
         app:endIconMode="custom"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -128,6 +186,12 @@
         app:startIconDrawable="@drawable/ic_baseline_phone_24"
         app:endIconMode="clear_text"
         app:prefixText="+91"
+        app:helperText="Required"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/button_color"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -149,7 +213,14 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/ic_baseline_phone_24"
         app:endIconMode="clear_text"
+        app:helperText="Required"
+        app:helperTextEnabled="true"
         app:prefixText="+91"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -171,6 +242,11 @@
         app:startIconDrawable="@drawable/ic_baseline_person_24"
         app:endIconMode="clear_text"
         android:layout_below="@id/AltMobileLayout"
+        app:boxStrokeColor="@color/button_color"
+        android:textColorHint="@color/black"
+        app:helperTextTextColor="@color/button_color"
+        app:boxStrokeErrorColor="@color/error_color"
+        app:errorTextColor="@color/error_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -180,8 +256,9 @@
             android:inputType="textEmailAddress"
             />
     </com.google.android.material.textfield.TextInputLayout>
-
-
+<!--            </RelativeLayout>-->
+<!--        </LinearLayout>-->
+<!--    </ScrollView>-->
     <Button
         android:id="@+id/Next"
         android:layout_width="match_parent"
@@ -189,8 +266,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-6dp"
         android:text="Next"
-        android:drawableTint="@color/white"
-        android:textSize="18dp"
-        android:backgroundTint="@color/red" />
+        android:drawableTint="@color/button_text"
+        android:textSize="20sp"
+        android:backgroundTint="@color/button_color" />
 </RelativeLayout>
 

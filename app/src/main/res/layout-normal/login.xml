@@ -7,25 +7,35 @@
     tools:context=".login">
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/logoicon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/kenarc_symbol"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:id="@+id/logoIcon"
         />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:src="@drawable/kenarc_text"
+        android:layout_marginTop="10dp"
+        android:id="@+id/logotxt"
+        android:layout_below="@+id/logoIcon"
+        android:layout_centerHorizontal="true"
+        />
+
 <com.google.android.material.textfield.TextInputLayout
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:id="@+id/emailInput"
-    android:layout_below="@+id/logoIcon"
+    android:layout_below="@+id/logotxt"
     android:layout_marginTop="15dp"
     android:layout_centerInParent="true"
     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     android:hint="Email"
-    app:hintTextColor="@color/red"
-    app:boxStrokeColor="@color/red"
-    android:textColorHint="@color/red"
+    app:hintTextColor="@color/button_color"
+    app:boxStrokeColor="@color/button_color"
+    android:textColorHint="@color/button_color"
     >
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
@@ -46,9 +56,9 @@
         android:hint="Password"
         app:endIconCheckable="true"
         app:endIconMode="password_toggle"
-      app:boxStrokeColor="@color/red"
-        app:hintTextColor="@color/red"
-        android:textColorHint="@color/red"
+      app:boxStrokeColor="@color/button_color"
+        app:hintTextColor="@color/button_color"
+        android:textColorHint="@color/button_color"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -60,12 +70,12 @@
     </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:layout_width="340dp"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/passwordInput"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
         android:id="@+id/login"
-        android:background="@drawable/login"
+        android:backgroundTint="@color/button_color"
         android:text="Log In"
         android:paddingBottom="10dp"
         />
@@ -78,9 +88,9 @@
         android:id="@+id/forgot"
         android:layout_marginTop="10dp"
         android:layout_centerInParent="true"
-        android:textColor="@color/red"
+        android:textColor="@color/button_color"
         android:textStyle="bold"
-        android:textSize="15dp"
+        android:textSize="15sp"
         />
 
     <TextView
@@ -96,11 +106,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:textColor="@color/red"
+        android:textColor="@color/button_color"
         android:id="@+id/signupac"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:textStyle="bold"
+        android:textSize="15sp"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/donthave"
         />

@@ -9,4 +9,17 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#EC5F5F</color>
     <color name="grey">#A3A1A1</color>
+    <color name="light_grey">#D6D6D6</color>
+
+    //new Color
+    <color name="header_back">#66004D</color>
+    <color name="header_font">#FFFFFF</color>
+    <color name="body_background">#FFFFFF</color>
+    <color name="element_title">#66004D</color>
+    <color name="element_content">#000000</color>
+    <color name="button_color"> #66004D</color>
+    <color name="button_text">#FFFFFF</color>
+    <color name="error_color">#FF0000</color>
+
+
 </resources>

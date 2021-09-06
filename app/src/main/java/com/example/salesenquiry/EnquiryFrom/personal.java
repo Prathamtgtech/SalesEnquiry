@@ -7,97 +7,89 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.salesenquiry.Database.FormDB;
 import com.example.salesenquiry.R;
+import com.example.salesenquiry.forgot_password;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class personal extends AppCompatActivity {
-    TextInputEditText Timer, Name, Locality, City, Pincode, Phone, AltPhone, Email;
+    TextInputEditText Timer, FirstName,LastName, Locality, City, Pincode, Phone, AltPhone, Email;
     TimePickerDialog timePickerDialog;
     Button next;
     Calendar calendar;
     int currentHour;
     int currentMin;
     String ampm;
-    String name,locality,city,timers,emailid,phone,altphone;
+    String fname,lname,locality,city,timers,emailid,phone,altphone;
     int pincode;
     SharedPreferences sp;
-
+    Cursor cursor;
+    ArrayList<DataModel> dataView=new ArrayList<DataModel>();
+    DataModel dataModel;
+    FormDB formDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal);
-        Timer = findViewById(R.id.timetocall);
-        Name = findViewById(R.id.Name);
+
+        FirstName = findViewById(R.id.FirstName);
+        LastName=findViewById(R.id.LastName);
         Locality = findViewById(R.id.Locality);
         City = findViewById(R.id.City);
         Pincode = findViewById(R.id.Pincode);
+        Timer = findViewById(R.id.timetocall);
         Phone = findViewById(R.id.Phone);
         AltPhone = findViewById(R.id.AltPhone);
         Email = findViewById(R.id.Emailid);
         next=(Button)findViewById(R.id.Next);
-
+       cursor=new FormDB(this).FetchCustData();
         //Timer
         TimpePicker();
         //nextbut
         nextbut();
+       //updateData
+        UpdateFormData();
 
           }
 
 
-//    @Override
-//    protected void onSaveInstanceState(@NonNull @NotNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putString("Name",name);
-//        outState.putString("Locality",locality);
-//        outState.putString("City",city);
-//        outState.putInt("Pincodes", pincode);
-//        outState.putString("Timers",timers);
-//        outState.putString("Phones", phone);
-//        outState.putString("AltPhones", altphone);
-//        outState.putString("Emails",emailid);
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//    String names=savedInstanceState.getString("Name");
-//    String localitys=savedInstanceState.getString("Locality");
-//        String citys=savedInstanceState.getString("City");
-//        int pincode=savedInstanceState.getInt("Pincodes");
-//        String timer=savedInstanceState.getString("Timers");
-//        String phone=savedInstanceState.getString("Phones");
-//        String altphone=savedInstanceState.getString("AltPhones");
-//        String emails=savedInstanceState.getString("Emails");
-//
-//        Name.setText(names);
-//        Locality.setText(localitys);
-//        City.setText(citys);
-//        Pincode.setText(pincode);
-//        Timer.setText(timer);
-//        Phone.setText(phone);
-//        AltPhone.setText(altphone);
-//        Email.setText(emails);
-//    }
+//    //Update Form Data
+    private void UpdateFormData() {
+        FirstName.setText(getIntent().getStringExtra("FNAME"));
+        LastName.setText(getIntent().getStringExtra("LNAME"));
+        Locality.setText(getIntent().getStringExtra("LOCALITY"));
+        City.setText(getIntent().getStringExtra("CITY"));
+        Pincode.setText(String.valueOf(getIntent().getStringExtra("PINCODE")));
+        Timer.setText(getIntent().getStringExtra("TIME_TO_CALL"));
+        Phone.setText(getIntent().getStringExtra("PHONE"));
+        AltPhone.setText(getIntent().getStringExtra("ALTPHONE"));
+        Email.setText(getIntent().getStringExtra("EMAIL"));
+  }
 
 
     private void nextbut() {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = Name.getText().toString();
+                fname = FirstName.getText().toString();
+                lname= LastName.getText().toString();
                 locality = Locality.getText().toString();
                 city = City.getText().toString();
                 emailid = Email.getText().toString();
@@ -113,18 +105,41 @@ public class personal extends AppCompatActivity {
                 //Share Prefrence
                 sp =getSharedPreferences("DetailsKey",MODE_PRIVATE);
                 SharedPreferences.Editor ed=sp.edit();
-                ed.putString("Name",name);
-                ed.putString("Locality",locality);
-                ed.putString("City",city);
-                ed.putInt("Pincodes", pincode);
-                ed.putString("Timers",timers);
-                ed.putString("Phones", phone);
-                ed.putString("AltPhones", altphone);
-                ed.putString("Emails",emailid);
-
-                Log.d("Values",""+name+locality+city+pincode+timers+phone+altphone+emailid);
+                ed.putString("FNAME",fname);
+                ed.putString("LNAME",lname);
+                ed.putString("LOCALITY",locality);
+                ed.putString("CITY",city);
+                ed.putInt("PINCODE", pincode);
+                ed.putString("TIMER",timers);
+                ed.putString("PHONE", phone);
+                ed.putString("ALTPHONE", altphone);
+                ed.putString("EMAIL",emailid);
                 ed.apply();
                 Intent intent=new Intent(getApplicationContext(),personal_2.class);
+                intent.putExtra("GENDER",getIntent().getStringExtra("GENDER"));
+                intent.putExtra("STATUS",getIntent().getStringExtra("STATUS"));
+                intent.putExtra("OCCUPATION",getIntent().getStringExtra("OCCUPATION"));
+                intent.putExtra("COMPANY_NAME",getIntent().getStringExtra("COMPANY_NAME"));
+                intent.putExtra("DESIGNATION",getIntent().getStringExtra("DESIGNATION"));
+                intent.putExtra("WORK_NATURE",getIntent().getStringExtra("WORK_NATURE"));
+                intent.putExtra("BUSINESS_LOCATION",getIntent().getStringExtra("BUSINESS_LOCATION"));
+                //need and requirement
+                intent.putExtra("CONFIGURATION",getIntent().getStringExtra("CONFIGURATION"));
+                intent.putExtra("SPECIFY",getIntent().getStringExtra("SPECIFY"));
+                intent.putExtra("BUDGET",getIntent().getStringExtra("BUDGET"));
+                intent.putExtra("HOMELOAN",getIntent().getStringExtra("HOMELOAN"));
+                intent.putExtra("BANKNAME",getIntent().getStringExtra("BANKNAME"));
+                intent.putExtra("PURCHASE",getIntent().getStringExtra("PURCHASE"));
+                intent.putExtra("RESIDENTAL",getIntent().getStringExtra("RESIDENTAL"));
+                //about project
+                intent.putExtra("NEWSPAPER_ADV",getIntent().getStringExtra("NEWSPAPER"));
+                intent.putExtra("NEWSPAPER_INSERT",getIntent().getStringExtra("ENTER_NEWSPAPER"));
+                intent.putExtra("HORDING",getIntent().getStringExtra("HORDING"));
+                intent.putExtra("ADVERTISMENT",getIntent().getStringExtra("ADVERTISMENT"));
+                intent.putExtra("SOURCE",getIntent().getStringExtra("SOURCE"));
+                intent.putExtra("TELECALLING",getIntent().getStringExtra("TELECALLING"));
+                intent.putExtra("BROKER",getIntent().getStringExtra("BROKER"));
+                intent.putExtra("REFER",getIntent().getStringExtra("REFER"));
                 startActivity(intent);
             }
         });
