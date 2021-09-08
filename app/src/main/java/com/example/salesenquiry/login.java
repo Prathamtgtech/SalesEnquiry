@@ -82,7 +82,7 @@ public class login extends AppCompatActivity {
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(), "Correct Email id", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Correct Email Id", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "InCorrect Email Id", Toast.LENGTH_LONG).show();
                     }
                 }
             }

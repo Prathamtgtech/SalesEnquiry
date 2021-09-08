@@ -229,6 +229,7 @@ public class need_require extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), about_project.class);
                 //about project
+                intent.putExtra("ID",getIntent().getIntExtra("ID",0));
                 intent.putExtra("NEWSPAPER",getIntent().getStringExtra("NEWSPAPER"));
                 intent.putExtra("ENTER_NEWSPAPER",getIntent().getStringExtra("ENTER_NEWSPAPER"));
                 intent.putExtra("HORDING",getIntent().getStringExtra("HORDING"));

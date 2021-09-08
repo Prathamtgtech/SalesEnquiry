@@ -72,6 +72,7 @@ public class personal extends AppCompatActivity {
 
 //    //Update Form Data
     private void UpdateFormData() {
+        Log.d("CheckId"," "+getIntent().getIntExtra("ID",0));
         FirstName.setText(getIntent().getStringExtra("FNAME"));
         LastName.setText(getIntent().getStringExtra("LNAME"));
         Locality.setText(getIntent().getStringExtra("LOCALITY"));
@@ -116,7 +117,8 @@ public class personal extends AppCompatActivity {
                 ed.putString("EMAIL",emailid);
                 ed.apply();
                 Intent intent=new Intent(getApplicationContext(),personal_2.class);
-                intent.putExtra("GENDER",getIntent().getStringExtra("GENDER"));
+                intent.putExtra("ID",getIntent().getIntExtra("ID",0));
+                intent.putExtra("GENDER",getIntent().getBooleanExtra("GENDER",true));
                 intent.putExtra("STATUS",getIntent().getStringExtra("STATUS"));
                 intent.putExtra("OCCUPATION",getIntent().getStringExtra("OCCUPATION"));
                 intent.putExtra("COMPANY_NAME",getIntent().getStringExtra("COMPANY_NAME"));

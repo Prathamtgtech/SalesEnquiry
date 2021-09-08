@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.function.BooleanSupplier;
 import java.util.jar.Attributes;
 
 public class about_project extends AppCompatActivity {
@@ -37,8 +38,8 @@ public class about_project extends AppCompatActivity {
     String hordindloc, digitals, sources, refernces, brokers, telecallings;
     FormDB formDB;
     SharedPreferences sp;
-    Button submit, submitbut;
-    Dialog submit_dialog;
+    Button submit, submitbut, updateData;
+    Dialog submit_dialog, update_dialog;
     DataModel dataModel;
     DatabaseReference dbreference;
     Cursor cursor;
@@ -52,6 +53,7 @@ public class about_project extends AppCompatActivity {
     ArrayList<DataModel> dataView = new ArrayList<DataModel>();
     FirebaseDatabase db;
     String newsadvval, newsinsertval;
+    int FormId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +73,14 @@ public class about_project extends AppCompatActivity {
         reference = findViewById(R.id.refrence);
         submit = findViewById(R.id.submit);
         submit_dialog = new Dialog(this);
-
+        update_dialog = new Dialog(this);
         //insert data in sqlite
         formDB = new FormDB(this);
         //firebase data get
-        cursor=new FormDB(this).FetchCustData();
+        cursor = new FormDB(this).FetchCustData();
         db = FirebaseDatabase.getInstance();
         dbreference = db.getReference("Sales Enquiry").child("Customer Data").child("Id");
+        FormId = getIntent().getIntExtra("ID",0);;
         //Newspaper Advertisment Spineer
         NewspaperAdv();
         //Newspaper Insert Spinner
@@ -122,15 +125,16 @@ public class about_project extends AppCompatActivity {
             }
         });
     }
-////Form Update Data
+
+    ////Form Update Data
     private void UpdateFormData() {
 //    newspaper.setText(getIntent().getStringExtra("ENTER_NEWSPAPER"));
-    hording.setText(getIntent().getStringExtra("HORDING"));
-    digital.setText(getIntent().getStringExtra("ADVERTISMENT"));
-    telecalling.setText(getIntent().getStringExtra("SOURCE"));
-    source.setText(getIntent().getStringExtra("TELECALLING"));
-    broker.setText(getIntent().getStringExtra("BROKER"));
-    reference.setText(getIntent().getStringExtra("REFER"));
+        hording.setText(getIntent().getStringExtra("HORDING"));
+        digital.setText(getIntent().getStringExtra("ADVERTISMENT"));
+        telecalling.setText(getIntent().getStringExtra("SOURCE"));
+        source.setText(getIntent().getStringExtra("TELECALLING"));
+        broker.setText(getIntent().getStringExtra("BROKER"));
+        reference.setText(getIntent().getStringExtra("REFER"));
     }
 
     //Submit Details Dialog Box
@@ -148,6 +152,21 @@ public class about_project extends AppCompatActivity {
         submit_dialog.show();
     }
 
+    //Update Dialog Box
+//Submit Details Dialog Box
+    private void UpdateDialog() {
+        update_dialog.setContentView(R.layout.update_dialog);
+        update_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        updateData = update_dialog.findViewById(R.id.dataupdate);
+        updateData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), view_form_data.class);
+                startActivity(intent);
+            }
+        });
+        update_dialog.show();
+    }
 
     //Submit Button
     private void submitbut() {
@@ -205,26 +224,30 @@ public class about_project extends AppCompatActivity {
                 Reference = sp.getString("REFERENCE", "");
 //Insert Value in Database
                 firestoredata();
-                //Update Data
-//                Boolean updateFormData = formDB.UpdateFormData(FName,LName,Locality,City,Pincode,Timetocall,Phone,Altphone,Email,
-//                        Gender,Status,Occupation,Company_name,Designation,Work_nature,Business_location,
-//                        Configuration,Specify,Budget,Loan,Bankname,Purchase,Residantal,
-//                        Newspaper_Adv,Newspaper_Insert,Hording,Advertisement,Telecalling,Source,Broker,Reference);
-//                if (updateFormData == true) {
-//                    SubmitDialog();
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
-//                }
+//insert data
 
-                //insert data
-                Boolean insertFormData = formDB.InsertFormData(FName,LName,Locality,City,Pincode,Timetocall,Phone,Altphone,Email,
-                        Gender,Status,Occupation,Company_name,Designation,Work_nature,Business_location,
-                        Configuration,Specify,Budget,Loan,Bankname,Purchase,Residantal,
-                        Newspaper_Adv,Newspaper_Insert,Hording,Advertisement,Telecalling,Source,Broker,Reference);
-                if (insertFormData == true) {
-                    SubmitDialog();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
+               Boolean checkId=formDB.checkId(String.valueOf(FormId));
+                if (checkId == true) {
+                    Boolean updateFormData = formDB.UpdateFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
+                            Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
+                            Configuration, Specify, Budget, Loan, Bankname, Purchase, Residantal,
+                            Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
+                    if (updateFormData == true) {
+                        UpdateDialog();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Details Are Not Updatted", Toast.LENGTH_LONG).show();
+                    }
+                } else{
+                    Boolean insertFormData = formDB.InsertFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
+                            Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
+                            Configuration, Specify, Budget, Loan, Bankname, Purchase, Residantal,
+                            Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
+                    if (insertFormData == true) {
+                        SubmitDialog();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
+                    }
+
                 }
             }
         });

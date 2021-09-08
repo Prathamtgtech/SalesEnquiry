@@ -35,6 +35,7 @@ public class personal_2 extends AppCompatActivity {
     SharedPreferences sp;
     SharedPreferences.Editor ed;
     String getGenderVal,getStatusval;
+    Boolean genederData,statusData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,21 +71,19 @@ public class personal_2 extends AppCompatActivity {
 //
     //Update Form Value
     private void UpdateFormData() {
-        Boolean genederData=getIntent().getBooleanExtra("GENDER",true);
-        if (genederData==true) {
+        genederData=getIntent().getBooleanExtra("GENDER",true);
+        if (genederData.equals(male.getText().toString())) {
             male.setChecked(true);
+        }
+        else if (genederData.equals(female.getText().toString())){
             female.setChecked(true);
         }
-        else {
-            getGenderVal = null;
-        }
-        Boolean statusData=getIntent().getBooleanExtra("STATUS",true);
-        if (statusData==true) {
+        statusData=getIntent().getBooleanExtra("STATUS",true);
+        if (statusData.equals(married.getText().toString())) {
             married.setChecked(true);
-            unmarried.setChecked(true);
         }
-        else {
-            getStatusval = null;
+        else if (statusData.equals(unmarried.getText().toString())){
+            unmarried.setChecked(true);
         }
         CompanyName.setText(getIntent().getStringExtra("COMPANY_NAME"));
         Designation.setText(getIntent().getStringExtra("DESIGNATION"));
@@ -129,7 +128,7 @@ public class personal_2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), personal.class);
-                intent.putExtra("ID",getIntent().getStringExtra("ID"));
+                intent.putExtra("ID",getIntent().getIntExtra("ID",0));
                 intent.putExtra("FNAME",getIntent().getStringExtra("FNAME"));
                 intent.putExtra("LNAME",getIntent().getStringExtra("LNAME"));
                 intent.putExtra("LOCALITY",getIntent().getStringExtra("LOCALITY"));
@@ -171,6 +170,7 @@ public class personal_2 extends AppCompatActivity {
                 ed.putString("BUSINESS_LOC", busiloc);
                 ed.apply();
                 Intent intent = new Intent(getApplicationContext(), need_require.class);
+                intent.putExtra("ID",getIntent().getStringExtra("ID"));
                 //need and requirement
                 intent.putExtra("CONFIGURATION",getIntent().getStringExtra("CONFIGURATION"));
                 intent.putExtra("SPECIFY",getIntent().getStringExtra("SPECIFY"));
