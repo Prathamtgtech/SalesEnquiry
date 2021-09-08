@@ -80,7 +80,9 @@ public class about_project extends AppCompatActivity {
         cursor = new FormDB(this).FetchCustData();
         db = FirebaseDatabase.getInstance();
         dbreference = db.getReference("Sales Enquiry").child("Customer Data").child("Id");
-        FormId = getIntent().getIntExtra("ID",0);;
+        FormId = getIntent().getIntExtra("ID", 0);
+        Log.d("CheckId"," "+getIntent().getIntExtra("ID", 0));
+        ;
         //Newspaper Advertisment Spineer
         NewspaperAdv();
         //Newspaper Insert Spinner
@@ -225,8 +227,7 @@ public class about_project extends AppCompatActivity {
 //Insert Value in Database
                 firestoredata();
 //insert data
-
-               Boolean checkId=formDB.checkId(String.valueOf(FormId));
+                Boolean checkId=formDB.checkId(FormId);
                 if (checkId == true) {
                     Boolean updateFormData = formDB.UpdateFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
                             Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
@@ -237,7 +238,8 @@ public class about_project extends AppCompatActivity {
                     } else {
                         Toast.makeText(getApplicationContext(), "Details Are Not Updatted", Toast.LENGTH_LONG).show();
                     }
-                } else{
+                }
+                else {
                     Boolean insertFormData = formDB.InsertFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
                             Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
                             Configuration, Specify, Budget, Loan, Bankname, Purchase, Residantal,
@@ -247,7 +249,6 @@ public class about_project extends AppCompatActivity {
                     } else {
                         Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
                     }
-
                 }
             }
         });
