@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -56,6 +58,7 @@ public class login extends AppCompatActivity {
         forgot = findViewById(R.id.forgot);
         loginDB = new LoginDB(this);
         forgot_dialog = new Dialog(this);
+        AuthCredential credential;
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
         if (user !=null){
@@ -82,18 +85,7 @@ public class login extends AppCompatActivity {
                     if (emailenter.getText().toString().isEmpty()) {
                         Toast.makeText(getApplicationContext(), "Enter The Email Id", Toast.LENGTH_LONG).show();
                     } else {
-                       user.verifyBeforeUpdateEmail(emailenter.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                           @Override
-                           public void onSuccess(Void unused) {
-                               startActivity(new Intent(getApplicationContext(),forgot_password.class));
-                               finish();
-                           }
-                       }).addOnFailureListener(new OnFailureListener() {
-                           @Override
-                           public void onFailure(@NonNull @NotNull Exception e) {
-                               e.printStackTrace();
-                           }
-                       });
+//                         firebaseAuth.signInWithEmailLink()
                     }
                 }
             });
