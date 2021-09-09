@@ -79,7 +79,7 @@ public class register extends AppCompatActivity {
                 //Firebase Value get From Sqlite
                 firebaseDatabase();
               //Sq Lite
-                SqliteStoreData();
+               // SqliteStoreData();
 
             }
         });
@@ -105,6 +105,7 @@ public class register extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(register.this, "Details Submit", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(register.this, login.class));
+                    finish();
                 } else {
                     Toast.makeText(register.this, "Login Failed", Toast.LENGTH_LONG).show();
                 }
@@ -138,6 +139,7 @@ public class register extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Register Sucessfully", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), login.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Register Failed Please Sign Up", Toast.LENGTH_LONG).show();
                 }
@@ -154,6 +156,7 @@ public class register extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), login.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -17,11 +17,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.salesenquiry.Database.LoginDB;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.jetbrains.annotations.NotNull;
 
 public class login extends AppCompatActivity {
     ImageView logo;
@@ -32,9 +39,10 @@ public class login extends AppCompatActivity {
     Dialog forgot_dialog;
     EditText emailenter;
     Button submit;
-    FirebaseAuth firebaseAuth;
     String Username,Password;
+    FirebaseAuth firebaseAuth;
     FirebaseUser user;
+    AuthCredential credential;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +56,10 @@ public class login extends AppCompatActivity {
         forgot = findViewById(R.id.forgot);
         loginDB = new LoginDB(this);
         forgot_dialog = new Dialog(this);
-        firebaseAuth = FirebaseAuth.getInstance();
-        user= firebaseAuth.getCurrentUser();
-        //if user is note null then open module activity
-        if (user != null) {
+        firebaseAuth=FirebaseAuth.getInstance();
+        user=firebaseAuth.getCurrentUser();
+        if (user !=null){
+            startActivity(new Intent(getApplicationContext(),welcome.class));
             finish();
         }
         //SignUpButton
@@ -62,9 +70,37 @@ public class login extends AppCompatActivity {
         ForgotPassword();
 
     }
-
-    private void forgotdialog() {
-
+    //firebase forgot password
+    private void  firebaseforgotdialog(){
+            forgot_dialog.setContentView(R.layout.forgot_dialog);
+            forgot_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            emailenter = forgot_dialog.findViewById(R.id.emailenter);
+            submit = forgot_dialog.findViewById(R.id.emailsubmit);
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (emailenter.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Enter The Email Id", Toast.LENGTH_LONG).show();
+                    } else {
+                       user.verifyBeforeUpdateEmail(emailenter.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                           @Override
+                           public void onSuccess(Void unused) {
+                               startActivity(new Intent(getApplicationContext(),forgot_password.class));
+                               finish();
+                           }
+                       }).addOnFailureListener(new OnFailureListener() {
+                           @Override
+                           public void onFailure(@NonNull @NotNull Exception e) {
+                               e.printStackTrace();
+                           }
+                       });
+                    }
+                }
+            });
+            forgot_dialog.show();
+        }
+//sqlite forget passwrod
+    private void sqliteforgotdialog() {
         forgot_dialog.setContentView(R.layout.forgot_dialog);
         forgot_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         emailenter = forgot_dialog.findViewById(R.id.emailenter);
@@ -80,6 +116,7 @@ public class login extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), forgot_password.class);
                         intent.putExtra("User",emailenter.getText().toString());
                         startActivity(intent);
+                        finish();
                         Toast.makeText(getApplicationContext(), "Correct Email id", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "InCorrect Email Id", Toast.LENGTH_LONG).show();
@@ -88,8 +125,6 @@ public class login extends AppCompatActivity {
             }
         });
         forgot_dialog.show();
-
-
     }
 
 
@@ -98,9 +133,8 @@ public class login extends AppCompatActivity {
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                forgotdialog();
-//
-//
+                sqliteforgotdialog();
+                firebaseforgotdialog();
             }
         });
     }
@@ -112,29 +146,36 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 Username = email.getText().toString();
                 Password = password.getText().toString();
-         startActivity(new Intent(getApplicationContext(), welcome.class));
-//              //Sqlite Login
-//                sqliteLogin();
+                // startActivity(new Intent(getApplicationContext(), welcome.class));
+                //Sqlite Login
+                //  sqliteLogin();
 //
-//                //Firebase Login
-//                firebaseLogin();
+                //Firebase Login
+                if (Username.isEmpty() || Password.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Fill The Details", Toast.LENGTH_LONG).show();
+                } else {
+                    firebaselogin();
+                }
             }
         });
     }
-//Firebase Login
-    private void firebaseLogin() {
-            firebaseAuth.signInWithEmailAndPassword(Username, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(login.this, "Log in Sucessful", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), welcome.class));
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Try again", Toast.LENGTH_LONG).show();
-                    }
+    //Firebase Login
+    private void firebaselogin() {
+        firebaseAuth.signInWithEmailAndPassword(Username,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),"Log In Sucessful",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(),welcome.class));
+                    finish();
                 }
-            });
+                else {
+                    Toast.makeText(getApplicationContext(),"Log In Failed",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
+
 
     //Sqlite Login
     private void sqliteLogin() {
@@ -145,6 +186,7 @@ public class login extends AppCompatActivity {
                     if (loginData == true) {
                         Toast.makeText(getApplicationContext(), "Log In Sucessfully", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(getApplicationContext(), welcome.class));
+                        finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Log In Failed", Toast.LENGTH_LONG).show();
                     }
@@ -158,8 +200,8 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), register.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         });
     }

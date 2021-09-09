@@ -139,6 +139,7 @@ public class personal_2 extends AppCompatActivity {
                 intent.putExtra("ALTPHONE",getIntent().getStringExtra("ALTPHONE"));
                 intent.putExtra("EMAIL",getIntent().getStringExtra("EMAIL"));
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -189,6 +190,7 @@ public class personal_2 extends AppCompatActivity {
                 intent.putExtra("REFER",getIntent().getStringExtra("REFER"));
                 intent.putExtra("PARTNER",getIntent().getStringExtra("PARTNER"));
                 startActivity(intent);
+                finish();
             }
         });
 

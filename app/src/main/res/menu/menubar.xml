@@ -7,4 +7,22 @@
     android:icon="@drawable/ic_baseline_content_paste_24"
     app:showAsAction="never"
     />
+    <item
+        android:title="About Us"
+        android:id="@+id/aboutus"
+        android:icon="@drawable/ic_baseline_content_paste_24"
+        app:showAsAction="never"
+        />
+    <item
+        android:title="Contact Us"
+        android:id="@+id/contactus"
+        android:icon="@drawable/ic_baseline_content_paste_24"
+        app:showAsAction="never"
+        />
+    <item
+        android:title="Log Out"
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_baseline_content_paste_24"
+        app:showAsAction="never"
+        />
 </menu>

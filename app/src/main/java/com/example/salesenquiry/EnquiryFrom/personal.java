@@ -143,6 +143,7 @@ public class personal extends AppCompatActivity {
                 intent.putExtra("BROKER",getIntent().getStringExtra("BROKER"));
                 intent.putExtra("REFER",getIntent().getStringExtra("REFER"));
                 startActivity(intent);
+                finish();
             }
         });
 

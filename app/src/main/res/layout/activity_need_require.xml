@@ -16,9 +16,9 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:text="1 BHK"
-                android:textColor="@color/grey"
+                android:textColor="@color/black"
                 android:buttonTint="@color/button_color"
-                android:textStyle="bold" />
+                 />
 
             <CheckBox
                 android:id="@+id/two"
@@ -30,8 +30,8 @@
                 android:layout_toRightOf="@+id/one"
                 android:text="2 BHK"
                 android:buttonTint="@color/button_color"
-                android:textColor="@color/grey"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                />
 
             <CheckBox
                 android:id="@+id/three"
@@ -43,8 +43,8 @@
                 android:layout_toRightOf="@+id/two"
                 android:text="3 BHK"
                 android:buttonTint="@color/button_color"
-                android:textColor="@color/grey"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+         />
 
             <CheckBox
                 android:id="@+id/other"
@@ -56,8 +56,8 @@
                 android:layout_toRightOf="@+id/three"
                 android:text="Other"
                 android:buttonTint="@color/button_color"
-                android:textColor="@color/grey"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+          />
 
             <EditText
                 android:id="@+id/specify"
@@ -69,7 +69,7 @@
                 android:layout_toRightOf="@id/other"
                 android:hint="Specify"
                 android:paddingLeft="5dp"
-                android:textColorHint="@color/button_color" />
+                android:textColorHint="@color/black" />
 
             <RadioGroup
                 android:id="@+id/purchaseval"
@@ -86,17 +86,16 @@
                     android:layout_height="35dp"
                     android:text="Self Funding"
                     android:buttonTint="@color/button_color"
-                    android:textColor="@color/grey"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black" />
 
                 <RadioButton
                     android:id="@+id/housing_loan"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:text="Housing Loan"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:buttonTint="@color/button_color"
-                    android:textStyle="bold" />
+                    />
 
             </RadioGroup>
 
@@ -195,8 +194,7 @@
                         android:layout_height="35dp"
                         android:id="@+id/approve"
                         android:text="Approved"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:buttonTint="@color/button_color"
                         />
                     <RadioButton
@@ -204,8 +202,7 @@
                         android:layout_height="35dp"
                         android:id="@+id/noapprove"
                         android:text="No Approved"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:buttonTint="@color/button_color"
                         />
 
@@ -263,18 +260,16 @@
                         android:layout_height="35dp"
                         android:id="@+id/owned"
                         android:text="Owned"
-                        android:textStyle="bold"
                         android:buttonTint="@color/button_color"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         />
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
                         android:id="@+id/rent"
                         android:text="Rented"
-                        android:textStyle="bold"
                         android:buttonTint="@color/button_color"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         />
                 </RadioGroup>
             <TextView

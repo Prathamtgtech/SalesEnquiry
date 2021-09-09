@@ -45,8 +45,7 @@
             android:id="@+id/male"
             android:buttonTint="@color/button_color"
             android:text="Male"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             />
         <RadioButton
             android:layout_width="wrap_content"
@@ -54,8 +53,7 @@
             android:id="@+id/female"
             android:buttonTint="@color/button_color"
             android:text="Female"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             />
     </RadioGroup>
 
@@ -87,8 +85,7 @@
             android:id="@+id/married"
             android:text="Married"
             android:buttonTint="@color/button_color"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             />
         <RadioButton
             android:layout_width="wrap_content"
@@ -96,8 +93,7 @@
             android:id="@+id/unmarried"
             android:text="Unmarried"
             android:buttonTint="@color/button_color"
-            android:textStyle="bold"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             />
 
     </RadioGroup>

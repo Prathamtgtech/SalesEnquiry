@@ -147,8 +147,9 @@ public class about_project extends AppCompatActivity {
         submitbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), view_form_data.class);
+                Intent intent = new Intent(getApplicationContext(),com.example.salesenquiry.welcome.class);
                 startActivity(intent);
+                finish();
             }
         });
         submit_dialog.show();
@@ -163,8 +164,9 @@ public class about_project extends AppCompatActivity {
         updateData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), view_form_data.class);
+                Intent intent = new Intent(getApplicationContext(),com.example.salesenquiry.welcome.class);
                 startActivity(intent);
+                finish();
             }
         });
         update_dialog.show();

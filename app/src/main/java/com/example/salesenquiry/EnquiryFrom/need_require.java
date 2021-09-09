@@ -158,14 +158,6 @@ public class need_require extends AppCompatActivity {
 
     //Home Loan
     private void loangrouptxt() {
-//        int selectedLoanId=getPurchase.getCheckedRadioButtonId();
-//        if (selectedLoanId != -1) {
-//            getLoanval = findViewById(selectedLoanId);
-//            Loanval +=getLoanval.getText().toString();
-//        }
-//        else{
-//
-//        }
         getLoan.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -184,11 +176,6 @@ public class need_require extends AppCompatActivity {
 
     //Current Residental Type
     private void typegrouptxt() {
-//        int selectedResidentalId=getResident.getCheckedRadioButtonId();
-//        if (selectedResidentalId != -1) {
-//            getResidentval = findViewById(selectedResidentalId);
-//            Residentalval +=getResidentval.getText().toString();
-//        }
         getResident.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -239,6 +226,7 @@ public class need_require extends AppCompatActivity {
                 intent.putExtra("REFER",getIntent().getStringExtra("REFER"));
                 intent.putExtra("PARTNER",getIntent().getStringExtra("PARTNER"));
                 startActivity(intent);
+                finish();
             }
         });
         previous.setOnClickListener(new View.OnClickListener() {
@@ -253,6 +241,7 @@ public class need_require extends AppCompatActivity {
                 intent2.putExtra("WORK_NATURE",getIntent().getStringExtra("WORK_NATURE"));
                 intent2.putExtra("BUSINESS_LOCATION",getIntent().getStringExtra("BUSINESS_LOCATION"));
                 startActivity(intent2);
+                finish();
             }
         });
     }
