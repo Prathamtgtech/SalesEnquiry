@@ -85,7 +85,14 @@ public class login extends AppCompatActivity {
                     if (emailenter.getText().toString().isEmpty()) {
                         Toast.makeText(getApplicationContext(), "Enter The Email Id", Toast.LENGTH_LONG).show();
                     } else {
-//                         firebaseAuth.signInWithEmailLink()
+                        Toast.makeText(getApplicationContext(), "Check Link In Gmail", Toast.LENGTH_LONG).show();
+                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                startActivity(new Intent(getApplicationContext(),forgot_password.class));
+                                finish();
+                            }
+                        });
                     }
                 }
             });
@@ -108,7 +115,9 @@ public class login extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), forgot_password.class);
                         intent.putExtra("User",emailenter.getText().toString());
                         startActivity(intent);
+                        overridePendingTransition(R.anim.nav_default_pop_enter_anim,R.anim.nav_default_pop_exit_anim);
                         finish();
+
                         Toast.makeText(getApplicationContext(), "Correct Email id", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "InCorrect Email Id", Toast.LENGTH_LONG).show();
@@ -138,16 +147,16 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 Username = email.getText().toString();
                 Password = password.getText().toString();
-                // startActivity(new Intent(getApplicationContext(), welcome.class));
+                 startActivity(new Intent(getApplicationContext(), welcome.class));
                 //Sqlite Login
                 //  sqliteLogin();
 //
                 //Firebase Login
-                if (Username.isEmpty() || Password.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Fill The Details", Toast.LENGTH_LONG).show();
-                } else {
-                    firebaselogin();
-                }
+//                if (Username.isEmpty() || Password.isEmpty()) {
+//                    Toast.makeText(getApplicationContext(), "Fill The Details", Toast.LENGTH_LONG).show();
+//                } else {
+//                    firebaselogin();
+//                }
             }
         });
     }

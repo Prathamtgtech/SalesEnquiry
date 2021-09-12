@@ -73,6 +73,7 @@ public class welcome extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.data:
                 startActivity(new Intent(getApplicationContext(), com.example.salesenquiry.EnquiryFrom.view_form_data.class));
+                finish();
                 break;
             case R.id.aboutus:
                 Toast.makeText(getApplicationContext(), "About Us", Toast.LENGTH_LONG).show();

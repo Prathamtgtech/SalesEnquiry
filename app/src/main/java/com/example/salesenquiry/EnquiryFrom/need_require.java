@@ -36,6 +36,8 @@ public class need_require extends AppCompatActivity {
     String budgets[] = {"< 1Cr.", "1.0 - 1.25 Cr", "1.25 – 1.5 Cr", "1.5 – 2 Cr", "2 cr & above"};
     String clientbudget=" ";
     String Residentalval=" ",Loanval=" ",Purchaseval =" ", configurationval=" ";
+    public final static int REQUEST_CODE_DATA = 1;
+    Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,7 @@ public class need_require extends AppCompatActivity {
         getPurchase=findViewById(R.id.purchaseval);
         getLoan = findViewById(R.id.loangroup);
         getResident = findViewById(R.id.typegroup);
+        bundle=getIntent().getExtras();
         buttonclick();
         //Configuration Value
         configurationbox();
@@ -216,6 +219,7 @@ public class need_require extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), about_project.class);
                 //about project
+                //Update DAta
                 intent.putExtra("ID",getIntent().getIntExtra("ID",0));
                 intent.putExtra("NEWSPAPER",getIntent().getStringExtra("NEWSPAPER"));
                 intent.putExtra("ENTER_NEWSPAPER",getIntent().getStringExtra("ENTER_NEWSPAPER"));
@@ -225,25 +229,35 @@ public class need_require extends AppCompatActivity {
                 intent.putExtra("TELECALLING",getIntent().getStringExtra("TELECALLING"));
                 intent.putExtra("REFER",getIntent().getStringExtra("REFER"));
                 intent.putExtra("PARTNER",getIntent().getStringExtra("PARTNER"));
-                startActivity(intent);
+                //bundle data
+                BundleData(intent);
+                startActivityForResult(intent,REQUEST_CODE_DATA);
                 finish();
             }
         });
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent2=new Intent(getApplicationContext(), personal_2.class);
-                intent2.putExtra("GENDER",getIntent().getStringExtra("GENDER"));
-                intent2.putExtra("STATUS",getIntent().getStringExtra("STATUS"));
-                intent2.putExtra("OCCUPATION",getIntent().getStringExtra("OCCUPATION"));
-                intent2.putExtra("COMPANY_NAME",getIntent().getStringExtra("COMPANY_NAME"));
-                intent2.putExtra("DESIGNATION",getIntent().getStringExtra("DESIGNATION"));
-                intent2.putExtra("WORK_NATURE",getIntent().getStringExtra("WORK_NATURE"));
-                intent2.putExtra("BUSINESS_LOCATION",getIntent().getStringExtra("BUSINESS_LOCATION"));
-                startActivity(intent2);
+                Intent intent = new Intent();
+                //Bundle Data
+                BundleData(intent);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK,intent);
                 finish();
+
             }
         });
+    }
+    //Bundle Data
+    private void BundleData(Intent intent) {
+        bundle.putString("CONFIGURATION",configurationval);
+        bundle.putString("SPECIFY",specify.getText().toString());
+        bundle.putString("BUDGETS", clientbudget);
+        bundle.putString("PURCHASE", Purchaseval);
+        bundle.putString("LOAN", Loanval);
+        bundle.putString("BANKNAME", BankName.getText().toString());
+        bundle.putString("RESIDENTAL", Residentalval);
+        intent.putExtras(bundle);
     }
 
 }

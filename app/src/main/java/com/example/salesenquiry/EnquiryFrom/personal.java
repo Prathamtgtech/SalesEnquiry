@@ -1,6 +1,7 @@
 package com.example.salesenquiry.EnquiryFrom;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
@@ -23,6 +24,7 @@ import com.example.salesenquiry.Database.FormDB;
 import com.example.salesenquiry.R;
 import com.example.salesenquiry.forgot_password;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,6 +46,8 @@ public class personal extends AppCompatActivity {
     ArrayList<DataModel> dataView=new ArrayList<DataModel>();
     DataModel dataModel;
     FormDB formDB;
+    Bundle bundle,UpdateBundle;
+    public final static int REQUEST_CODE_DATA = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +64,8 @@ public class personal extends AppCompatActivity {
         Email = findViewById(R.id.Emailid);
         next=(Button)findViewById(R.id.Next);
        cursor=new FormDB(this).FetchCustData();
+       bundle=getIntent().getExtras();
+       UpdateBundle=getIntent().getExtras();
         //Timer
         TimpePicker();
         //nextbut
@@ -73,6 +79,7 @@ public class personal extends AppCompatActivity {
 //    //Update Form Data
     private void UpdateFormData() {
         Log.d("CheckId"," "+getIntent().getIntExtra("ID",0));
+        //Personal Details
         FirstName.setText(getIntent().getStringExtra("FNAME"));
         LastName.setText(getIntent().getStringExtra("LNAME"));
         Locality.setText(getIntent().getStringExtra("LOCALITY"));
@@ -82,26 +89,49 @@ public class personal extends AppCompatActivity {
         Phone.setText(getIntent().getStringExtra("PHONE"));
         AltPhone.setText(getIntent().getStringExtra("ALTPHONE"));
         Email.setText(getIntent().getStringExtra("EMAIL"));
-  }
 
+    }
+//Validation
+    public boolean validation(){
+        fname = FirstName.getText().toString();
+        lname= LastName.getText().toString();
+        locality = Locality.getText().toString();
+        city = City.getText().toString();
+        emailid = Email.getText().toString();
+        timers = Timer.getText().toString();
+        phone = Phone.getText().toString();
+        altphone = AltPhone.getText().toString();
+
+        //validation values values
+        try {
+            pincode = Integer.parseInt(Pincode.getText().toString());
+        } catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+        }
+        if(fname.isEmpty() || lname.isEmpty() || phone.isEmpty() || altphone.isEmpty()) {
+            FirstName.setError("Details Are Mandatory");
+            LastName.setError("Details Are Mandatory");
+            Phone.setError("Details Are Mandatory");
+            AltPhone.setError("Details Are Mandatory");
+            return false;
+        }
+        else{
+            FirstName.setError(null);
+            LastName.setError(null);
+            Phone.setError(null);
+            AltPhone.setError(null);
+            return true;
+        }
+
+    }
 
     private void nextbut() {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fname = FirstName.getText().toString();
-                lname= LastName.getText().toString();
-                locality = Locality.getText().toString();
-                city = City.getText().toString();
-                emailid = Email.getText().toString();
-                timers = Timer.getText().toString();
-                phone = Phone.getText().toString();
-                altphone = AltPhone.getText().toString();
-                //pass values
-                try {
-                    pincode = Integer.parseInt(Pincode.getText().toString());
-                } catch (NumberFormatException nfe) {
-                    nfe.printStackTrace();
+              //  Validation
+                if (!validation()){
+                    return;
                 }
                 //Share Prefrence
                 sp =getSharedPreferences("DetailsKey",MODE_PRIVATE);
@@ -115,8 +145,10 @@ public class personal extends AppCompatActivity {
                 ed.putString("PHONE", phone);
                 ed.putString("ALTPHONE", altphone);
                 ed.putString("EMAIL",emailid);
+                Log.d("DataOfFist",sp.getString("FNAME",""));
                 ed.apply();
                 Intent intent=new Intent(getApplicationContext(),personal_2.class);
+                //Update Data Intent
                 intent.putExtra("ID",getIntent().getIntExtra("ID",0));
                 intent.putExtra("GENDER",getIntent().getBooleanExtra("GENDER",true));
                 intent.putExtra("STATUS",getIntent().getStringExtra("STATUS"));
@@ -142,15 +174,29 @@ public class personal extends AppCompatActivity {
                 intent.putExtra("TELECALLING",getIntent().getStringExtra("TELECALLING"));
                 intent.putExtra("BROKER",getIntent().getStringExtra("BROKER"));
                 intent.putExtra("REFER",getIntent().getStringExtra("REFER"));
-                startActivity(intent);
+                //Bundle Data
+                BundleData(intent);
+                //resultCode
+                startActivityForResult(intent,REQUEST_CODE_DATA);
                 finish();
             }
         });
 
     }
-
-
-
+    //Passing Data To New Activity Using Bundle
+    private void BundleData(Intent intent) {
+        bundle=new Bundle();
+        bundle.putString("FNAME",fname);
+        bundle.putString("LNAME",lname);
+        bundle.putString("LOCALITY",locality);
+        bundle.putString("CITY",city);
+        bundle.putInt("PINCODE",pincode);
+        bundle.putString("TIME_TO_CALL",timers);
+        bundle.putString("PHONE",phone);
+        bundle.putString("ALTPHONE",altphone);
+        bundle.putString("EMAIL",emailid);
+        intent.putExtras(bundle);
+    }
     //TimePicker
     private void TimpePicker () {
 

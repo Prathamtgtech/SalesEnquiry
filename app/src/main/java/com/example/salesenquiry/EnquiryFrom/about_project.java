@@ -54,7 +54,7 @@ public class about_project extends AppCompatActivity {
     FirebaseDatabase db;
     String newsadvval, newsinsertval;
     int FormId;
-
+Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,15 +81,14 @@ public class about_project extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         dbreference = db.getReference("Sales Enquiry").child("Customer Data").child("Id");
         FormId = getIntent().getIntExtra("ID", 0);
-        Log.d("CheckId"," "+getIntent().getIntExtra("ID", 0));
-        ;
+        bundle=getIntent().getExtras();
         //Newspaper Advertisment Spineer
         NewspaperAdv();
         //Newspaper Insert Spinner
         NewsaperInsert();
         submitbut();
 //        //Update Form
-//        UpdateFormData();
+        UpdateFormData();
     }
 
     //Newspaper Advertisment
@@ -147,7 +146,7 @@ public class about_project extends AppCompatActivity {
         submitbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),com.example.salesenquiry.welcome.class);
+                Intent intent = new Intent(getApplicationContext(), com.example.salesenquiry.welcome.class);
                 startActivity(intent);
                 finish();
             }
@@ -164,7 +163,7 @@ public class about_project extends AppCompatActivity {
         updateData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),com.example.salesenquiry.welcome.class);
+                Intent intent = new Intent(getApplicationContext(), com.example.salesenquiry.welcome.class);
                 startActivity(intent);
                 finish();
             }
@@ -226,34 +225,39 @@ public class about_project extends AppCompatActivity {
                 Source = sp.getString("SOURCE", "");
                 Broker = sp.getString("BROKER", "");
                 Reference = sp.getString("REFERENCE", "");
+                Log.d("ValueOfForm",""+FName+ LName+ Locality+ City+ Pincode+ Timetocall+ Phone+ Altphone+ Email+
+                        Gender+ Status+ Occupation+ Company_name+ Designation+ Work_nature+ Business_location+
+                        Configuration+ Specify+ Budget+ Loan+ Bankname+ Purchase+ Residantal+
+                        Newspaper_Adv+ Newspaper_Insert+ Hording+Advertisement+ Telecalling+ Source+ Broker+ Reference);
 //Insert Value in Database
                 firestoredata();
 //insert data
-                Boolean checkId=formDB.checkId(FormId);
-                if (checkId == true) {
-                        Boolean updateFormData = formDB.UpdateFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
-                                Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
-                                Configuration, Specify, Budget, Loan, Bankname, Purchase, Residantal,
-                                Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
-                        if (updateFormData == true) {
-                            UpdateDialog();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Details Are Not Updatted", Toast.LENGTH_LONG).show();
-                        }
+                Boolean checkValue = formDB.checkId(FormId);
+                Log.d("CheckId",""+FormId);
+                if (checkValue == true) {
+                    Boolean updateFormData = formDB.UpdateFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
+                            Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
+                            Configuration, Specify, Budget, Loan, Bankname, Purchase, Residantal,
+                            Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
+                    if (updateFormData == true) {
+                        UpdateDialog();
                     }
                     else {
-                        Boolean insertFormData = formDB.InsertFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
-                                Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
-                                Configuration, Specify, Budget, Loan, Bankname, Purchase, Residantal,
-                                Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
-                        if (insertFormData == true) {
-                            SubmitDialog();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
-                        }
+                        Toast.makeText(getApplicationContext(), "Details Are Not Updatted", Toast.LENGTH_LONG).show();
+                    }
                 }
-
-            }
+                else {
+                    Boolean insertFormData = formDB.InsertFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
+                            Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
+                            Configuration, Specify, Budget, Loan, Bankname, Purchase, Residantal,
+                            Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
+                    if (insertFormData == true) {
+                        SubmitDialog();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
+                    }
+                        }
+                    }
         });
     }
 
@@ -299,5 +303,16 @@ public class about_project extends AppCompatActivity {
             dataView.add(dataModel);
         }
         dbreference.setValue(dataView);
+    }
+    //onBackPressedButton
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent();
+        //Bundle Data
+        intent.putExtras(bundle);
+        setResult(RESULT_OK,intent);
+        finish();
     }
 }

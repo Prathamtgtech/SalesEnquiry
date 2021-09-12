@@ -58,7 +58,7 @@ String User,Password,ChangePassword;
 
     private void Firebaseupdatepassword() {
         if (ChangePassword.equals(Password)) {
-          user.updatePassword(String.valueOf(changepassword)).addOnSuccessListener(new OnSuccessListener<Void>() {
+          firebaseAuth.getCurrentUser().updatePassword(String.valueOf(changepassword)).addOnSuccessListener(new OnSuccessListener<Void>() {
               @Override
               public void onSuccess(Void unused) {
                   Toast.makeText(getApplicationContext(), "Password Changed", Toast.LENGTH_LONG).show();

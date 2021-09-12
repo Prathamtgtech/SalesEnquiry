@@ -138,7 +138,7 @@ public class FormDB extends SQLiteOpenHelper {
 
     public boolean checkId(int id){
         SQLiteDatabase db=this.getWritableDatabase();
-        Cursor cursor=db.rawQuery("Select  * from CustData where id=?",null);
+        Cursor cursor=db.rawQuery("Select  * from CustData where id=?",new String[]{String.valueOf(id)});
         if (cursor.getCount() >0)
             return true;
         else

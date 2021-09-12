@@ -187,6 +187,7 @@
         app:endIconMode="clear_text"
         app:prefixText="+91"
         app:helperText="Required"
+        app:errorEnabled="true"
         app:boxStrokeColor="@color/button_color"
         android:textColorHint="@color/black"
         app:helperTextTextColor="@color/button_color"
@@ -221,6 +222,7 @@
         app:helperTextTextColor="@color/button_color"
         app:boxStrokeErrorColor="@color/error_color"
         app:errorTextColor="@color/error_color"
+        app:errorEnabled="true"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
