@@ -130,9 +130,9 @@ public class personal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               //  Validation
-//                if (!validation()){
-//                    return;
-//                }
+                if (!validation()){
+                    return;
+                }
                 //Share Prefrence
                 sp =getSharedPreferences("DetailsKey",MODE_PRIVATE);
                 SharedPreferences.Editor ed=sp.edit();
