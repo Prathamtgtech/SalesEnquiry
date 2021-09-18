@@ -117,22 +117,23 @@ public class View_form extends AppCompatActivity {
             work_nature_1.setText(cursor.getString(15));
             business_loc_1.setText(cursor.getString(16));
             //Need And Requirement
-            configutation_1.setText(cursor.getString(17));
-            specify_1.setText(cursor.getString(18));
-            budgets_1.setText(cursor.getString(19));
-            loan_1.setText(cursor.getString(20));
-            bank_name_1.setText(cursor.getString(21));
-            purchase_1.setText(cursor.getString(22));
-            residental_1.setText(cursor.getString(23));
+            configutation_1.setText(cursor.getString(17)+cursor.getString(18)+cursor.getString(19)+cursor.getString(20));
+            specify_1.setText(cursor.getString(21));
+            budgets_1.setText(cursor.getString(22));
+            loan_1.setText(cursor.getString(23));
+            bank_name_1.setText(cursor.getString(24));
+            purchase_1.setText(cursor.getString(25));
+            residental_1.setText(cursor.getString(26));
             //about project
-            newspapersadv_1.setText(cursor.getString(24));
-            newspaperinsert_1.setText(cursor.getString(25));
-            hording_1.setText(cursor.getString(26));
-            advertisment_1.setText(cursor.getString(27));
-            telecalling_1.setText(cursor.getString(28));
-            sources_1.setText(cursor.getString(29));
-            broker_1.setText(cursor.getString(30));
-            refers_1.setText(cursor.getString(31));
+            newspapersadv_1.setText(cursor.getString(27));
+            newspaperinsert_1.setText(cursor.getString(28));
+            hording_1.setText(cursor.getString(29));
+            advertisment_1.setText(cursor.getString(30));
+            telecalling_1.setText(cursor.getString(31));
+            sources_1.setText(cursor.getString(32));
+            broker_1.setText(cursor.getString(33));
+            refers_1.setText(cursor.getString(34));
         }
     }
+
 }

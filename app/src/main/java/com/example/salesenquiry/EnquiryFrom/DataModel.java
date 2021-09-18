@@ -24,7 +24,10 @@ public class DataModel {
     String WORK_NATURE;
     String BUSINESS_LOCATION;
     //Need And Requirements
-    String CONFIGURATION;
+    String CONFIG_ONE;
+    String CONFIG_TWO;
+    String CONFIG_THREE;
+    String CONFIG_OTHER;
     String SPECIFY;
     String BUDGET;
     String LOAN;
@@ -62,7 +65,10 @@ public class DataModel {
         this.DESIGNATION = DESIGNATION;
         this.WORK_NATURE = WORK_NATURE;
         this.BUSINESS_LOCATION = BUSINESS_LOCATION;
-        this.CONFIGURATION = CONFIGURATION;
+        this.CONFIG_ONE = CONFIG_ONE;
+        this.CONFIG_TWO = CONFIG_TWO;
+        this.CONFIG_THREE = CONFIG_THREE;
+        this.CONFIG_OTHER = CONFIG_OTHER;
         this.SPECIFY = SPECIFY;
         this.BUDGET = BUDGET;
         this.LOAN = LOAN;
@@ -78,7 +84,49 @@ public class DataModel {
         this.BROKER = BROKER;
         this.REFER = REFER;
     }
+
+
     //getter settter
+
+    public String getCONFIG_OTHER() {
+        return CONFIG_OTHER;
+    }
+
+    public void setCONFIG_OTHER(String CONFIG_OTHER) {
+        this.CONFIG_OTHER = CONFIG_OTHER;
+    }
+
+    public String getCONFIG_ONE() {
+        return CONFIG_ONE;
+    }
+
+    public void setCONFIG_ONE(String CONFIG_ONE) {
+        this.CONFIG_ONE = CONFIG_ONE;
+    }
+
+    public String getCONFIG_TWO() {
+        return CONFIG_TWO;
+    }
+
+    public void setCONFIG_TWO(String CONFIG_TWO) {
+        this.CONFIG_TWO = CONFIG_TWO;
+    }
+
+    public String getCONFIG_THREE() {
+        return CONFIG_THREE;
+    }
+
+    public void setCONFIG_THREE(String CONFIG_THREE) {
+        this.CONFIG_THREE = CONFIG_THREE;
+    }
+
+    public String getCONFIG_FOUR() {
+        return CONFIG_OTHER;
+    }
+
+    public void setCONFIG_FOUR(String CONFIG_FOUR) {
+        this.CONFIG_OTHER = CONFIG_FOUR;
+    }
 
     public int getId() {
         return id;
@@ -214,14 +262,6 @@ public class DataModel {
 
     public void setBUSINESS_LOCATION(String BUSINESS_LOCATION) {
         this.BUSINESS_LOCATION = BUSINESS_LOCATION;
-    }
-
-    public String getCONFIGURATION() {
-        return CONFIGURATION;
-    }
-
-    public void setCONFIGURATION(String CONFIGURATION) {
-        this.CONFIGURATION = CONFIGURATION;
     }
 
     public String getSPECIFY() {

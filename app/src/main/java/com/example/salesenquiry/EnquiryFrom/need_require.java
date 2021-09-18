@@ -27,46 +27,50 @@ import static android.content.ContentValues.TAG;
 
 public class need_require extends AppCompatActivity {
     Spinner budget;
-    TextView next, previous,configurationtxt,budgettxt,purchasetxt, HomeLoan, Residantial,needtxt;
+    TextView next, previous, configurationtxt, budgettxt, purchasetxt, HomeLoan, Residantial, needtxt;
     EditText specify;
     TextInputEditText BankName;
     CheckBox one, two, three, other;
+    String config_one = "", config_two = "", config_there = "", config_other = "";
+    String getOne,getTwo, getThree,getOther;
     RadioGroup getLoan, getResident, getPurchase;
-    RadioButton getLoanval, getResidentval, getPurchaseval,self_fund,housing_loan,approve,no_approve,owned,rent;
+    RadioButton self_fund, housing_loan, approve, no_approve, owned, rent;
     String budgets[] = {"< 1Cr.", "1.0 - 1.25 Cr", "1.25 – 1.5 Cr", "1.5 – 2 Cr", "2 cr & above"};
-    String clientbudget=" ";
-    String Residentalval=" ",Loanval=" ",Purchaseval =" ", configurationval=" ";
+    String clientbudget = " ";
+    String Residentalval = " ", Loanval = " ", Purchaseval = " ", configurationval = " ";
+    String getPurchaseval = " ", getResidentalval = " ", getLoanVal = " ";
     public final static int REQUEST_CODE_DATA = 1;
     Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_need_require);
-        needtxt=findViewById(R.id.needtxt);
-        configurationtxt=findViewById(R.id.configrationtxt);
+        needtxt = findViewById(R.id.needtxt);
+        configurationtxt = findViewById(R.id.configrationtxt);
         one = findViewById(R.id.one);
         two = findViewById(R.id.two);
         three = findViewById(R.id.three);
         other = findViewById(R.id.other);
         specify = findViewById(R.id.specify);
-        budgettxt=findViewById(R.id.budgettxt);
+        budgettxt = findViewById(R.id.budgettxt);
         budget = findViewById(R.id.spinner);
-        purchasetxt=findViewById(R.id.purchasetxt);
-        self_fund=findViewById(R.id.self_fund);
-        housing_loan=findViewById(R.id.housing_loan);
-        approve=findViewById(R.id.approve);
-        no_approve=findViewById(R.id.noapprove);
+        purchasetxt = findViewById(R.id.purchasetxt);
+        self_fund = findViewById(R.id.self_fund);
+        housing_loan = findViewById(R.id.housing_loan);
+        approve = findViewById(R.id.approve);
+        no_approve = findViewById(R.id.noapprove);
         HomeLoan = findViewById(R.id.loan);
         Residantial = findViewById(R.id.residental);
-        owned= findViewById(R.id.owned);
-        rent=findViewById(R.id.rent);
+        owned = findViewById(R.id.owned);
+        rent = findViewById(R.id.rent);
         BankName = findViewById(R.id.bankname);
         next = findViewById(R.id.next);
         previous = findViewById(R.id.previous);
-        getPurchase=findViewById(R.id.purchaseval);
+        getPurchase = findViewById(R.id.purchaseval);
         getLoan = findViewById(R.id.loangroup);
         getResident = findViewById(R.id.typegroup);
-        bundle=getIntent().getExtras();
+        bundle = getIntent().getExtras();
         buttonclick();
         //Configuration Value
         configurationbox();
@@ -79,15 +83,66 @@ public class need_require extends AppCompatActivity {
         //Residental Type
         typegrouptxt();
 //        //Update Data
-          UpdateFormData();
+        UpdateFormData();
 
     }
 
-//    //Update Form Data
+    //    //Update Form Data
     private void UpdateFormData() {
-        specify.setText(getIntent().getStringExtra("SPECIFY"));
-        BankName.setText(getIntent().getStringExtra("BANKNAME"));
-        Residentalval=getIntent().getStringExtra("RESIDENTAL");
+        try {
+            //Nature Of Purchase
+            getPurchaseval = getIntent().getStringExtra("PURCHASE");
+            Log.d("getPurchase", getPurchaseval);
+            if (getPurchaseval.equals("Self_Funding")) {
+                self_fund.setChecked(true);
+                housing_loan.setChecked(false);
+            } else if (getPurchaseval.equals("Housing_Loan")) {
+                self_fund.setChecked(false);
+                housing_loan.setChecked(true);
+            }
+            //Residental
+            getResidentalval = getIntent().getStringExtra("RESIDENTAL");
+            if (getResidentalval.equals("Owned")) {
+                owned.setChecked(true);
+                rent.setChecked(false);
+            } else if (getResidentalval.equals("Rented")) {
+                owned.setChecked(false);
+                rent.setChecked(true);
+            }
+            //Home Loan
+            getLoanVal = getIntent().getStringExtra("HOMELOAN");
+            if (getLoanVal.equals("Approve")) {
+                approve.setChecked(true);
+                no_approve.setChecked(false);
+            } else if (getLoanVal.equals("No_Approve")) {
+                approve.setChecked(false);
+                no_approve.setChecked(true);
+            }
+            //Cofiguration
+            getOne=getIntent().getStringExtra("CONFIG_ONE");
+            getTwo=getIntent().getStringExtra("CONFIG_TWO");
+            getThree=getIntent().getStringExtra("CONFIG_THREE");
+            getOther=getIntent().getStringExtra("CONFIG_OTHER");
+            Log.d("ConfigValA",getOther);
+            if (getOne.equals("1BHK")){
+                one.setChecked(true);
+            }
+            if (getTwo.equals("2BHK")){
+                two.setChecked(true);
+            }
+            if (getThree.equals("3BHK")){
+                three.setChecked(true);
+            }
+            if (getOther.equals("OTHER")){
+                other.setChecked(true);
+            }
+
+            specify.setText(getIntent().getStringExtra("SPECIFY"));
+            BankName.setText(getIntent().getStringExtra("BANKNAME"));
+            Residentalval = getIntent().getStringExtra("RESIDENTAL");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     //Configuration
@@ -96,7 +151,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (one.isChecked()) {
-                    configurationval +=" "+one.getText().toString();
+                    config_one ="1BHK";
                 }
             }
         });
@@ -104,7 +159,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (two.isChecked()) {
-                    configurationval +=" " +two.getText().toString();
+                    config_two ="2BHK";
                 }
             }
         });
@@ -112,7 +167,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (three.isChecked()) {
-                configurationval +=" "+three.getText().toString();
+                    config_there ="3BHK";
                 }
             }
         });
@@ -120,7 +175,7 @@ public class need_require extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (other.isChecked()) {
-                    configurationval +=other.getText().toString();
+                    config_other ="OTHER";
                 }
             }
         });
@@ -149,11 +204,12 @@ public class need_require extends AppCompatActivity {
         getPurchase.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (R.id.self_fund == checkedId){
-                    Purchaseval +=" "+self_fund.getText().toString();
-                }
-                else if (R.id.housing_loan == checkedId){
-                    Purchaseval +=" "+housing_loan.getText().toString();
+                if (R.id.self_fund == checkedId) {
+                    Purchaseval = "Self_Funding";
+                } else if (R.id.housing_loan == checkedId) {
+                    Purchaseval = "Housing_Loan";
+                } else {
+                    Purchaseval = "Null";
                 }
             }
         });
@@ -164,14 +220,12 @@ public class need_require extends AppCompatActivity {
         getLoan.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (R.id.approve == checkedId){
-                    Loanval +=" "+approve.getText().toString();
-                }
-                else if (R.id.noapprove == checkedId){
-                    Loanval +=" "+no_approve.getText().toString();
-                }
-                else{
-                    Loanval +="Null";
+                if (R.id.approve == checkedId) {
+                    Loanval = "Approve";
+                } else if (R.id.noapprove == checkedId) {
+                    Loanval = "No_Approve";
+                } else {
+                    Loanval = "Null";
                 }
             }
         });
@@ -182,14 +236,12 @@ public class need_require extends AppCompatActivity {
         getResident.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (R.id.owned == checkedId){
-                    Residentalval +=" "+owned.getText().toString();
-                }
-                else if (R.id.rent == checkedId){
-                    Residentalval +=" "+rent.getText().toString();
-                }
-                else{
-                    Residentalval +="Null";
+                if (R.id.owned == checkedId) {
+                    Residentalval = "Owned";
+                } else if (R.id.rent == checkedId) {
+                    Residentalval = "Rented";
+                } else {
+                    Residentalval = "Null";
                 }
             }
         });
@@ -204,35 +256,36 @@ public class need_require extends AppCompatActivity {
                 SharedPreferences sp = getSharedPreferences("DetailsKey", MODE_PRIVATE);
                 SharedPreferences.Editor ed = sp.edit();
                 try {
-                    ed.putString("CONFIGURATION", configurationval);
+                    ed.putString("CONFIG_ONE", config_one);
+                    ed.putString("CONFIG_TWO", config_two);
+                    ed.putString("CONFIG_THREE", config_there);
+                    ed.putString("CONFIG_OTHER", config_other);
                     ed.putString("SPECIFY", specify.getText().toString());
                     ed.putString("BUDGETS", clientbudget);
                     ed.putString("PURCHASE", Purchaseval);
-                    ed.putString("LOAN",Loanval);
+                    ed.putString("LOAN", Loanval);
                     ed.putString("BANKNAME", BankName.getText().toString());
                     ed.putString("RESIDENTAL", Residentalval);
                     ed.apply();
-                }
-                catch (NumberFormatException nfe){
+                } catch (NumberFormatException nfe) {
                     nfe.printStackTrace();
                 }
 
                 Intent intent = new Intent(getApplicationContext(), about_project.class);
                 //about project
                 //Update DAta
-                intent.putExtra("ID",getIntent().getIntExtra("ID",0));
-                intent.putExtra("NEWSPAPER",getIntent().getStringExtra("NEWSPAPER"));
-                intent.putExtra("ENTER_NEWSPAPER",getIntent().getStringExtra("ENTER_NEWSPAPER"));
-                intent.putExtra("HORDING",getIntent().getStringExtra("HORDING"));
-                intent.putExtra("ADVERTISMENT",getIntent().getStringExtra("ADVERTISMENT"));
-                intent.putExtra("SOURCE",getIntent().getStringExtra("SOURCE"));
-                intent.putExtra("TELECALLING",getIntent().getStringExtra("TELECALLING"));
-                intent.putExtra("REFER",getIntent().getStringExtra("REFER"));
-                intent.putExtra("PARTNER",getIntent().getStringExtra("PARTNER"));
+                intent.putExtra("ID", getIntent().getIntExtra("ID", 0));
+                intent.putExtra("NEWSPAPER", getIntent().getStringExtra("NEWSPAPER"));
+                intent.putExtra("ENTER_NEWSPAPER", getIntent().getStringExtra("ENTER_NEWSPAPER"));
+                intent.putExtra("HORDING", getIntent().getStringExtra("HORDING"));
+                intent.putExtra("ADVERTISMENT", getIntent().getStringExtra("ADVERTISMENT"));
+                intent.putExtra("SOURCE", getIntent().getStringExtra("SOURCE"));
+                intent.putExtra("TELECALLING", getIntent().getStringExtra("TELECALLING"));
+                intent.putExtra("REFER", getIntent().getStringExtra("REFER"));
+                intent.putExtra("PARTNER", getIntent().getStringExtra("PARTNER"));
                 //bundle data
                 BundleData(intent);
-                startActivityForResult(intent,REQUEST_CODE_DATA);
-                finish();
+                startActivityForResult(intent, REQUEST_CODE_DATA);
             }
         });
         previous.setOnClickListener(new View.OnClickListener() {
@@ -242,16 +295,17 @@ public class need_require extends AppCompatActivity {
                 //Bundle Data
                 BundleData(intent);
                 intent.putExtras(bundle);
-                setResult(RESULT_OK,intent);
+                setResult(RESULT_OK, intent);
                 finish();
 
             }
         });
     }
+
     //Bundle Data
     private void BundleData(Intent intent) {
-        bundle.putString("CONFIGURATION",configurationval);
-        bundle.putString("SPECIFY",specify.getText().toString());
+        bundle.putString("CONFIGURATION", configurationval);
+        bundle.putString("SPECIFY", specify.getText().toString());
         bundle.putString("BUDGETS", clientbudget);
         bundle.putString("PURCHASE", Purchaseval);
         bundle.putString("LOAN", Loanval);

@@ -12,7 +12,7 @@ public class FormDB extends SQLiteOpenHelper {
     public static final String DB_NAME="Customer.db";
 
     public FormDB(@Nullable Context context) {
-        super(context,DB_NAME,null,5);
+        super(context,DB_NAME,null,6);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class FormDB extends SQLiteOpenHelper {
         String sql="Create table CustData(id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "FNAME TEXT,LNAME,LOCALITY TEXT,CITY TEXT,PINCODE INTEGER,TIME_TO_CALL TEXT,PHONE TEXT,ALTPHONE TEXT,EMAIL TEXT,"+
                 "GENDER TEXT,STATUS TEXT,OCCUPATION TEXT,COMPANY_NAME TEXT,DESIGNATION TEXT,WORK_NATURE TEXT,BUSINESS_LOCATION TEXT,"+
-                "CONFIGURATION TEXT,SPECIFY TEXT,BUDGET TEXT,LOAN TEXT,BANK_NAME TEXT,PURCHASE TEXT,RESIDENTAL TEXT," +
+                "CONFIG_ONE TEXT,CONFIG_TWO TEXT,CONFIG_THREE TEXT,CONFIG_OTHER TEXT,SPECIFY TEXT,BUDGET TEXT,LOAN TEXT,BANK_NAME TEXT,PURCHASE TEXT,RESIDENTAL TEXT," +
                 "NEWSPAPER_ADV TEXT,NEWSPAPER_INSERT TEXT,HORDING TEXT,DIGITAL TEXT,TELECALLING TEXT,SOURCE TEXT,BROKER TEXT,REFER TEXT)";
         db.execSQL(sql);
     }
@@ -32,7 +32,7 @@ public class FormDB extends SQLiteOpenHelper {
 
     public Boolean InsertFormData(String Fname,String Lname, String Locality, String City, int Pincode, String Time_to_call, String Phone, String Altphone, String Email,
                                   String Gender,String Status, String Occupation, String Company_name, String Designation, String Work_nature, String Business_location,
-                                  String Configuration, String Specify, String Budget, String Loan, String Bankname, String Purchase, String Residental,
+                                  String Config_One,String Config_Two,String Config_Three,String Config_Other, String Specify, String Budget, String Loan, String Bankname, String Purchase, String Residental,
                                   String Newspaper_adv , String Newspaper_insert, String Hording, String Digital, String Telecalling, String Source, String Broker, String Refer){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
@@ -55,7 +55,10 @@ public class FormDB extends SQLiteOpenHelper {
         values.put("WORK_NATURE",Work_nature);
         values.put("BUSINESS_LOCATION",Business_location);
         //Need and Requirement
-        values.put("CONFIGURATION",Configuration);
+        values.put("CONFIG_ONE",Config_One);
+        values.put("CONFIG_TWO",Config_Two);
+        values.put("CONFIG_THREE",Config_Three);
+        values.put("CONFIG_OTHER",Config_Other);
         values.put("SPECIFY",Specify);
         values.put("BUDGET",Budget);
         values.put("LOAN",Loan);
@@ -88,7 +91,7 @@ public class FormDB extends SQLiteOpenHelper {
 
     public Boolean UpdateFormData(String Fname,String Lname, String Locality, String City, int Pincode, String Time_to_call, String Phone, String Altphone, String Email,
                                   String Gender,String Status, String Occupation, String Company_name, String Designation, String Work_nature, String Business_location,
-                                  String Configuration, String Specify, String Budget, String Loan, String Bankname, String Purchase, String Residental,
+                                  String Config_One,String Config_Two,String Config_Three,String Config_Other, String Specify, String Budget, String Loan, String Bankname, String Purchase, String Residental,
                                   String Newspaper_adv , String Newspaper_insert, String Hording, String Digital, String Telecalling, String Source, String Broker, String Refer){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
@@ -111,7 +114,10 @@ public class FormDB extends SQLiteOpenHelper {
         values.put("WORK_NATURE",Work_nature);
         values.put("BUSINESS_LOCATION",Business_location);
         //Need and Requirement
-        values.put("CONFIGURATION",Configuration);
+        values.put("CONFIG_ONE",Config_One);
+        values.put("CONFIG_TWO",Config_Two);
+        values.put("CONFIG_THREE",Config_Three);
+        values.put("CONFIG_OTHER",Config_Other);
         values.put("SPECIFY",Specify);
         values.put("BUDGET",Budget);
         values.put("LOAN",Loan);

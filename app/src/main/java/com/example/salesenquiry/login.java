@@ -45,6 +45,7 @@ public class login extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     AuthCredential credential;
+    String User_Email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,8 @@ public class login extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
         if (user !=null){
+            User_Email=user.getEmail();
+            Log.d("User_Email_Firebase",""+User_Email);
             startActivity(new Intent(getApplicationContext(),welcome.class));
             finish();
         }
@@ -85,12 +88,15 @@ public class login extends AppCompatActivity {
                     if (emailenter.getText().toString().isEmpty()) {
                         Toast.makeText(getApplicationContext(), "Enter The Email Id", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Check Link In Gmail", Toast.LENGTH_LONG).show();
-                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firebaseAuth.sendPasswordResetEmail(emailenter.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                startActivity(new Intent(getApplicationContext(),forgot_password.class));
-                                finish();
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(),"Reset Password Link Sent On Your Mail Id",Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Error"+e.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -134,7 +140,7 @@ public class login extends AppCompatActivity {
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sqliteforgotdialog();
+                //sqliteforgotdialog();
                 firebaseforgotdialog();
             }
         });

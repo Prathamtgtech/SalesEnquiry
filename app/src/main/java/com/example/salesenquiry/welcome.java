@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import android.widget.*;
 
@@ -35,6 +36,7 @@ public class welcome extends AppCompatActivity {
     ImageView permia_logo, kenarc_logo, kenarc_txt;
     Toolbar toolbar;
     FirebaseAuth firebaseAuth;
+    CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,9 @@ public class welcome extends AppCompatActivity {
         permia_txt = findViewById(R.id.premia_text);
         kenarc_logo = findViewById(R.id.kenarc_logo);
         //  kenarc_txt=findViewById(R.id.kenarc_logo);
-        nexttxt = findViewById(R.id.nextTxt);
+        nexttxt = findViewById(R.id.needtxt);
         toolbar = findViewById(R.id.toolbar);
+        cardView=findViewById(R.id.cardView);
         setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.menubar);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -95,7 +98,7 @@ public class welcome extends AppCompatActivity {
 
     //Open Sales Enquiry Form
     private void enquirybut() {
-        nexttxt.setOnClickListener(new View.OnClickListener() {
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Open Form Activity
@@ -106,4 +109,9 @@ public class welcome extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    finishAffinity();
+    }
 }

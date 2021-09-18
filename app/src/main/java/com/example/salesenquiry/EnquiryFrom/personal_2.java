@@ -28,14 +28,14 @@ public class personal_2 extends AppCompatActivity {
     Spinner occupation;
     TextView next, previous, gendertxt, statustxt, personaltxt;
     RadioGroup gender, status;
-    RadioButton selectedGender, selectedStatus, male, female, married, unmarried;
+    RadioButton  male, female, married, unmarried;
     TextInputEditText CompanyName, Designation, WorkNature, BLocation;
     String companyname, designation, worknature, busiloc, occupationss;
     String occupations[] = {"Salary", "Business", "Professional", "Retired", "Student"};
     SharedPreferences sp;
     SharedPreferences.Editor ed;
-    String getGenderVal, getStatusval;
-    Boolean genederData, statusData;
+    String getGenderVal="0", getStatusval="0";
+    String genederData =" ", statusData=" ";
     Bundle bundle;
     public final static int REQUEST_CODE_DATA = 1;
     @Override
@@ -65,7 +65,7 @@ public class personal_2 extends AppCompatActivity {
         nextclick();
         previousclick();
 //        //updateData
-        UpdateFormData();
+     UpdateFormData();
         //gender RadioButton
         gendervalget();
         //status Radiobutton
@@ -76,22 +76,31 @@ public class personal_2 extends AppCompatActivity {
     //
     //Update Form Value
     private void UpdateFormData() {
-        genederData = getIntent().getBooleanExtra("GENDER", true);
-        if (genederData.equals(male.getText().toString())) {
-            male.setChecked(true);
-        } else if (genederData.equals(female.getText().toString())) {
-            female.setChecked(true);
-        }
-        statusData = getIntent().getBooleanExtra("STATUS", true);
-        if (statusData.equals(married.getText().toString())) {
-            married.setChecked(true);
-        } else if (statusData.equals(unmarried.getText().toString())) {
-            unmarried.setChecked(true);
-        }
-        CompanyName.setText(getIntent().getStringExtra("COMPANY_NAME"));
-        Designation.setText(getIntent().getStringExtra("DESIGNATION"));
-        WorkNature.setText(getIntent().getStringExtra("WORK_NATURE"));
-        BLocation.setText(getIntent().getStringExtra("BUSINESS_LOCATION"));
+       try {
+           genederData = getIntent().getStringExtra("GENDER");
+           if (genederData.equals("Male")) {
+               male.setChecked(true);
+               female.setChecked(false);
+           } else if (genederData.equals("Female")) {
+               female.setChecked(true);
+               male.setChecked(false);
+           }
+           statusData = getIntent().getStringExtra("STATUS");
+           if (statusData.equals("Married")) {
+               married.setChecked(true);
+               unmarried.setChecked(false);
+           } else if (statusData.equals("Unmarried")) {
+               unmarried.setChecked(true);
+               married.setChecked(false);
+           }
+           CompanyName.setText(getIntent().getStringExtra("COMPANY_NAME"));
+           Designation.setText(getIntent().getStringExtra("DESIGNATION"));
+           WorkNature.setText(getIntent().getStringExtra("WORK_NATURE"));
+           BLocation.setText(getIntent().getStringExtra("BUSINESS_LOCATION"));
+       }
+       catch (NullPointerException e){
+           e.printStackTrace();
+       }
     }
 
     //validation
@@ -113,9 +122,13 @@ public class personal_2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (R.id.male == checkedId) {
-                    getGenderVal += male.getText().toString();
-                } else if (R.id.female == checkedId) {
-                    getGenderVal += female.getText().toString();
+                getGenderVal="Male";
+                }
+                else if (R.id.female == checkedId) {
+                getGenderVal="Female";
+                }
+                else {
+                    getGenderVal="Null";
                 }
             }
         });
@@ -127,9 +140,12 @@ public class personal_2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (R.id.married == checkedId) {
-                    getStatusval += married.getText().toString();
+                    getStatusval = "Married";
                 } else if (R.id.unmarried == checkedId) {
-                    getStatusval += unmarried.getText().toString();
+                  getStatusval="Unmarried";
+                }
+                else {
+                    getStatusval="Null";
                 }
             }
         });
@@ -146,7 +162,7 @@ public class personal_2 extends AppCompatActivity {
                 BundleData(intent);
                 intent.putExtras(bundle);
                 setResult(RESULT_OK,intent);
-                finish();
+                finish();;
             }
         });
     }
@@ -184,7 +200,10 @@ public class personal_2 extends AppCompatActivity {
                 //Update Data Value
                 intent.putExtra("ID", getIntent().getStringExtra("ID"));
                 //need and requirement
-                intent.putExtra("CONFIGURATION", getIntent().getStringExtra("CONFIGURATION"));
+                intent.putExtra("CONFIG_ONE",getIntent().getStringExtra("CONFIG_ONE"));
+                intent.putExtra("CONFIG_TWO",getIntent().getStringExtra("CONFIG_TWO"));
+                intent.putExtra("CONFIG_THREE",getIntent().getStringExtra("CONFIG_THREE"));
+                intent.putExtra("CONFIG_OTHER",getIntent().getStringExtra("CONFIG_OTHER"));
                 intent.putExtra("SPECIFY", getIntent().getStringExtra("SPECIFY"));
                 intent.putExtra("BUDGET", getIntent().getStringExtra("BUDGET"));
                 intent.putExtra("HOMELOAN", getIntent().getStringExtra("HOMELOAN"));
@@ -204,7 +223,6 @@ public class personal_2 extends AppCompatActivity {
                 BundleData(intent);
                 intent.putExtras(bundle);
                 startActivityForResult(intent,REQUEST_CODE_DATA);
-                finish();
             }
         });
 

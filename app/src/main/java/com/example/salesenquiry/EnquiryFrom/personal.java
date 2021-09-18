@@ -130,9 +130,9 @@ public class personal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               //  Validation
-                if (!validation()){
-                    return;
-                }
+//                if (!validation()){
+//                    return;
+//                }
                 //Share Prefrence
                 sp =getSharedPreferences("DetailsKey",MODE_PRIVATE);
                 SharedPreferences.Editor ed=sp.edit();
@@ -150,7 +150,8 @@ public class personal extends AppCompatActivity {
                 Intent intent=new Intent(getApplicationContext(),personal_2.class);
                 //Update Data Intent
                 intent.putExtra("ID",getIntent().getIntExtra("ID",0));
-                intent.putExtra("GENDER",getIntent().getBooleanExtra("GENDER",true));
+                intent.putExtra("GENDER",getIntent().getStringExtra("GENDER"));
+                Log.d("GENDERVAL",""+getIntent().getStringExtra("GENDER"));
                 intent.putExtra("STATUS",getIntent().getStringExtra("STATUS"));
                 intent.putExtra("OCCUPATION",getIntent().getStringExtra("OCCUPATION"));
                 intent.putExtra("COMPANY_NAME",getIntent().getStringExtra("COMPANY_NAME"));
@@ -158,7 +159,10 @@ public class personal extends AppCompatActivity {
                 intent.putExtra("WORK_NATURE",getIntent().getStringExtra("WORK_NATURE"));
                 intent.putExtra("BUSINESS_LOCATION",getIntent().getStringExtra("BUSINESS_LOCATION"));
                 //need and requirement
-                intent.putExtra("CONFIGURATION",getIntent().getStringExtra("CONFIGURATION"));
+                intent.putExtra("CONFIG_ONE",getIntent().getStringExtra("CONFIG_ONE"));
+                intent.putExtra("CONFIG_TWO",getIntent().getStringExtra("CONFIG_TWO"));
+                intent.putExtra("CONFIG_THREE",getIntent().getStringExtra("CONFIG_THREE"));
+                intent.putExtra("CONFIG_OTHER",getIntent().getStringExtra("CONFIG_OTHER"));
                 intent.putExtra("SPECIFY",getIntent().getStringExtra("SPECIFY"));
                 intent.putExtra("BUDGET",getIntent().getStringExtra("BUDGET"));
                 intent.putExtra("HOMELOAN",getIntent().getStringExtra("HOMELOAN"));
@@ -178,11 +182,16 @@ public class personal extends AppCompatActivity {
                 BundleData(intent);
                 //resultCode
                 startActivityForResult(intent,REQUEST_CODE_DATA);
-                finish();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
     }
+
     //Passing Data To New Activity Using Bundle
     private void BundleData(Intent intent) {
         bundle=new Bundle();

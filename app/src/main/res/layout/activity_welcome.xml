@@ -14,7 +14,6 @@
         app:titleTextColor="@color/white"
         android:paddingStart="30dp"
         app:menu="@menu/menubar"
-        android:theme="?attr/actionBarTheme"
         />
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -44,8 +43,8 @@
             />
     </androidx.cardview.widget.CardView>
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="110dp"
+        android:layout_width="60dp"
+        android:layout_height="95dp"
         android:id="@+id/premia_logo"
         android:background="@drawable/premia_symbol"
         android:layout_below="@+id/slidercard"
@@ -80,44 +79,33 @@
         android:background="@drawable/kenarc_logo"
         android:layout_below="@+id/projectbytxt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_centerVertical="true"
         />
     <androidx.cardview.widget.CardView
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:backgroundTint="@color/button_color"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="10dp"
-        app:cardCornerRadius="20dp"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/button_color"
+        app:cardCornerRadius="20dp"
+        android:id="@+id/cardView"
         >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Next"
-                android:id="@+id/nextTxt"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginStart="25sp"
-                android:layout_gravity="center"
-                android:textColor="@color/button_text"
-                />
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:backgroundTint="@color/white"
-                android:layout_gravity="center"
-                android:id="@+id/arrowImg"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/right_arrow"/>
-        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Next"
+         android:gravity="center"
+         android:textSize="20sp"
+         android:textColor="@color/white"
+         android:textStyle="bold"
+         android:id="@+id/nexttxt"
+         />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
-</RelativeLayout>
+    </RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.salesenquiry.EnquiryFrom;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
                 intent2.putExtra("WORK_NATURE",temp.getWORK_NATURE());
                 intent2.putExtra("BUSINESS_LOCATION",temp.getBUSINESS_LOCATION());
                 //need and requirement
-                intent2.putExtra("CONFIGURATION",temp.getCONFIGURATION());
+                intent2.putExtra("CONFIG_ONE",temp.getCONFIG_ONE());
+                intent2.putExtra("CONFIG_TWO",temp.getCONFIG_TWO());
+                intent2.putExtra("CONFIG_THREE",temp.getCONFIG_THREE());
+                intent2.putExtra("CONFIG_OTHER",temp.getCONFIG_FOUR());
                 intent2.putExtra("SPECIFY",temp.getSPECIFY());
                 intent2.putExtra("BUDGET",temp.getBUDGET());
                 intent2.putExtra("HOMELOAN",temp.getLOAN());

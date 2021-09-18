@@ -45,7 +45,7 @@ public class about_project extends AppCompatActivity {
     Cursor cursor;
     String FName, LName, Locality, City, Timetocall, Phone, Altphone, Email,
             Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
-            Configuration, Specify, Budget, Purchase, Loan, Bankname, Residantal,
+            Config_One,Config_Two,Config_Three,Config_Other, Specify, Budget, Purchase, Loan, Bankname, Residantal,
             Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference;
     int Pincode;
     String newsAdvOpt[] = {"Times Of India", "Mumbai Mirror,Mid-Day", "Navbhart Times", "Maharashtra Times", "Mumbai Samachar", "Gujrat Samachar", "Any Others"};
@@ -147,8 +147,7 @@ Bundle bundle;
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.salesenquiry.welcome.class);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent,2);
             }
         });
         submit_dialog.show();
@@ -210,7 +209,10 @@ Bundle bundle;
                 Designation = sp.getString("DESIGNATION", "");
                 Work_nature = sp.getString("WORKNATURE", "");
                 Business_location = sp.getString("BUSINESS_LOC", "");
-                Configuration = sp.getString("CONFIGURATION", "");
+                Config_One=sp.getString("CONFIG_ONE","");
+                Config_Two=sp.getString("CONFIG_TWO","");
+                Config_Three=sp.getString("CONFIG_THREE","");
+                Config_Other=sp.getString("CONFIG_OTHER","");
                 Specify = sp.getString("SPECIFY", "");
                 Budget = sp.getString("BUDGETS", "");
                 Purchase = sp.getString("PURCHASE", "");
@@ -227,7 +229,7 @@ Bundle bundle;
                 Reference = sp.getString("REFERENCE", "");
                 Log.d("ValueOfForm",""+FName+ LName+ Locality+ City+ Pincode+ Timetocall+ Phone+ Altphone+ Email+
                         Gender+ Status+ Occupation+ Company_name+ Designation+ Work_nature+ Business_location+
-                        Configuration+ Specify+ Budget+ Loan+ Bankname+ Purchase+ Residantal+
+                        Config_One+Config_Two+Config_Three+Config_Other+ Specify+ Budget+ Loan+ Bankname+ Purchase+ Residantal+
                         Newspaper_Adv+ Newspaper_Insert+ Hording+Advertisement+ Telecalling+ Source+ Broker+ Reference);
 //Insert Value in Database
                 firestoredata();
@@ -237,7 +239,7 @@ Bundle bundle;
                 if (checkValue == true) {
                     Boolean updateFormData = formDB.UpdateFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
                             Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
-                            Configuration, Specify, Budget, Loan, Bankname, Purchase, Residantal,
+                            Config_One,Config_Two,Config_Three,Config_Other, Specify, Budget, Loan, Bankname, Purchase, Residantal,
                             Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
                     if (updateFormData == true) {
                         UpdateDialog();
@@ -249,7 +251,7 @@ Bundle bundle;
                 else {
                     Boolean insertFormData = formDB.InsertFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
                             Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
-                            Configuration, Specify, Budget, Loan, Bankname, Purchase, Residantal,
+                            Config_One,Config_Two,Config_Three,Config_Other, Specify, Budget, Loan, Bankname, Purchase, Residantal,
                             Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
                     if (insertFormData == true) {
                         SubmitDialog();
@@ -284,22 +286,25 @@ Bundle bundle;
             dataModel.setWORK_NATURE(cursor.getString(15));
             dataModel.setBUSINESS_LOCATION(cursor.getString(16));
             //Need And Requirment
-            dataModel.setCONFIGURATION(cursor.getString(17));
-            dataModel.setSPECIFY(cursor.getString(18));
-            dataModel.setBUDGET(cursor.getString(19));
-            dataModel.setLOAN(cursor.getString(20));
-            dataModel.setBANKNAME(cursor.getString(21));
-            dataModel.setPURCHASE(cursor.getString(22));
-            dataModel.setRESIDENTAL(cursor.getString(23));
+            dataModel.setCONFIG_ONE(cursor.getString(17));
+            dataModel.setCONFIG_ONE(cursor.getString(18));
+            dataModel.setCONFIG_ONE(cursor.getString(19));
+            dataModel.setCONFIG_ONE(cursor.getString(20));
+            dataModel.setSPECIFY(cursor.getString(21));
+            dataModel.setBUDGET(cursor.getString(22));
+            dataModel.setLOAN(cursor.getString(23));
+            dataModel.setBANKNAME(cursor.getString(24));
+            dataModel.setPURCHASE(cursor.getString(25));
+            dataModel.setRESIDENTAL(cursor.getString(26));
             //About Project
-            dataModel.setNEWSPAPER_ADV(cursor.getString(24));
-            dataModel.setNEWSPAPER_INSERT(cursor.getString(25));
-            dataModel.setHORDING(cursor.getString(26));
-            dataModel.setADVERTISEMENT(cursor.getString(27));
-            dataModel.setTELECALLING(cursor.getString(28));
-            dataModel.setSOURCE(cursor.getString(29));
-            dataModel.setBROKER(cursor.getString(30));
-            dataModel.setREFER(cursor.getString(31));
+            dataModel.setNEWSPAPER_ADV(cursor.getString(27));
+            dataModel.setNEWSPAPER_INSERT(cursor.getString(28));
+            dataModel.setHORDING(cursor.getString(29));
+            dataModel.setADVERTISEMENT(cursor.getString(30));
+            dataModel.setTELECALLING(cursor.getString(31));
+            dataModel.setSOURCE(cursor.getString(32));
+            dataModel.setBROKER(cursor.getString(33));
+            dataModel.setREFER(cursor.getString(34));
             dataView.add(dataModel);
         }
         dbreference.setValue(dataView);
