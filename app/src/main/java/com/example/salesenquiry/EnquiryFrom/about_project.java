@@ -90,7 +90,7 @@ Bundle bundle;
         //firebase data get
         cursor = new FormDB(this).FetchCustData();
         db = FirebaseDatabase.getInstance();
-        dbreference = db.getReference("Sales Enquiry").child("Customer Data").child("Id");
+
         FormId = getIntent().getIntExtra("ID", 0);
         bundle=getIntent().getExtras();
 
@@ -448,8 +448,9 @@ public void showElements(String name){
                             Config_One,Config_Two,Config_Three,Config_Other, Specify, Budget, Loan, Bankname, Purchase, Residantal,
                             Source_Adv,Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling,  Broker_Fname, Broker_lname);
                     if (insertFormData == true) {
-                        firestoredata();
                         SubmitDialog();
+//Check This Line
+                        firestoredata();
                     } else {
                         Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
                     }
@@ -457,9 +458,10 @@ public void showElements(String name){
                     }
         });
     }
-
+//ERROR========================================================================================
     //Firebase Value Store
     private void firestoredata() {
+        dbreference = db.getReference("Sales Enquiry").child("Customer Data").child("Id");
             dataModel = new DataModel();
             dataModel.setFNAME(sp.getString("FNAME", ""));
             dataModel.setLNAME(sp.getString("LNAME", ""));
