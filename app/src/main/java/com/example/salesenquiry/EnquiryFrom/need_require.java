@@ -270,7 +270,7 @@ public class need_require extends AppCompatActivity {
                 } catch (NumberFormatException nfe) {
                     nfe.printStackTrace();
                 }
-
+                Log.d("GENDER_VAL",""+sp.getString("GENDER",""));
                 Intent intent = new Intent(getApplicationContext(), about_project.class);
                 //about project
                 //Update DAta

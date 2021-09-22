@@ -396,6 +396,7 @@ public void showElements(String name){
                 Altphone = sp.getString("ALTPHONE", "");
                 Email = sp.getString("EMAIL", "");
                 Gender = sp.getString("GENDER", "");
+                Log.d("GENDER_VAL",""+sp.getString("GENDER",""));
                 Status = sp.getString("STATUS", "");
                 Occupation = sp.getString("OCCUPATION", "");
                 Company_name = sp.getString("COMPANY_NAME", "");
@@ -465,7 +466,7 @@ public void showElements(String name){
             dataModel.setLOCALITY(sp.getString("LOCALITY", ""));
             dataModel.setCITY(sp.getString("CITY", ""));
             dataModel.setPINCODE(sp.getInt("PINCODE", 0));
-            dataModel.setTIME_TO_CALL(sp.getString("TIME_TO_CALL", ""));
+            dataModel.setTIME_TO_CALL(sp.getString("TIMER", ""));
             dataModel.setPHONE(sp.getString("PHONE", ""));
             dataModel.setALTPHONE(sp.getString("ALTPHONE", ""));
             dataModel.setEMAIL(sp.getString("EMAIL", ""));
@@ -483,7 +484,7 @@ public void showElements(String name){
             dataModel.setCONFIG_THREE(sp.getString("CONFIG_THREE", ""));
             dataModel.setCONFIG_OTHER(sp.getString("CONFIG_OTHER", ""));
             dataModel.setSPECIFY(sp.getString("SPECIFY", ""));
-            dataModel.setBUDGET(sp.getString("BUDGET", ""));
+            dataModel.setBUDGET(sp.getString("BUDGETS", ""));
             dataModel.setLOAN(sp.getString("LOAN", ""));
             dataModel.setBANKNAME(sp.getString("BANKNAME", ""));
             dataModel.setPURCHASE(sp.getString("PURCHASE", ""));
@@ -492,8 +493,8 @@ public void showElements(String name){
             dataModel.setSOURCE_ADV(sp.getString("SOURCE_ADV", ""));
             dataModel.setNEWSPAPER_ADV(sp.getString("NEWSPAPER_ADV", ""));
             dataModel.setNEWSPAPER_INSERT(sp.getString("NEWSPAPER_INSERT", ""));
-            dataModel.setHORDING(sp.getString("HORDING", ""));
-            dataModel.setADVERTISEMENT(sp.getString("ADVERTISMENT", ""));
+            dataModel.setHORDING(sp.getString("HORDINGS", ""));
+            dataModel.setADVERTISEMENT(sp.getString("DIGITAL_ADV", ""));
             dataModel.setTELECALLING(sp.getString("TELECALLING", ""));
             dataModel.setBROKER_FNAME(sp.getString("BROKER_FNAME", ""));
             dataModel.setBROKER_LNAME(sp.getString("BROKER_LNAME", ""));

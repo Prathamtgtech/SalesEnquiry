@@ -173,7 +173,9 @@ public class personal_2 extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (!validation()) {
+                    return;
+                }
                 try {
                     companyname = CompanyName.getText().toString();
                     designation = Designation.getText().toString();
@@ -185,11 +187,9 @@ public class personal_2 extends AppCompatActivity {
                 sp = getSharedPreferences("DetailsKey", MODE_PRIVATE);
                 ed = sp.edit();
                 ed.putString("GENDER", getGenderVal);
+                Log.d("GENDER_VAL",""+getGenderVal);
                 ed.putString("STATUS", getStatusval);
                 ed.putString("COMPANY_NAME", companyname);
-                if (!validation()) {
-                    return;
-                }
                 ed.putString("OCCUPATION", occupationss);
                 ed.putString("DESIGNATION", designation);
                 ed.putString("WORKNATURE", worknature);

@@ -132,9 +132,10 @@ public class View_form extends AppCompatActivity {
                     configutation_1.setText(datasnapshot.child("config_ONE").getValue().toString()
                             +datasnapshot.child("config_TWO").getValue().toString()+" "+
                             datasnapshot.child("config_THREE").getValue().toString()+" "+
-                            datasnapshot.child("config_OTHER").getValue().toString()+" "+
-                            datasnapshot.child("specify").getValue().toString());
+                            datasnapshot.child("config_OTHER").getValue().toString());
+                    specify_1.setText(datasnapshot.child("specify").getValue().toString());
                     budgets_1.setText(datasnapshot.child("budget").getValue().toString());
+                    loan_1.setText(datasnapshot.child("loan").getValue().toString());
                     bank_name_1.setText(datasnapshot.child("bankname").getValue().toString());
                     purchase_1.setText(datasnapshot.child("purchase").getValue().toString());
                     residental_1.setText(datasnapshot.child("residental").getValue().toString());
