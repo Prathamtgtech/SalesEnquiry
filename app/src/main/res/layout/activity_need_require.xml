@@ -201,7 +201,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
                         android:id="@+id/noapprove"
-                        android:text="No Approved"
+                        android:text="Not Approved"
                         android:textColor="@color/black"
                         android:buttonTint="@color/button_color"
                         />

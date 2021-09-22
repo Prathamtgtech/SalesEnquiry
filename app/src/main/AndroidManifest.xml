@@ -9,6 +9,7 @@
         android:roundIcon="@drawable/kenarc_symbol"
         android:supportsRtl="true"
         android:theme="@style/Theme.SalesEnquiry"
+        android:usesCleartextTraffic="true"
         >
         <activity android:name=".EnquiryFrom.View_form"></activity>
         <activity android:name=".EnquiryFrom.view_form_data" />

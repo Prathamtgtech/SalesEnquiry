@@ -199,7 +199,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/Phone"
             android:hint="Phone No"
-            android:maxLength="10"
+            android:maxLength="12"
             android:inputType="phone"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -228,8 +228,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/AltPhone"
-            android:hint="Alternate Phone No"
-            android:maxLength="10"
+            android:hint="Whatsapp Phone No"
+            android:maxLength="12"
             android:inputType="phone"
             />
     </com.google.android.material.textfield.TextInputLayout>

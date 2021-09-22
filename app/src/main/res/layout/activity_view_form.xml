@@ -762,9 +762,9 @@
         android:textColor="@color/black"
         />
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/brokers_1"
+        android:id="@+id/brokers_fname"
         android:layout_marginRight="20dp"
         android:layout_below="@+id/telecallings"
         android:layout_marginLeft="2dp"
@@ -776,23 +776,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/references"
-        android:layout_below="@id/brokers"
-        android:text="Direct Reference :"
-        android:layout_marginTop="5dp"
-        android:textSize="12sp"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/black"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/references_1"
+        android:id="@+id/brokers_lname"
         android:layout_marginRight="20dp"
-        android:layout_below="@+id/brokers"
+        android:layout_below="@+id/telecallings"
         android:layout_marginLeft="2dp"
-        android:hint="Direct Reference"
-        android:layout_toRightOf="@+id/references"
+        android:hint="Broker"
+        android:layout_toRightOf="@+id/brokers_fname"
         android:layout_marginTop="5dp"
         android:textSize="12sp"
         />

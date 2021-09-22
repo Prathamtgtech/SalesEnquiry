@@ -173,9 +173,7 @@ public class personal_2 extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (!validation()) {
-//                    return;
-//                }
+
                 try {
                     companyname = CompanyName.getText().toString();
                     designation = Designation.getText().toString();
@@ -189,6 +187,9 @@ public class personal_2 extends AppCompatActivity {
                 ed.putString("GENDER", getGenderVal);
                 ed.putString("STATUS", getStatusval);
                 ed.putString("COMPANY_NAME", companyname);
+                if (!validation()) {
+                    return;
+                }
                 ed.putString("OCCUPATION", occupationss);
                 ed.putString("DESIGNATION", designation);
                 ed.putString("WORKNATURE", worknature);
@@ -211,14 +212,14 @@ public class personal_2 extends AppCompatActivity {
                 intent.putExtra("PURCHASE", getIntent().getStringExtra("PURCHASE"));
                 intent.putExtra("RESIDENTAL", getIntent().getStringExtra("RESIDENTAL"));
                 //about project
+                intent.putExtra("SOURCE_ADV",getIntent().getStringExtra("SOURCE_ADV"));
                 intent.putExtra("NEWSPAPER_ADV", getIntent().getStringExtra("NEWSPAPER_ADV"));
                 intent.putExtra("NEWSPAPER_INSERT", getIntent().getStringExtra("NEWSPAPER_INSERT"));
                 intent.putExtra("HORDING", getIntent().getStringExtra("HORDING"));
                 intent.putExtra("ADVERTISMENT", getIntent().getStringExtra("ADVERTISMENT"));
-                intent.putExtra("SOURCE", getIntent().getStringExtra("SOURCE"));
                 intent.putExtra("TELECALLING", getIntent().getStringExtra("TELECALLING"));
-                intent.putExtra("REFER", getIntent().getStringExtra("REFER"));
-                intent.putExtra("PARTNER", getIntent().getStringExtra("PARTNER"));
+                intent.putExtra("BROKER_FNAME",getIntent().getStringExtra("BROKER_FNAME"));
+                intent.putExtra("BROKER_LNAME",getIntent().getStringExtra("BROKER_LNAME"));
                 //Bundle Data
                 BundleData(intent);
                 intent.putExtras(bundle);

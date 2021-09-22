@@ -275,14 +275,14 @@ public class need_require extends AppCompatActivity {
                 //about project
                 //Update DAta
                 intent.putExtra("ID", getIntent().getIntExtra("ID", 0));
-                intent.putExtra("NEWSPAPER", getIntent().getStringExtra("NEWSPAPER"));
-                intent.putExtra("ENTER_NEWSPAPER", getIntent().getStringExtra("ENTER_NEWSPAPER"));
+                intent.putExtra("SOURCE_ADV",getIntent().getStringExtra("SOURCE_ADV"));
+                intent.putExtra("NEWSPAPER_ADV",getIntent().getStringExtra("NEWSPAPER_ADV"));
+                intent.putExtra("NEWSPAPER_INSERT",getIntent().getStringExtra("NEWSPAPER_INSERT"));
                 intent.putExtra("HORDING", getIntent().getStringExtra("HORDING"));
                 intent.putExtra("ADVERTISMENT", getIntent().getStringExtra("ADVERTISMENT"));
-                intent.putExtra("SOURCE", getIntent().getStringExtra("SOURCE"));
                 intent.putExtra("TELECALLING", getIntent().getStringExtra("TELECALLING"));
-                intent.putExtra("REFER", getIntent().getStringExtra("REFER"));
-                intent.putExtra("PARTNER", getIntent().getStringExtra("PARTNER"));
+                intent.putExtra("BROKER_FNAME",getIntent().getStringExtra("BROKER_FNAME"));
+                intent.putExtra("BROKER_LNAME",getIntent().getStringExtra("BROKER_LNAME"));
                 //bundle data
                 BundleData(intent);
                 startActivityForResult(intent, REQUEST_CODE_DATA);

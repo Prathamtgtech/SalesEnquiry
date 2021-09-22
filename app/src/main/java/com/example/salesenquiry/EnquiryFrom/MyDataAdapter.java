@@ -75,7 +75,7 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
                 intent2.putExtra("CONFIG_ONE",temp.getCONFIG_ONE());
                 intent2.putExtra("CONFIG_TWO",temp.getCONFIG_TWO());
                 intent2.putExtra("CONFIG_THREE",temp.getCONFIG_THREE());
-                intent2.putExtra("CONFIG_OTHER",temp.getCONFIG_FOUR());
+                intent2.putExtra("CONFIG_OTHER",temp.getCONFIG_OTHER());
                 intent2.putExtra("SPECIFY",temp.getSPECIFY());
                 intent2.putExtra("BUDGET",temp.getBUDGET());
                 intent2.putExtra("HOMELOAN",temp.getLOAN());
@@ -83,14 +83,14 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
                 intent2.putExtra("PURCHASE",temp.getPURCHASE());
                 intent2.putExtra("RESIDENTAL",temp.getRESIDENTAL());
                 //about project
+                intent2.putExtra("SOURCE_ADV",temp.getSOURCE_ADV());
                 intent2.putExtra("NEWSPAPER_ADV",temp.getNEWSPAPER_ADV());
                 intent2.putExtra("NEWSPAPER_INSERT",temp.getNEWSPAPER_INSERT());
                 intent2.putExtra("HORDING",temp.getHORDING());
                 intent2.putExtra("ADVERTISMENT",temp.getADVERTISEMENT());
-                intent2.putExtra("SOURCE",temp.getSOURCE());
                 intent2.putExtra("TELECALLING",temp.getTELECALLING());
-                intent2.putExtra("BROKER",temp.getBROKER());
-                intent2.putExtra("REFER",temp.getREFER());
+                intent2.putExtra("BROKER_FNAME",temp.getBROKER_FNAME());
+                intent2.putExtra("BROKER_LNAME",temp.getBROKER_LNAME());
                 intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent2);
             }

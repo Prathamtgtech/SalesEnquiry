@@ -78,9 +78,9 @@ public class register extends AppCompatActivity {
                     FirebaseStoreData();
                 }
                 //Firebase Value get From Sqlite
-                //firebaseDatabase();
+                firebaseDatabase();
               //Sq Lite
-               // SqliteStoreData();
+                SqliteStoreData();
 
             }
         });

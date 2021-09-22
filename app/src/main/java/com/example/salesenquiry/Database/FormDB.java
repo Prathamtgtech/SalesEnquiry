@@ -12,7 +12,7 @@ public class FormDB extends SQLiteOpenHelper {
     public static final String DB_NAME="Customer.db";
 
     public FormDB(@Nullable Context context) {
-        super(context,DB_NAME,null,6);
+        super(context,DB_NAME,null,7);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class FormDB extends SQLiteOpenHelper {
                 "FNAME TEXT,LNAME,LOCALITY TEXT,CITY TEXT,PINCODE INTEGER,TIME_TO_CALL TEXT,PHONE TEXT,ALTPHONE TEXT,EMAIL TEXT,"+
                 "GENDER TEXT,STATUS TEXT,OCCUPATION TEXT,COMPANY_NAME TEXT,DESIGNATION TEXT,WORK_NATURE TEXT,BUSINESS_LOCATION TEXT,"+
                 "CONFIG_ONE TEXT,CONFIG_TWO TEXT,CONFIG_THREE TEXT,CONFIG_OTHER TEXT,SPECIFY TEXT,BUDGET TEXT,LOAN TEXT,BANK_NAME TEXT,PURCHASE TEXT,RESIDENTAL TEXT," +
-                "NEWSPAPER_ADV TEXT,NEWSPAPER_INSERT TEXT,HORDING TEXT,DIGITAL TEXT,TELECALLING TEXT,SOURCE TEXT,BROKER TEXT,REFER TEXT)";
+                "NEWSPAPER_ADV TEXT,NEWSPAPER_INSERT TEXT,HORDING TEXT,DIGITAL TEXT,TELECALLING TEXT,BROKER_FNAME TEXT,BROKER_LNAME TEXT,SOURCE_ADV TEXT)";
         db.execSQL(sql);
     }
 
@@ -33,7 +33,7 @@ public class FormDB extends SQLiteOpenHelper {
     public Boolean InsertFormData(String Fname,String Lname, String Locality, String City, int Pincode, String Time_to_call, String Phone, String Altphone, String Email,
                                   String Gender,String Status, String Occupation, String Company_name, String Designation, String Work_nature, String Business_location,
                                   String Config_One,String Config_Two,String Config_Three,String Config_Other, String Specify, String Budget, String Loan, String Bankname, String Purchase, String Residental,
-                                  String Newspaper_adv , String Newspaper_insert, String Hording, String Digital, String Telecalling, String Source, String Broker, String Refer){
+                                  String Newspaper_adv , String Newspaper_insert, String Hording, String Digital, String Telecalling, String Broker_Fname, String Broker_Lname,String Source_adv){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
         //persona details
@@ -66,14 +66,14 @@ public class FormDB extends SQLiteOpenHelper {
         values.put("PURCHASE",Purchase);
         values.put("RESIDENTAL",Residental);
         //About project
+        values.put("SOURCE_ADV",Source_adv);
         values.put("NEWSPAPER_ADV",Newspaper_adv);
         values.put("NEWSPAPER_INSERT",Newspaper_insert);
         values.put("HORDING",Hording);
         values.put("DIGITAL",Digital);
         values.put("TELECALLING",Telecalling);
-        values.put("SOURCE",Source);
-        values.put("BROKER",Broker);
-        values.put("REFER",Refer);
+        values.put("BROKER_FNAME",Broker_Fname);
+        values.put("BROKER_FNAME",Broker_Lname);
         long result=db.insert("CustData",null,values);
         if (result == -1){
             return false;
@@ -89,10 +89,10 @@ public class FormDB extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Boolean UpdateFormData(String Fname,String Lname, String Locality, String City, int Pincode, String Time_to_call, String Phone, String Altphone, String Email,
+    public Boolean UpdateFormData(int id,String Fname,String Lname, String Locality, String City, int Pincode, String Time_to_call, String Phone, String Altphone, String Email,
                                   String Gender,String Status, String Occupation, String Company_name, String Designation, String Work_nature, String Business_location,
                                   String Config_One,String Config_Two,String Config_Three,String Config_Other, String Specify, String Budget, String Loan, String Bankname, String Purchase, String Residental,
-                                  String Newspaper_adv , String Newspaper_insert, String Hording, String Digital, String Telecalling, String Source, String Broker, String Refer){
+                                  String Newspaper_adv , String Newspaper_insert, String Hording, String Digital, String Telecalling,String Broker_Fname, String Broker_Lname,String Source_adv){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
         //persona details
@@ -125,15 +125,17 @@ public class FormDB extends SQLiteOpenHelper {
         values.put("PURCHASE",Purchase);
         values.put("RESIDENTAL",Residental);
         //About project
+        values.put("SOURCE_ADV",Source_adv);
         values.put("NEWSPAPER_ADV",Newspaper_adv);
         values.put("NEWSPAPER_INSERT",Newspaper_insert);
         values.put("HORDING",Hording);
         values.put("DIGITAL",Digital);
         values.put("TELECALLING",Telecalling);
-        values.put("SOURCE",Source);
-        values.put("BROKER",Broker);
-        values.put("REFER",Refer);
-        long result=db.update("CustData",values,"id=?",null);
+        values.put("BROKER_FNAME",Broker_Fname);
+        values.put("BROKER_FNAME",Broker_Lname);
+        //long result=db.update("CustData",values,"id=?",null);
+        long result = db.update("CustData", values, "id = " + id  , null);
+
         if (result == -1){
             return false;
         }

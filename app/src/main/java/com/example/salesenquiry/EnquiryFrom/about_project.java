@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.salesenquiry.Database.FormDB;
 import com.example.salesenquiry.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,10 +33,11 @@ import java.util.function.BooleanSupplier;
 import java.util.jar.Attributes;
 
 public class about_project extends AppCompatActivity {
-    Spinner newsadv, newsinsert;
-    TextView pleasure, aboutproject, newsadvtxt, newsinserttxt;
-    TextInputEditText hording, digital, telecalling, source, broker, reference;
-    String hordindloc, digitals, sources, refernces, brokers, telecallings;
+    Spinner newsadv, newsinsert, sourceadv;
+    TextView pleasure, aboutproject, newsadvtxt, newsinserttxt,sourcetxt;
+    TextInputEditText hording, digital, telecalling, source, broker_fname,broker_lname;
+    TextInputLayout hordingLay,digitalLay,telecallingLay,broker_fname_Lay,broker_lname_Lay;
+    String hordindloc, digitals,brokers_lname, brokers_fname, telecallings;
     FormDB formDB;
     SharedPreferences sp;
     Button submit, submitbut, updateData;
@@ -46,13 +48,15 @@ public class about_project extends AppCompatActivity {
     String FName, LName, Locality, City, Timetocall, Phone, Altphone, Email,
             Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
             Config_One,Config_Two,Config_Three,Config_Other, Specify, Budget, Purchase, Loan, Bankname, Residantal,
-            Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference;
+            Source_Adv,Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling,  Broker_Fname, Broker_lname;
     int Pincode;
     String newsAdvOpt[] = {"Times Of India", "Mumbai Mirror,Mid-Day", "Navbhart Times", "Maharashtra Times", "Mumbai Samachar", "Gujrat Samachar", "Any Others"};
     String newsInsertOpt[] = {"Times Of India", "Mumbai Mirror,Mid-Day", "Navbhart Times", "Maharashtra Times", "Mumbai Samachar", "Gujrat Samachar", "Any Others"};
     ArrayList<DataModel> dataView = new ArrayList<DataModel>();
     FirebaseDatabase db;
-    String newsadvval, newsinsertval;
+    String newsadvval, newsinsertval,sourceval;
+    //Source Spinner
+    String sourceOpt[] = {"News Paper", "Inserts", "Hordings", "Digital Advertisement", "Tele Calling", "Broker Name", "Direct Reference"};
     int FormId;
 Bundle bundle;
     @Override
@@ -68,9 +72,16 @@ Bundle bundle;
         hording = findViewById(R.id.hording);
         digital = findViewById(R.id.digital);
         telecalling = findViewById(R.id.telecalling);
-        source = findViewById(R.id.source);
-        broker = findViewById(R.id.broker);
-        reference = findViewById(R.id.refrence);
+        sourceadv = findViewById(R.id.sourceadv);
+        broker_fname = findViewById(R.id.broker_fname);
+        broker_lname = findViewById(R.id.broker_lname);
+        //layput
+        hordingLay = findViewById(R.id.hordingLayout);
+        digitalLay = findViewById(R.id.digitalLayout);
+        telecallingLay = findViewById(R.id.teleLayout);
+        broker_fname_Lay = findViewById(R.id.broker_fname_lay);
+        broker_lname_Lay = findViewById(R.id.broker_lname_lay);
+
         submit = findViewById(R.id.submit);
         submit_dialog = new Dialog(this);
         update_dialog = new Dialog(this);
@@ -82,20 +93,160 @@ Bundle bundle;
         dbreference = db.getReference("Sales Enquiry").child("Customer Data").child("Id");
         FormId = getIntent().getIntExtra("ID", 0);
         bundle=getIntent().getExtras();
-        //Newspaper Advertisment Spineer
-        NewspaperAdv();
-        //Newspaper Insert Spinner
-        NewsaperInsert();
+
         submitbut();
 //        //Update Form
         UpdateFormData();
-    }
+//Spinner
 
+
+        if(FormId < 0 ){
+            SourceSpinner("");
+            //Newspaper Advertisment Spineer
+            NewspaperAdv("");
+            //Newspaper Insert Spinner
+            NewsaperInsert("");
+        }
+
+        Log.d("SOURCE_ADV_VAL",""+getIntent().getStringExtra("SOURCE_ADV"));
+
+    }
+//Source Spinner
+public void showElements(String name){
+    if(name == "News Paper"){
+        newsadvtxt.setVisibility(View.VISIBLE);
+        newsadv.setVisibility(View.VISIBLE);
+
+        newsinserttxt.setVisibility(View.GONE);
+        newsinsert.setVisibility(View.GONE);
+        hording.setVisibility(View.GONE);
+        hordingLay.setVisibility(View.GONE);
+        digital.setVisibility(View.GONE);
+        digitalLay.setVisibility(View.GONE);
+        telecallingLay.setVisibility(View.GONE);
+        broker_fname_Lay.setVisibility(View.GONE);
+        broker_lname_Lay.setVisibility(View.GONE);
+        telecalling.setVisibility(View.GONE);
+        broker_fname.setVisibility(View.GONE);
+        broker_lname.setVisibility(View.GONE);
+
+    }else if(name == "Inserts"){
+        newsinserttxt.setVisibility(View.VISIBLE);
+        newsinsert.setVisibility(View.VISIBLE);
+
+        newsadvtxt.setVisibility(View.GONE);
+        newsadv.setVisibility(View.GONE);
+        hording.setVisibility(View.GONE);
+        hordingLay.setVisibility(View.GONE);
+        digital.setVisibility(View.GONE);
+        digitalLay.setVisibility(View.GONE);
+        telecallingLay.setVisibility(View.GONE);
+        broker_fname_Lay.setVisibility(View.GONE);
+        broker_lname_Lay.setVisibility(View.GONE);
+        telecalling.setVisibility(View.GONE);
+        broker_fname.setVisibility(View.GONE);
+        broker_lname.setVisibility(View.GONE);
+
+    }else if(name == "Hordings"){
+        hording.setVisibility(View.VISIBLE);
+        hordingLay.setVisibility(View.VISIBLE);
+
+        newsadvtxt.setVisibility(View.GONE);
+        newsadv.setVisibility(View.GONE);
+        newsinserttxt.setVisibility(View.GONE);
+        newsinsert.setVisibility(View.GONE);
+
+        digital.setVisibility(View.GONE);
+        digitalLay.setVisibility(View.GONE);
+        telecallingLay.setVisibility(View.GONE);
+        broker_fname_Lay.setVisibility(View.GONE);
+        broker_lname_Lay.setVisibility(View.GONE);
+        telecalling.setVisibility(View.GONE);
+        broker_fname.setVisibility(View.GONE);
+        broker_lname.setVisibility(View.GONE);
+    }else if(name == "Digital Advertisement"){
+        digital.setVisibility(View.VISIBLE);
+        digitalLay.setVisibility(View.VISIBLE);
+
+        newsadvtxt.setVisibility(View.GONE);
+        newsadv.setVisibility(View.GONE);
+        newsinserttxt.setVisibility(View.GONE);
+        newsinsert.setVisibility(View.GONE);
+
+        hording.setVisibility(View.GONE);
+        hordingLay.setVisibility(View.GONE);
+        telecallingLay.setVisibility(View.GONE);
+        broker_fname_Lay.setVisibility(View.GONE);
+        broker_lname_Lay.setVisibility(View.GONE);
+        telecalling.setVisibility(View.GONE);
+        broker_fname.setVisibility(View.GONE);
+        broker_lname.setVisibility(View.GONE);
+    }else if(name == "Tele Calling"){
+        telecallingLay.setVisibility(View.VISIBLE);
+        broker_fname_Lay.setVisibility(View.VISIBLE);
+        broker_lname_Lay.setVisibility(View.VISIBLE);
+        telecalling.setVisibility(View.VISIBLE);
+        broker_fname.setVisibility(View.VISIBLE);
+        broker_lname.setVisibility(View.VISIBLE);
+
+        digital.setVisibility(View.GONE);
+        digitalLay.setVisibility(View.GONE);
+
+        newsadvtxt.setVisibility(View.GONE);
+        newsadv.setVisibility(View.GONE);
+        newsinserttxt.setVisibility(View.GONE);
+        newsinsert.setVisibility(View.GONE);
+
+        hording.setVisibility(View.GONE);
+        hordingLay.setVisibility(View.GONE);
+    }else if(name == "Broker Name"){
+        telecallingLay.setVisibility(View.VISIBLE);
+        broker_fname_Lay.setVisibility(View.VISIBLE);
+        broker_lname_Lay.setVisibility(View.VISIBLE);
+        telecalling.setVisibility(View.VISIBLE);
+        broker_fname.setVisibility(View.VISIBLE);
+        broker_lname.setVisibility(View.VISIBLE);
+
+        digital.setVisibility(View.GONE);
+        digitalLay.setVisibility(View.GONE);
+
+        newsadvtxt.setVisibility(View.GONE);
+        newsadv.setVisibility(View.GONE);
+        newsinserttxt.setVisibility(View.GONE);
+        newsinsert.setVisibility(View.GONE);
+
+        hording.setVisibility(View.GONE);
+        hordingLay.setVisibility(View.GONE);
+    }else{
+        telecallingLay.setVisibility(View.VISIBLE);
+        broker_fname_Lay.setVisibility(View.VISIBLE);
+        broker_lname_Lay.setVisibility(View.VISIBLE);
+        telecalling.setVisibility(View.VISIBLE);
+        broker_fname.setVisibility(View.VISIBLE);
+        broker_lname.setVisibility(View.VISIBLE);
+
+        digital.setVisibility(View.GONE);
+        digitalLay.setVisibility(View.GONE);
+
+        newsadvtxt.setVisibility(View.GONE);
+        newsadv.setVisibility(View.GONE);
+        newsinserttxt.setVisibility(View.GONE);
+        newsinsert.setVisibility(View.GONE);
+
+        hording.setVisibility(View.GONE);
+        hordingLay.setVisibility(View.GONE);
+    }
+}
     //Newspaper Advertisment
-    private void NewspaperAdv() {
+    private void NewspaperAdv(String value) {
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.newspaper_advertise, newsAdvOpt);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         newsadv.setAdapter(arrayAdapter);
+        if(value != null){
+            int spinnerPosition = arrayAdapter.getPosition(value);
+            Log.d("position",""+spinnerPosition);
+            newsadv.setSelection(spinnerPosition);
+        }
         newsadv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -110,10 +261,16 @@ Bundle bundle;
     }
 
     //Insert Newspaper
-    private void NewsaperInsert() {
+    private void NewsaperInsert(String value) {
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.newspaper_insert, newsInsertOpt);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         newsinsert.setAdapter(arrayAdapter);
+
+        if(value != null){
+            int spinnerPosition = arrayAdapter.getPosition(value);
+            Log.d("position",""+spinnerPosition);
+            newsinsert.setSelection(spinnerPosition);
+        }
         newsinsert.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -127,15 +284,52 @@ Bundle bundle;
         });
     }
 
+    //Source Spinner
+    public void SourceSpinner(String value){
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.source_spinner, sourceOpt);
+        arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        sourceadv.setAdapter(arrayAdapter);
+
+        if(value != null){
+            int spinnerPosition = arrayAdapter.getPosition(value);
+            Log.d("position",""+spinnerPosition);
+            sourceadv.setSelection(spinnerPosition);
+//            showElements(value);
+        }
+
+
+//set the default according to value
+
+
+        sourceadv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sourceval = (sourceOpt[position].toString());
+                showElements(sourceval);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                newsinsertval = "Null";
+            }
+        });
+
+    }
+
     ////Form Update Data
     private void UpdateFormData() {
 //    newspaper.setText(getIntent().getStringExtra("ENTER_NEWSPAPER"));
         hording.setText(getIntent().getStringExtra("HORDING"));
         digital.setText(getIntent().getStringExtra("ADVERTISMENT"));
-        telecalling.setText(getIntent().getStringExtra("SOURCE"));
-        source.setText(getIntent().getStringExtra("TELECALLING"));
-        broker.setText(getIntent().getStringExtra("BROKER"));
-        reference.setText(getIntent().getStringExtra("REFER"));
+        telecalling.setText(getIntent().getStringExtra("TELECALLING"));
+        broker_fname.setText(getIntent().getStringExtra("BROKER_FNAME"));
+        broker_lname.setText(getIntent().getStringExtra("BROKER_LNAME"));
+        Log.d("sourceValue",""+getIntent().getStringExtra("SOURCE_ADV"));
+        Log.d("sourceValue1",""+getIntent().getStringExtra("NEWSPAPER_ADV"));
+        Log.d("sourceValue2",""+getIntent().getStringExtra("NEWSPAPER_INSERT"));
+        SourceSpinner(getIntent().getStringExtra("SOURCE_ADV"));
+        NewsaperInsert(getIntent().getStringExtra("NEWSPAPER_ADV"));
+        NewspaperAdv(getIntent().getStringExtra("NEWSPAPER_INSERT"));
     }
 
     //Submit Details Dialog Box
@@ -178,19 +372,18 @@ Bundle bundle;
 
                 hordindloc = hording.getText().toString();
                 digitals = digital.getText().toString();
-                sources = source.getText().toString();
-                brokers = broker.getText().toString();
-                refernces = reference.getText().toString();
+                brokers_fname = broker_fname.getText().toString();
+                brokers_lname = broker_lname.getText().toString();
                 telecallings = telecalling.getText().toString();
                 sp = getSharedPreferences("DetailsKey", MODE_PRIVATE);
                 SharedPreferences.Editor ed = sp.edit();
+                ed.putString("SOURCE_ADV",sourceval);
                 ed.putString("NEWSPAPER_ADV", newsadvval);
                 ed.putString("NEWSPAPER_INSERT", newsinsertval);
                 ed.putString("HORDINGS", hordindloc);
                 ed.putString("DIGITAL_ADV", digitals);
-                ed.putString("SOURCE", sources);
-                ed.putString("BROKER", brokers);
-                ed.putString("REFERENCE", refernces);
+                ed.putString("BROKER_FNAME", brokers_fname);
+                ed.putString("BROKER_LNAME", brokers_lname);
                 ed.putString("TELECALLING", telecallings);
                 ed.apply();
                 FName = sp.getString("FNAME", "");
@@ -219,28 +412,28 @@ Bundle bundle;
                 Loan = sp.getString("LOAN", "");
                 Bankname = sp.getString("BANKNAME", "");
                 Residantal = sp.getString("RESIDENTAL", "");
+                Source_Adv=sp.getString("SOURCE_ADV","");
                 Newspaper_Adv = sp.getString("NEWSPAPER_ADV", "");
                 Newspaper_Insert = sp.getString("NEWSPAPER_INSERT", "");
                 Hording = sp.getString("HORDINGS", "");
                 Advertisement = sp.getString("DIGITAL_ADV", "");
                 Telecalling = sp.getString("TELECALLING", "");
-                Source = sp.getString("SOURCE", "");
-                Broker = sp.getString("BROKER", "");
-                Reference = sp.getString("REFERENCE", "");
+                Broker_Fname = sp.getString("BROKER_FNAME", "");
+                Broker_lname = sp.getString("BROKER_LNAME", "");
                 Log.d("ValueOfForm",""+FName+ LName+ Locality+ City+ Pincode+ Timetocall+ Phone+ Altphone+ Email+
                         Gender+ Status+ Occupation+ Company_name+ Designation+ Work_nature+ Business_location+
                         Config_One+Config_Two+Config_Three+Config_Other+ Specify+ Budget+ Loan+ Bankname+ Purchase+ Residantal+
-                        Newspaper_Adv+ Newspaper_Insert+ Hording+Advertisement+ Telecalling+ Source+ Broker+ Reference);
+                        Newspaper_Adv+ Newspaper_Insert+ Hording+Advertisement+ Telecalling+Broker_Fname+ Broker_lname);
 //Insert Value in Database
-                firestoredata();
+
 //insert data
-                Boolean checkValue = formDB.checkId(FormId);
+                //Boolean checkValue = formDB.checkId(FormId);
                 Log.d("CheckId",""+FormId);
-                if (checkValue == true) {
-                    Boolean updateFormData = formDB.UpdateFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
+                if (FormId > 0) {
+                    Boolean updateFormData = formDB.UpdateFormData(FormId,FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
                             Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
                             Config_One,Config_Two,Config_Three,Config_Other, Specify, Budget, Loan, Bankname, Purchase, Residantal,
-                            Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
+                            Source_Adv,Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Broker_Fname, Broker_lname);
                     if (updateFormData == true) {
                         UpdateDialog();
                     }
@@ -252,8 +445,9 @@ Bundle bundle;
                     Boolean insertFormData = formDB.InsertFormData(FName, LName, Locality, City, Pincode, Timetocall, Phone, Altphone, Email,
                             Gender, Status, Occupation, Company_name, Designation, Work_nature, Business_location,
                             Config_One,Config_Two,Config_Three,Config_Other, Specify, Budget, Loan, Bankname, Purchase, Residantal,
-                            Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Source, Broker, Reference);
+                            Source_Adv,Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling,  Broker_Fname, Broker_lname);
                     if (insertFormData == true) {
+                        firestoredata();
                         SubmitDialog();
                     } else {
                         Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
@@ -265,48 +459,45 @@ Bundle bundle;
 
     //Firebase Value Store
     private void firestoredata() {
-        while (cursor.moveToNext()) {
             dataModel = new DataModel();
-            dataModel.setId(cursor.getInt(0));
-            dataModel.setFNAME(cursor.getString(1));
-            dataModel.setLNAME(cursor.getString(2));
-            dataModel.setLOCALITY(cursor.getString(3));
-            dataModel.setCITY(cursor.getString(4));
-            dataModel.setPINCODE(cursor.getInt(5));
-            dataModel.setTIME_TO_CALL(cursor.getString(6));
-            dataModel.setPHONE(cursor.getString(7));
-            dataModel.setALTPHONE(cursor.getString(8));
-            dataModel.setEMAIL(cursor.getString(9));
+            dataModel.setFNAME(sp.getString("FNAME", ""));
+            dataModel.setLNAME(sp.getString("LNAME", ""));
+            dataModel.setLOCALITY(sp.getString("LOCALITY", ""));
+            dataModel.setCITY(sp.getString("CITY", ""));
+            dataModel.setPINCODE(sp.getInt("PINCODE", 0));
+            dataModel.setTIME_TO_CALL(sp.getString("TIME_TO_CALL", ""));
+            dataModel.setPHONE(sp.getString("PHONE", ""));
+            dataModel.setALTPHONE(sp.getString("ALTPHONE", ""));
+            dataModel.setEMAIL(sp.getString("EMAIL", ""));
             //Personal Details
-            dataModel.setGENDER(cursor.getString(10));
-            dataModel.setSTATUS(cursor.getString(11));
-            dataModel.setOCCUPATION(cursor.getString(12));
-            dataModel.setCOMPANY_NAME(cursor.getString(13));
-            dataModel.setDESIGNATION(cursor.getString(14));
-            dataModel.setWORK_NATURE(cursor.getString(15));
-            dataModel.setBUSINESS_LOCATION(cursor.getString(16));
+            dataModel.setGENDER(sp.getString("GENDER", ""));
+            dataModel.setSTATUS(sp.getString("STATUS", ""));
+            dataModel.setOCCUPATION(sp.getString("OCCUPATION", ""));
+            dataModel.setCOMPANY_NAME(sp.getString("COMPANY_NAME", ""));
+            dataModel.setDESIGNATION(sp.getString("DESIGNATION", ""));
+            dataModel.setWORK_NATURE(sp.getString("WORKNATURE", ""));
+            dataModel.setBUSINESS_LOCATION(sp.getString("BUSINESS_LOC", ""));
             //Need And Requirment
-            dataModel.setCONFIG_ONE(cursor.getString(17));
-            dataModel.setCONFIG_ONE(cursor.getString(18));
-            dataModel.setCONFIG_ONE(cursor.getString(19));
-            dataModel.setCONFIG_ONE(cursor.getString(20));
-            dataModel.setSPECIFY(cursor.getString(21));
-            dataModel.setBUDGET(cursor.getString(22));
-            dataModel.setLOAN(cursor.getString(23));
-            dataModel.setBANKNAME(cursor.getString(24));
-            dataModel.setPURCHASE(cursor.getString(25));
-            dataModel.setRESIDENTAL(cursor.getString(26));
+            dataModel.setCONFIG_ONE(sp.getString("CONFIG_ONE", ""));
+            dataModel.setCONFIG_TWO(sp.getString("CONFIG_TWO", ""));
+            dataModel.setCONFIG_THREE(sp.getString("CONFIG_THREE", ""));
+            dataModel.setCONFIG_OTHER(sp.getString("CONFIG_OTHER", ""));
+            dataModel.setSPECIFY(sp.getString("SPECIFY", ""));
+            dataModel.setBUDGET(sp.getString("BUDGET", ""));
+            dataModel.setLOAN(sp.getString("LOAN", ""));
+            dataModel.setBANKNAME(sp.getString("BANKNAME", ""));
+            dataModel.setPURCHASE(sp.getString("PURCHASE", ""));
+            dataModel.setRESIDENTAL(sp.getString("RESIDENTAL", ""));
             //About Project
-            dataModel.setNEWSPAPER_ADV(cursor.getString(27));
-            dataModel.setNEWSPAPER_INSERT(cursor.getString(28));
-            dataModel.setHORDING(cursor.getString(29));
-            dataModel.setADVERTISEMENT(cursor.getString(30));
-            dataModel.setTELECALLING(cursor.getString(31));
-            dataModel.setSOURCE(cursor.getString(32));
-            dataModel.setBROKER(cursor.getString(33));
-            dataModel.setREFER(cursor.getString(34));
+            dataModel.setSOURCE_ADV(sp.getString("SOURCE_ADV", ""));
+            dataModel.setNEWSPAPER_ADV(sp.getString("NEWSPAPER_ADV", ""));
+            dataModel.setNEWSPAPER_INSERT(sp.getString("NEWSPAPER_INSERT", ""));
+            dataModel.setHORDING(sp.getString("HORDING", ""));
+            dataModel.setADVERTISEMENT(sp.getString("ADVERTISMENT", ""));
+            dataModel.setTELECALLING(sp.getString("TELECALLING", ""));
+            dataModel.setBROKER_FNAME(sp.getString("BROKER_FNAME", ""));
+            dataModel.setBROKER_LNAME(sp.getString("BROKER_LNAME", ""));
             dataView.add(dataModel);
-        }
         dbreference.setValue(dataView);
     }
     //onBackPressedButton

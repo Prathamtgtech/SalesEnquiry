@@ -35,14 +35,14 @@ public class DataModel {
     String PURCHASE;
     String RESIDENTAL;
     //About Project
+    String SOURCE_ADV;
     String NEWSPAPER_ADV;
     String NEWSPAPER_INSERT;
     String HORDING;
     String ADVERTISEMENT;
     String TELECALLING;
-    String SOURCE;
-    String BROKER;
-    String REFER;
+    String BROKER_FNAME;
+    String BROKER_LNAME;
 
 
     //Constructor
@@ -80,13 +80,38 @@ public class DataModel {
         this.HORDING = HORDING;
         this.ADVERTISEMENT = ADVERTISEMENT;
         this.TELECALLING = TELECALLING;
-        this.SOURCE = SOURCE;
-        this.BROKER = BROKER;
-        this.REFER = REFER;
+        this.BROKER_FNAME = BROKER_FNAME;
+        this.BROKER_LNAME = BROKER_LNAME;
+        this.SOURCE_ADV =SOURCE_ADV;
     }
 
 
     //getter settter
+
+
+    public String getSOURCE_ADV() {
+        return SOURCE_ADV;
+    }
+
+    public void setSOURCE_ADV(String SOURCE_ADV) {
+        this.SOURCE_ADV = SOURCE_ADV;
+    }
+
+    public String getBROKER_FNAME() {
+        return BROKER_FNAME;
+    }
+
+    public void setBROKER_FNAME(String BROKER_FNAME) {
+        this.BROKER_FNAME = BROKER_FNAME;
+    }
+
+    public String getBROKER_LNAME() {
+        return BROKER_LNAME;
+    }
+
+    public void setBROKER_LNAME(String BROKER_LNAME) {
+        this.BROKER_LNAME = BROKER_LNAME;
+    }
 
     public String getCONFIG_OTHER() {
         return CONFIG_OTHER;
@@ -118,14 +143,6 @@ public class DataModel {
 
     public void setCONFIG_THREE(String CONFIG_THREE) {
         this.CONFIG_THREE = CONFIG_THREE;
-    }
-
-    public String getCONFIG_FOUR() {
-        return CONFIG_OTHER;
-    }
-
-    public void setCONFIG_FOUR(String CONFIG_FOUR) {
-        this.CONFIG_OTHER = CONFIG_FOUR;
     }
 
     public int getId() {
@@ -352,27 +369,5 @@ public class DataModel {
         this.TELECALLING = TELECALLING;
     }
 
-    public String getSOURCE() {
-        return SOURCE;
-    }
 
-    public void setSOURCE(String SOURCE) {
-        this.SOURCE = SOURCE;
-    }
-
-    public String getBROKER() {
-        return BROKER;
-    }
-
-    public void setBROKER(String BROKER) {
-        this.BROKER = BROKER;
-    }
-
-    public String getREFER() {
-        return REFER;
-    }
-
-    public void setREFER(String REFER) {
-        this.REFER = REFER;
-    }
 }

@@ -84,7 +84,7 @@ public class personal extends AppCompatActivity {
         LastName.setText(getIntent().getStringExtra("LNAME"));
         Locality.setText(getIntent().getStringExtra("LOCALITY"));
         City.setText(getIntent().getStringExtra("CITY"));
-        Pincode.setText(String.valueOf(getIntent().getStringExtra("PINCODE")));
+        Pincode.setText(getIntent().getStringExtra("PINCODE"));
         Timer.setText(getIntent().getStringExtra("TIME_TO_CALL"));
         Phone.setText(getIntent().getStringExtra("PHONE"));
         AltPhone.setText(getIntent().getStringExtra("ALTPHONE"));
@@ -170,14 +170,15 @@ public class personal extends AppCompatActivity {
                 intent.putExtra("PURCHASE",getIntent().getStringExtra("PURCHASE"));
                 intent.putExtra("RESIDENTAL",getIntent().getStringExtra("RESIDENTAL"));
                 //about project
-                intent.putExtra("NEWSPAPER_ADV",getIntent().getStringExtra("NEWSPAPER"));
-                intent.putExtra("NEWSPAPER_INSERT",getIntent().getStringExtra("ENTER_NEWSPAPER"));
+                intent.putExtra("SOURCE_ADV",getIntent().getStringExtra("SOURCE_ADV"));
+                Log.d("sourceValue",""+getIntent().getStringExtra("SOURCE_ADV"));
+                intent.putExtra("NEWSPAPER_ADV",getIntent().getStringExtra("NEWSPAPER_ADV"));
+                intent.putExtra("NEWSPAPER_INSERT",getIntent().getStringExtra("NEWSPAPER_INSERT"));
                 intent.putExtra("HORDING",getIntent().getStringExtra("HORDING"));
                 intent.putExtra("ADVERTISMENT",getIntent().getStringExtra("ADVERTISMENT"));
-                intent.putExtra("SOURCE",getIntent().getStringExtra("SOURCE"));
                 intent.putExtra("TELECALLING",getIntent().getStringExtra("TELECALLING"));
-                intent.putExtra("BROKER",getIntent().getStringExtra("BROKER"));
-                intent.putExtra("REFER",getIntent().getStringExtra("REFER"));
+                intent.putExtra("BROKER_FNAME",getIntent().getStringExtra("BROKER_FNAME"));
+                intent.putExtra("BROKER_LNAME",getIntent().getStringExtra("BROKER_LNAME"));
                 //Bundle Data
                 BundleData(intent);
                 //resultCode

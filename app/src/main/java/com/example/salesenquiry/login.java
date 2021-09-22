@@ -153,16 +153,16 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 Username = email.getText().toString();
                 Password = password.getText().toString();
-                 startActivity(new Intent(getApplicationContext(), welcome.class));
+                 //startActivity(new Intent(getApplicationContext(), welcome.class));
                 //Sqlite Login
                 //  sqliteLogin();
 //
                 //Firebase Login
-//                if (Username.isEmpty() || Password.isEmpty()) {
-//                    Toast.makeText(getApplicationContext(), "Fill The Details", Toast.LENGTH_LONG).show();
-//                } else {
-//                    firebaselogin();
-//                }
+                if (Username.isEmpty() || Password.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Fill The Details", Toast.LENGTH_LONG).show();
+                } else {
+                    firebaselogin();
+                }
             }
         });
     }
