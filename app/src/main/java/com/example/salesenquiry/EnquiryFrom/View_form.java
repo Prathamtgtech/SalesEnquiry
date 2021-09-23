@@ -112,44 +112,41 @@ public class View_form extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for (DataSnapshot datasnapshot : snapshot.getChildren()) {
-                  //Personal Details
-                   fname.setText(datasnapshot.child("fname").getValue().toString());
-                   lname.setText(datasnapshot.child("lname").getValue().toString());
-                   locality_1.setText(datasnapshot.child("locality").getValue().toString());
-                   city_1.setText(datasnapshot.child("city").getValue().toString());
-                   time_to_call_1.setText(datasnapshot.child("time_TO_CALL").getValue().toString());
-                   pincode_1.setText(datasnapshot.child("pincode").getValue().toString());
-                   phone_1.setText(datasnapshot.child("phone").getValue().toString());
-                   alt_phone_1.setText(datasnapshot.child("altphone").getValue().toString());
-                   email_id_1.setText(datasnapshot.child("email").getValue().toString());
-                   gender_1.setText(datasnapshot.child("gender").getValue().toString());
-                   status_1.setText(datasnapshot.child("status").getValue().toString());
-                   occupation_1.setText(datasnapshot.child("occupation").getValue().toString());
-                   company_name_1.setText(datasnapshot.child("company_NAME").getValue().toString());
-                   work_nature_1.setText(datasnapshot.child("work_NATURE").getValue().toString());
-                   designations_1.setText(datasnapshot.child("designation").getValue().toString());
-                   business_loc_1.setText(datasnapshot.child("business_LOCATION").getValue().toString());
+                   fname.setText(snapshot.child("fname").getValue().toString());
+                   lname.setText(snapshot.child("lname").getValue().toString());
+                   locality_1.setText(snapshot.child("locality").getValue().toString());
+                   city_1.setText(snapshot.child("city").getValue().toString());
+                   time_to_call_1.setText(snapshot.child("time_TO_CALL").getValue().toString());
+                   pincode_1.setText(snapshot.child("pincode").getValue().toString());
+                   phone_1.setText(snapshot.child("phone").getValue().toString());
+                   alt_phone_1.setText(snapshot.child("altphone").getValue().toString());
+                   email_id_1.setText(snapshot.child("email").getValue().toString());
+                   gender_1.setText(snapshot.child("gender").getValue().toString());
+                   status_1.setText(snapshot.child("status").getValue().toString());
+                   occupation_1.setText(snapshot.child("occupation").getValue().toString());
+                   company_name_1.setText(snapshot.child("company_NAME").getValue().toString());
+                   work_nature_1.setText(snapshot.child("work_NATURE").getValue().toString());
+                   designations_1.setText(snapshot.child("designation").getValue().toString());
+                   business_loc_1.setText(snapshot.child("business_LOCATION").getValue().toString());
                    //Need And Requirements
-                    configutation_1.setText(datasnapshot.child("config_ONE").getValue().toString()
-                            +datasnapshot.child("config_TWO").getValue().toString()+" "+
-                            datasnapshot.child("config_THREE").getValue().toString()+" "+
-                            datasnapshot.child("config_OTHER").getValue().toString());
-                    specify_1.setText(datasnapshot.child("specify").getValue().toString());
-                    budgets_1.setText(datasnapshot.child("budget").getValue().toString());
-                    loan_1.setText(datasnapshot.child("loan").getValue().toString());
-                    bank_name_1.setText(datasnapshot.child("bankname").getValue().toString());
-                    purchase_1.setText(datasnapshot.child("purchase").getValue().toString());
-                    residental_1.setText(datasnapshot.child("residental").getValue().toString());
+                    configutation_1.setText(snapshot.child("config_ONE").getValue().toString()
+                            +snapshot.child("config_TWO").getValue().toString()+" "+
+                            snapshot.child("config_THREE").getValue().toString()+" "+
+                            snapshot.child("config_OTHER").getValue().toString());
+                    specify_1.setText(snapshot.child("specify").getValue().toString());
+                    budgets_1.setText(snapshot.child("budget").getValue().toString());
+                    loan_1.setText(snapshot.child("loan").getValue().toString());
+                    bank_name_1.setText(snapshot.child("bankname").getValue().toString());
+                    purchase_1.setText(snapshot.child("purchase").getValue().toString());
+                    residental_1.setText(snapshot.child("residental").getValue().toString());
                     //About Project
-                    newspapersadv_1.setText(datasnapshot.child("newspaper_ADV").getValue().toString());
-                    newspaperinsert_1.setText(datasnapshot.child("newspaper_INSERT").getValue().toString());
-                    hording_1.setText(datasnapshot.child("hording").getValue().toString());
-                    advertisment_1.setText(datasnapshot.child("advertisement").getValue().toString());
-                    telecalling_1.setText(datasnapshot.child("telecalling").getValue().toString());
-                    broker_fname.setText(datasnapshot.child("broker_FNAME").getValue().toString());
-                    broker_lname.setText(datasnapshot.child("broker_LNAME").getValue().toString());
-                }
+                    newspapersadv_1.setText(snapshot.child("newspaper_ADV").getValue().toString());
+                    newspaperinsert_1.setText(snapshot.child("newspaper_INSERT").getValue().toString());
+                    hording_1.setText(snapshot.child("hording").getValue().toString());
+                    advertisment_1.setText(snapshot.child("advertisement").getValue().toString());
+                    telecalling_1.setText(snapshot.child("telecalling").getValue().toString());
+                    broker_fname.setText(snapshot.child("broker_FNAME").getValue().toString());
+                    broker_lname.setText(snapshot.child("broker_LNAME").getValue().toString());
 
             }
 
