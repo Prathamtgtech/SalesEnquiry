@@ -1,6 +1,8 @@
 package com.example.salesenquiry.EnquiryFrom;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -23,12 +25,19 @@ import android.widget.Toast;
 
 import com.example.salesenquiry.Database.FormDB;
 import com.example.salesenquiry.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BooleanSupplier;
 import java.util.jar.Attributes;
 
@@ -426,8 +435,11 @@ public void showElements(String name){
                         Config_One+Config_Two+Config_Three+Config_Other+ Specify+ Budget+ Loan+ Bankname+ Purchase+ Residantal+
                         Newspaper_Adv+ Newspaper_Insert+ Hording+Advertisement+ Telecalling+Broker_Fname+ Broker_lname);
 //Insert Value in Database
-
 //insert data
+                //firebaseUpdate();
+               // UpdateDialog();
+               // firestoredata();
+                //firestoredata();
                 //Boolean checkValue = formDB.checkId(FormId);
                 Log.d("CheckId",""+FormId);
                 if (FormId > 0) {
@@ -436,6 +448,7 @@ public void showElements(String name){
                             Config_One,Config_Two,Config_Three,Config_Other, Specify, Budget, Loan, Bankname, Purchase, Residantal,
                             Source_Adv,Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Broker_Fname, Broker_lname);
                     if (updateFormData == true) {
+                       // firebaseUpdate();
                         UpdateDialog();
                     }
                     else {
@@ -449,8 +462,8 @@ public void showElements(String name){
                             Source_Adv,Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling,  Broker_Fname, Broker_lname);
                     if (insertFormData == true) {
                         SubmitDialog();
-//Check This Line
                         firestoredata();
+                        Log.d("DATAMODEL",""+dataModel.id);
                     } else {
                         Toast.makeText(getApplicationContext(), "Details Are Not Submitted", Toast.LENGTH_LONG).show();
                     }
@@ -461,7 +474,7 @@ public void showElements(String name){
 //ERROR========================================================================================
     //Firebase Value Store
     private void firestoredata() {
-        dbreference = db.getReference("Sales Enquiry").child("Customer Data").child("Id");
+     /*ERROR*/   dbreference = db.getReference("Sales Enquiry").child("Customer Data").child(Phone);//KEY SET USING NUMBER BECAUSE ID WAS NOT INCREMENT
             dataModel = new DataModel();
             dataModel.setFNAME(sp.getString("FNAME", ""));
             dataModel.setLNAME(sp.getString("LNAME", ""));
@@ -500,11 +513,59 @@ public void showElements(String name){
             dataModel.setTELECALLING(sp.getString("TELECALLING", ""));
             dataModel.setBROKER_FNAME(sp.getString("BROKER_FNAME", ""));
             dataModel.setBROKER_LNAME(sp.getString("BROKER_LNAME", ""));
-            dataView.add(dataModel);
-        dbreference.setValue(dataView);
+        dbreference.setValue(dataModel);
+    }
+
+    //Update Firebasedata
+    public void firebaseUpdate() {
+        HashMap hashMap = new HashMap();
+        //personal Details
+        hashMap.put("fname", FName);
+        hashMap.put("lname", LName);
+        hashMap.put("locality", Locality);
+        hashMap.put("city", City);
+        hashMap.put("pincode", Pincode);
+        hashMap.put("time_TO_CALL", Timetocall);
+        hashMap.put("phone", Phone);
+        hashMap.put("altphone", Altphone);
+        hashMap.put("email", Email);
+        hashMap.put("gender", Gender);
+        hashMap.put("status", Status);
+        hashMap.put("occupation", Occupation);
+        hashMap.put("company_NAME", Company_name);
+        hashMap.put("work_NATURE", Work_nature);
+        hashMap.put("designation", Designation);
+        hashMap.put("business_LOCATION", Business_location);
+        //Need And Requirement
+        hashMap.put("config_ONE", Config_One);
+        hashMap.put("config_TWO", Config_Two);
+        hashMap.put("config_THREE", Config_Three);
+        hashMap.put("config_OTHER", Config_Other);
+        hashMap.put("specify", Specify);
+        hashMap.put("budget", Budget);
+        hashMap.put("loan", Loan);
+        hashMap.put("bankname", Bankname);
+        hashMap.put("residental", Residantal);
+        //ABOUT PROJECT
+        hashMap.put("newspaper_ADV", Newspaper_Adv);
+        hashMap.put("newspaper_INSERT", Newspaper_Insert);
+        hashMap.put("hording", Hording);
+        hashMap.put("advertisement", Advertisement);
+        hashMap.put("telecalling", Telecalling);
+        hashMap.put("broker_FNAME", Broker_Fname);
+        hashMap.put("broker_LNAME", Broker_lname);
+        FirebaseDatabase.getInstance().getReference("Sales Enquiry")
+                .child("Customer Data")
+                .child(sp.getString("PHONE",""))
+                .updateChildren(hashMap)
+                .addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task task) {
+                   Toast.makeText(getApplicationContext(),"Update data",Toast.LENGTH_LONG).show();
+                    }
+                });
     }
     //onBackPressedButton
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

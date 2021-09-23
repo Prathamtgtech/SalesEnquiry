@@ -3,8 +3,10 @@ package com.example.salesenquiry.EnquiryFrom;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -31,7 +33,7 @@ public class View_form extends AppCompatActivity {
     DataModel dataModel;
     FirebaseDatabase db;
     DatabaseReference reference;
-
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,14 +101,17 @@ public class View_form extends AppCompatActivity {
         broker_fname = findViewById(R.id.brokers_fname);
         broker_lname = findViewById(R.id.brokers_lname);
         cursor = new FormDB(this).FetchCustData();
-        reference = FirebaseDatabase.getInstance().getReference("Sales Enquiry").child("Customer Data").child("Id");
+        db=FirebaseDatabase.getInstance();
         // getTheData();
         getFirebaseData();
     }
 
     //GetData From Firebase RealtimeDataBase
     private void getFirebaseData() {
-
+        sp = getSharedPreferences("DetailsKey", MODE_PRIVATE);
+        Log.d("PHONEVAL",""+sp.getString("PHONE",""));
+        String Phone =sp.getString("PHONE","");
+        /*ERROR*/reference = db.getReference("Sales Enquiry").child("Customer Data");//KEY=====================================
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {

@@ -15,6 +15,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.salesenquiry.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,9 +39,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
     }
 
     @Override
-    public void onBindViewHolder( MyDataAdapter.Holder holder, int position) { DataModel dataModel=dataView.get(position);
-            DataModel temp=dataView.get(position);
-            holder.Cust_id.setText(String.valueOf(dataView.get(position).getId()));
+    public void onBindViewHolder( MyDataAdapter.Holder holder, int position) {
+        DataModel temp=dataView.get(position);
+        holder.Cust_Phone.setText(dataView.get(position).getPHONE());
+        holder.Cust_id.setText(String.valueOf(dataView.get(position).getId()));
         holder.Cust_Name.setText(dataView.get(position).getFNAME()+" "+dataView.get(position).getLNAME());
         holder.Cust_Emailid.setText(dataView.get(position).getEMAIL());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +111,9 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
         TextView Cust_Name,Cust_Emailid,Cust_id;
         CardView cardView;
         TextView Cust_update;
+        TextView Cust_Phone;
+        FirebaseDatabase db;
+        DatabaseReference reference;
         public Holder( View itemView) {
             super(itemView);
             cardView=itemView.findViewById(R.id.datacardView);
@@ -115,6 +121,7 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
             Cust_Name=itemView.findViewById(R.id.Cust_Name);
             Cust_Emailid=itemView.findViewById(R.id.Cust_Emailid);
             Cust_update=itemView.findViewById(R.id.Cust_update);
+            Cust_Phone=itemView.findViewById(R.id.Cust_Phone);
         }
     }
 }
