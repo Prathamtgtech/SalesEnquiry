@@ -448,8 +448,14 @@ public void showElements(String name){
                             Config_One,Config_Two,Config_Three,Config_Other, Specify, Budget, Loan, Bankname, Purchase, Residantal,
                             Source_Adv,Newspaper_Adv, Newspaper_Insert, Hording, Advertisement, Telecalling, Broker_Fname, Broker_lname);
                     if (updateFormData == true) {
-                       // firebaseUpdate();
-                        UpdateDialog();
+                       if (!Phone.equals(0)) {
+                           firebaseUpdate();
+                           UpdateDialog();
+                       }
+                       else {
+                           Toast.makeText(getApplicationContext(),"Update Failed",Toast.LENGTH_LONG).show();
+                       }
+
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "Details Are Not Updatted", Toast.LENGTH_LONG).show();
@@ -474,7 +480,7 @@ public void showElements(String name){
 //ERROR========================================================================================
     //Firebase Value Store
     private void firestoredata() {
-     /*ERROR*/   dbreference = db.getReference("Sales Enquiry").child("Customer Data").child(Phone);//KEY SET USING NUMBER BECAUSE ID WAS NOT INCREMENT
+     /*ERROR*/dbreference = db.getReference("Sales Enquiry").child("Customer Data").child(Phone);//KEY SET USING NUMBER BECAUSE ID WAS NOT INCREMENT
             dataModel = new DataModel();
             dataModel.setFNAME(sp.getString("FNAME", ""));
             dataModel.setLNAME(sp.getString("LNAME", ""));
@@ -513,6 +519,7 @@ public void showElements(String name){
             dataModel.setTELECALLING(sp.getString("TELECALLING", ""));
             dataModel.setBROKER_FNAME(sp.getString("BROKER_FNAME", ""));
             dataModel.setBROKER_LNAME(sp.getString("BROKER_LNAME", ""));
+            dataView.add(dataModel);
         dbreference.setValue(dataModel);
     }
 

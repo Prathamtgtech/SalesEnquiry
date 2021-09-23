@@ -108,10 +108,7 @@ public class View_form extends AppCompatActivity {
 
     //GetData From Firebase RealtimeDataBase
     private void getFirebaseData() {
-        sp = getSharedPreferences("DetailsKey", MODE_PRIVATE);
-        Log.d("PHONEVAL",""+sp.getString("PHONE",""));
-        String Phone =sp.getString("PHONE","");
-        /*ERROR*/reference = db.getReference("Sales Enquiry").child("Customer Data");//KEY=====================================
+        reference = db.getReference("Sales Enquiry").child("Customer Data").child(getIntent().getStringExtra("PHONE"));
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {

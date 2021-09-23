@@ -49,6 +49,7 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context,View_form.class);
+                intent.putExtra("PHONE",dataView.get(position).getPHONE());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

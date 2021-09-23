@@ -35,6 +35,7 @@ public class view_form_data extends AppCompatActivity {
     SharedPreferences sp;
     FirebaseDatabase db;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,16 +49,14 @@ public class view_form_data extends AppCompatActivity {
     }
 
     private void FetchFirebaseValue() {
-        sp = getSharedPreferences("DetailsKey", MODE_PRIVATE);
-        Log.d("PHONEVAL",""+sp.getString("PHONE",""));
-        String Phone =sp.getString("PHONE","");
-        /*ERROR*/reference = db.getReference("Sales Enquiry").child("Customer Data");//Key================;
+       reference = db.getReference("Sales Enquiry").child("Customer Data");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     dataModel = new DataModel();
                     //Personal Details
+                    Log.d("FNAMEVAL",""+dataSnapshot.child("fname").getValue().toString());
                     dataModel.setFNAME(dataSnapshot.child("fname").getValue().toString());
                     dataModel.setLNAME(dataSnapshot.child("lname").getValue().toString());
                     dataModel.setLOCALITY(dataSnapshot.child("locality").getValue().toString());

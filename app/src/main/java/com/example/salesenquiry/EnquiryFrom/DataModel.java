@@ -46,7 +46,6 @@ public class DataModel {
 
 
     //Constructor
-
     public DataModel() {
         this.id = id;
         this.FNAME = FNAME;

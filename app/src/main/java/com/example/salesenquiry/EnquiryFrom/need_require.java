@@ -41,7 +41,7 @@ public class need_require extends AppCompatActivity {
     String getPurchaseval = " ", getResidentalval = " ", getLoanVal = " ";
     public final static int REQUEST_CODE_DATA = 1;
     Bundle bundle;
-
+    int FormId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +75,7 @@ public class need_require extends AppCompatActivity {
         //Configuration Value
         configurationbox();
         //budget value
-        budgetitem();
+            budgetitem();
         //purchase value
         purchaseVal();
         //get Home Value
@@ -84,10 +84,13 @@ public class need_require extends AppCompatActivity {
         typegrouptxt();
 //        //Update Data
         UpdateFormData();
+        FormId= getIntent().getIntExtra("ID", 0);
+        //Set Spinner
+
 
     }
 
-    //    //Update Form Data
+    //Update Form Data
     private void UpdateFormData() {
         try {
             //Nature Of Purchase
