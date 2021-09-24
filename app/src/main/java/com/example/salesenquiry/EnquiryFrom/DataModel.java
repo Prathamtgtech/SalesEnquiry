@@ -144,7 +144,7 @@ public class DataModel {
         this.CONFIG_THREE = CONFIG_THREE;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

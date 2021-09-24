@@ -13,6 +13,8 @@ import android.util.Log;
 
 import com.example.salesenquiry.Database.FormDB;
 import com.example.salesenquiry.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,23 +38,26 @@ public class view_form_data extends AppCompatActivity {
     DatabaseReference reference;
     SharedPreferences sp;
     FirebaseDatabase db;
-
+FirebaseAuth firebaseauth;
+FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_form_data);
         rcv = findViewById(R.id.rcv);
-        rcv.setLayoutManager(new LinearLayoutManager(this, VERTICAL, false));
+        rcv.setLayoutManager(new LinearLayoutManager(this));
         cursor = new FormDB(this).FetchCustData();
         db=FirebaseDatabase.getInstance();
         //  FetchData();
+        firebaseauth= FirebaseAuth.getInstance();
+        user=firebaseauth.getCurrentUser();
         FetchFirebaseValue();
     }
 
     private void FetchFirebaseValue() {
-       reference = db.getReference("Sales Enquiry").child("Customer Data");
-        reference.addValueEventListener(new ValueEventListener() {
+       reference = db.getReference("Sales Enquiry").child("Customer Data").child(user.getUid());
+        reference.orderByKey().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

@@ -61,12 +61,6 @@ public class login extends AppCompatActivity {
         loginDB = new LoginDB(this);
         forgot_dialog = new Dialog(this);
         firebaseAuth=FirebaseAuth.getInstance();
-        FirebaseUser user=firebaseAuth.getCurrentUser();
-        Log.d("CurrentUser",""+user);
-        if (user != null) {
-            finish();
-            startActivity(new Intent(login.this, welcome.class));
-        }
         //SignUpButton
         signupbut();
         //log in Button
@@ -152,7 +146,7 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 Username = email.getText().toString();
                 Password = password.getText().toString();
-                 //startActivity(new Intent(getApplicationContext(), welcome.class));
+                // startActivity(new Intent(getApplicationContext(), welcome.class));
                 //Firebase Login
                 if (Username.isEmpty() || Password.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill The Details", Toast.LENGTH_LONG).show();
@@ -170,6 +164,7 @@ public class login extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(getApplicationContext(),"Log In Sucessful",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getApplicationContext(),welcome.class));
+                    finish();
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"Log In Failed",Toast.LENGTH_LONG).show();
@@ -179,21 +174,21 @@ public class login extends AppCompatActivity {
     }
 
 
-    //Sqlite Login
-    private void sqliteLogin() {
-                if (Username.isEmpty() || Password.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Fill The Details", Toast.LENGTH_LONG).show();
-                } else {
-                    Boolean loginData = loginDB.checkusernamepassword(Username, Password);
-                    if (loginData == true) {
-                        Toast.makeText(getApplicationContext(), "Log In Sucessfully", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), welcome.class));
-                        finish();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Log In Failed", Toast.LENGTH_LONG).show();
-                    }
-                }
-    }
+//    //Sqlite Login
+//    private void sqliteLogin() {
+//                if (Username.isEmpty() || Password.isEmpty()) {
+//                    Toast.makeText(getApplicationContext(), "Fill The Details", Toast.LENGTH_LONG).show();
+//                } else {
+//                    Boolean loginData = loginDB.checkusernamepassword(Username, Password);
+//                    if (loginData == true) {
+//                        Toast.makeText(getApplicationContext(), "Log In Sucessfully", Toast.LENGTH_LONG).show();
+//                        startActivity(new Intent(getApplicationContext(), welcome.class));
+//                        finish();
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Log In Failed", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//    }
 
 
     //Go to Login Activity

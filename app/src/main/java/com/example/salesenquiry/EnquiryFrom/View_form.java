@@ -108,7 +108,7 @@ public class View_form extends AppCompatActivity {
 
     //GetData From Firebase RealtimeDataBase
     private void getFirebaseData() {
-        reference = db.getReference("Sales Enquiry").child("Customer Data").child(getIntent().getStringExtra("PHONE"));
+        reference = db.getReference("Sales Enquiry").child("Customer Data").child(String.valueOf(getIntent().getIntExtra("MAXID",0)));
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {

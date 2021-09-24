@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,12 +78,12 @@ public class register extends AppCompatActivity {
                 else{
                     FirebaseStoreData();
                     firebaseDatabase();
-
+                    //Sq Lite
+                    SqliteStoreData();
                 }
                 //Firebase Value get From Sqlite
 
-              //Sq Lite
-               // SqliteStoreData();
+
 
             }
         });
@@ -104,7 +105,10 @@ public class register extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    startActivity(new Intent(getApplicationContext(), com.example.salesenquiry.login.class));
+                    Intent intent=new Intent(getApplicationContext(),login.class);
+                    firebaseAuth.signOut();
+                    startActivity(intent);
+                    finish();
                     Toast.makeText(register.this, "Details Are Submit", Toast.LENGTH_LONG).show();
 
                 } else {
@@ -137,10 +141,8 @@ public class register extends AppCompatActivity {
             if (checkuser == false) {
                 Boolean insert = loginDB.insertData(Fullname, Username, Password);
                 if (insert = true) {
-                    Toast.makeText(getApplicationContext(), "Register Sucessfully", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), login.class);
-                    startActivity(intent);
-                    finish();
+                   //Store Data
+                    Log.d("SqliteData","Store Sqlite Data");
                 } else {
                     Toast.makeText(getApplicationContext(), "Register Failed Please Sign Up", Toast.LENGTH_LONG).show();
                 }

@@ -18,9 +18,9 @@
         <activity android:name=".EnquiryFrom.need_require" />
         <activity android:name=".EnquiryFrom.personal_2" />
         <activity android:name=".EnquiryFrom.personal" />
-        <activity android:name=".welcome" />
+        <activity android:name=".login" />
         <activity android:name=".register" />
-        <activity android:name=".login">
+        <activity android:name=".welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

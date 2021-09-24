@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import androidx.cardview.widget.CardView;
 import android.widget.*;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -53,6 +55,15 @@ public class welcome extends AppCompatActivity {
         //setSupportActionBar(toolbar);
        // toolbar.inflateMenu(R.menu.menubar);
         firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user=firebaseAuth.getCurrentUser();
+         if (user != null) {
+             Log.d("GETUSER",""+user);
+            }
+         else{
+             startActivity(new Intent(getApplicationContext(),login.class));
+             finish();
+         }
+
         sliderView = findViewById(R.id.image_slider);
         sliderAdapter = new SliderAdapter(images);
         sliderView.setSliderAdapter(sliderAdapter);
