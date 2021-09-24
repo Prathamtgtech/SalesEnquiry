@@ -22,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import static com.example.salesenquiry.R.id.Cust_id;
 
 public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
     ArrayList<DataModel> dataView;
@@ -42,7 +41,6 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
     public void onBindViewHolder( MyDataAdapter.Holder holder, int position) {
         DataModel temp=dataView.get(position);
         holder.Cust_Phone.setText(dataView.get(position).getPHONE());
-        holder.Cust_id.setText(String.valueOf(dataView.get(position).getId()));
         holder.Cust_Name.setText(dataView.get(position).getFNAME()+" "+dataView.get(position).getLNAME());
         holder.Cust_Emailid.setText(dataView.get(position).getEMAIL());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +117,6 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.Holder> {
         public Holder( View itemView) {
             super(itemView);
             cardView=itemView.findViewById(R.id.datacardView);
-            Cust_id=itemView.findViewById(R.id.Cust_id);
             Cust_Name=itemView.findViewById(R.id.Cust_Name);
             Cust_Emailid=itemView.findViewById(R.id.Cust_Emailid);
             Cust_update=itemView.findViewById(R.id.Cust_update);

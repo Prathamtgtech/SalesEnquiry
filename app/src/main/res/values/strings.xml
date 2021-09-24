@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sales Enquiry</string>
+    <string name="app_name">Kenarc</string>
     <string name="or_line">______________________________ or ________________________________</string>
     <string name="title_activity_welcome">welcome</string>
     <string name="prompt_email">Email</string>

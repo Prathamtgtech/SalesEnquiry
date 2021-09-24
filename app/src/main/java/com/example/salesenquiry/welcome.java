@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,10 +48,10 @@ public class welcome extends AppCompatActivity {
         kenarc_logo = findViewById(R.id.kenarc_logo);
         //  kenarc_txt=findViewById(R.id.kenarc_logo);
         nexttxt = findViewById(R.id.needtxt);
-        toolbar = findViewById(R.id.toolbar);
+      //  toolbar = findViewById(R.id.toolbar);
         cardView=findViewById(R.id.cardView);
-        setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.menubar);
+        //setSupportActionBar(toolbar);
+       // toolbar.inflateMenu(R.menu.menubar);
         firebaseAuth = FirebaseAuth.getInstance();
         sliderView = findViewById(R.id.image_slider);
         sliderAdapter = new SliderAdapter(images);
@@ -82,7 +83,8 @@ public class welcome extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "About Us", Toast.LENGTH_LONG).show();
                 break;
             case R.id.contactus:
-                Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_LONG).show();
+                Uri uri=Uri.parse("http://kenarcspaces.com/");
+                startActivity(new Intent(Intent.ACTION_VIEW,uri));
                 break;
             case R.id.logout:
                 firebaseAuth.signOut();

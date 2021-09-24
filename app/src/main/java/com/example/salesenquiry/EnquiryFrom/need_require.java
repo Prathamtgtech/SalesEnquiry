@@ -71,11 +71,15 @@ public class need_require extends AppCompatActivity {
         getLoan = findViewById(R.id.loangroup);
         getResident = findViewById(R.id.typegroup);
         bundle = getIntent().getExtras();
+      //  FormId= getIntent().getIntExtra("ID", 0);
+
         buttonclick();
         //Configuration Value
         configurationbox();
         //budget value
-            budgetitem();
+        //if(FormId < 0 ){
+           budgetitem();
+        //}
         //purchase value
         purchaseVal();
         //get Home Value
@@ -84,7 +88,6 @@ public class need_require extends AppCompatActivity {
         typegrouptxt();
 //        //Update Data
         UpdateFormData();
-        FormId= getIntent().getIntExtra("ID", 0);
         //Set Spinner
 
 
@@ -143,6 +146,7 @@ public class need_require extends AppCompatActivity {
             specify.setText(getIntent().getStringExtra("SPECIFY"));
             BankName.setText(getIntent().getStringExtra("BANKNAME"));
             Residentalval = getIntent().getStringExtra("RESIDENTAL");
+            //budgetitem(getIntent().getStringExtra("BUDGET"));
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -189,6 +193,12 @@ public class need_require extends AppCompatActivity {
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.budget_item, budgets);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         budget.setAdapter(arrayAdapter);
+//
+//        if(value != null){
+//            int spinnerPosition = arrayAdapter.getPosition(value);
+//            Log.d("position",""+spinnerPosition);
+//            budget.setSelection(spinnerPosition);
+//        }
         budget.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

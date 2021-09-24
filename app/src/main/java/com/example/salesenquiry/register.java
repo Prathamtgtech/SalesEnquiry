@@ -56,7 +56,7 @@ public class register extends AppCompatActivity {
         cursor = new LoginDB(this).FetchLoginData();
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
-        reference = db.getReference("Sales Enquiry").child("User Details").child("Id");
+
         logintxt();
         //Enter Details in Feild
         EnterDetails();
@@ -76,26 +76,26 @@ public class register extends AppCompatActivity {
                 }
                 else{
                     FirebaseStoreData();
+                    firebaseDatabase();
+
                 }
                 //Firebase Value get From Sqlite
-                firebaseDatabase();
+
               //Sq Lite
-                SqliteStoreData();
+               // SqliteStoreData();
 
             }
         });
     }
     //Firebase Realtime Database
     private void firebaseDatabase() {
-        while (cursor.moveToNext()) {
+        reference = db.getReference("Sales Enquiry").child("User Details").child(Fullname);
             signupDataModel = new SignupDataModel();
-            signupDataModel.setId(cursor.getInt(0));
-            signupDataModel.setFULLNAME(cursor.getString(1));
-            signupDataModel.setUSERNAME(cursor.getString(2));
-            signupDataModel.setPASSWORD(cursor.getString(3));
+            signupDataModel.setFULLNAME(Fullname);
+            signupDataModel.setUSERNAME(Username);
+            signupDataModel.setPASSWORD(Password);
             dataview.add(signupDataModel);
-        }
-        reference.setValue(dataview);
+        reference.setValue(signupDataModel);
     }
 
     //Store Data In Firebase
@@ -104,20 +104,9 @@ public class register extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    firebaseAuth.getCurrentUser().sendEmailVerification()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                    Toast.makeText(register.this, "Email Has Been Sent In Email", Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(register.this, login.class));
-                                    finish();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull @NotNull Exception e) {
-                            Toast.makeText(register.this, "Not verified Your Email", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    startActivity(new Intent(getApplicationContext(), com.example.salesenquiry.login.class));
+                    Toast.makeText(register.this, "Details Are Submit", Toast.LENGTH_LONG).show();
+
                 } else {
                     Toast.makeText(register.this, "Login Failed", Toast.LENGTH_LONG).show();
                 }

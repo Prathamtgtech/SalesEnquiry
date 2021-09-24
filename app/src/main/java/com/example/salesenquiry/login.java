@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthCredential;
@@ -43,7 +44,7 @@ public class login extends AppCompatActivity {
     Button submit;
     String Username,Password;
     FirebaseAuth firebaseAuth;
-    FirebaseUser user;
+
     AuthCredential credential;
     String User_Email;
     @Override
@@ -59,14 +60,12 @@ public class login extends AppCompatActivity {
         forgot = findViewById(R.id.forgot);
         loginDB = new LoginDB(this);
         forgot_dialog = new Dialog(this);
-        AuthCredential credential;
         firebaseAuth=FirebaseAuth.getInstance();
-        user=firebaseAuth.getCurrentUser();
-        if (user !=null){
-            User_Email=user.getEmail();
-            Log.d("User_Email_Firebase",""+User_Email);
-            startActivity(new Intent(getApplicationContext(),welcome.class));
+        FirebaseUser user=firebaseAuth.getCurrentUser();
+        Log.d("CurrentUser",""+user);
+        if (user != null) {
             finish();
+            startActivity(new Intent(login.this, welcome.class));
         }
         //SignUpButton
         signupbut();
@@ -105,34 +104,34 @@ public class login extends AppCompatActivity {
             forgot_dialog.show();
         }
 //sqlite forget passwrod
-    private void sqliteforgotdialog() {
-        forgot_dialog.setContentView(R.layout.forgot_dialog);
-        forgot_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        emailenter = forgot_dialog.findViewById(R.id.emailenter);
-        submit = forgot_dialog.findViewById(R.id.emailsubmit);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (emailenter.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Enter The Email Id", Toast.LENGTH_LONG).show();
-                } else {
-                    Boolean checkName = loginDB.checkUsername(emailenter.getText().toString());
-                    if (checkName == true) {
-                        Intent intent = new Intent(getApplicationContext(), forgot_password.class);
-                        intent.putExtra("User",emailenter.getText().toString());
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.nav_default_pop_enter_anim,R.anim.nav_default_pop_exit_anim);
-                        finish();
-
-                        Toast.makeText(getApplicationContext(), "Correct Email id", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "InCorrect Email Id", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        });
-        forgot_dialog.show();
-    }
+//    private void sqliteforgotdialog() {
+//        forgot_dialog.setContentView(R.layout.forgot_dialog);
+//        forgot_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        emailenter = forgot_dialog.findViewById(R.id.emailenter);
+//        submit = forgot_dialog.findViewById(R.id.emailsubmit);
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (emailenter.getText().toString().isEmpty()) {
+//                    Toast.makeText(getApplicationContext(), "Enter The Email Id", Toast.LENGTH_LONG).show();
+//                } else {
+//                    Boolean checkName = loginDB.checkUsername(emailenter.getText().toString());
+//                    if (checkName == true) {
+//                        Intent intent = new Intent(getApplicationContext(), forgot_password.class);
+//                        intent.putExtra("User",emailenter.getText().toString());
+//                        startActivity(intent);
+//                        overridePendingTransition(R.anim.nav_default_pop_enter_anim,R.anim.nav_default_pop_exit_anim);
+//                        finish();
+//
+//                        Toast.makeText(getApplicationContext(), "Correct Email id", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "InCorrect Email Id", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            }
+//        });
+//        forgot_dialog.show();
+//    }
 
 
     //Forgot Password
@@ -154,9 +153,6 @@ public class login extends AppCompatActivity {
                 Username = email.getText().toString();
                 Password = password.getText().toString();
                  //startActivity(new Intent(getApplicationContext(), welcome.class));
-                //Sqlite Login
-                //  sqliteLogin();
-//
                 //Firebase Login
                 if (Username.isEmpty() || Password.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill The Details", Toast.LENGTH_LONG).show();
@@ -174,7 +170,6 @@ public class login extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(getApplicationContext(),"Log In Sucessful",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getApplicationContext(),welcome.class));
-                    finish();
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"Log In Failed",Toast.LENGTH_LONG).show();
